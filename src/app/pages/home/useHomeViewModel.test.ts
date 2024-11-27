@@ -1,60 +1,52 @@
-import { renderHook } from "@testing-library/react";
-import { mock } from "@codescouts/test/jest";
-import { useResolve } from "@codescouts/di";
-import { useHomeViewModel } from "./useHomeViewModel";
-import { GetMessageUseCase } from "@/core/application/get-message-usecase";
+import { useHomeViewModel, DEFAULT_MESSAGE } from "./useHomeViewModel";
 import { Message } from "@/core/domain/model/Message";
 import { describe, test, expect, jest } from "@jest/globals";
-import { waitFor } from "@testing-library/react";
 import { faker } from "@faker-js/faker";
+import { container } from "@/core/di/DependencyContainer";
 
+const ERROR_FETCHING_MESSAGE = "Error fetching message:";
 const EXPECTED_CALL_COUNT = 1;
-const DEFAULT_ERROR_MESSAGE = "Error loading message";
 
-jest.spyOn(console, "error").mockImplementation(() => {});
-jest.mock("@codescouts/di", () => ({
-  useResolve: jest.fn(),
+jest.mock("@/core/di/DependencyContainer", () => ({
+  container: {
+    resolve: jest.fn(),
+  },
 }));
 
 describe("useHomeViewModel", () => {
   test("should fetch and return a message", async () => {
-    const fakeMessage = faker.lorem.sentence();
-    const mockMessage = new Message(fakeMessage);
+    const fakeMessageContent = faker.lorem.sentence();
+    const mockMessage = new Message(fakeMessageContent);
 
-    const getMessageUseCase = mock<GetMessageUseCase>({
+    const getMessageUseCase = {
       execute: jest.fn<() => Promise<Message>>().mockResolvedValue(mockMessage),
-    });
+    };
+    jest.mocked(container.resolve).mockReturnValue(getMessageUseCase);
 
-    jest.mocked(useResolve).mockReturnValue(getMessageUseCase);
+    const result = await useHomeViewModel();
 
-    const { result } = renderHook(() => useHomeViewModel());
-
-    await waitFor(() => {
-      expect(result.current.message).toBe(fakeMessage);
-    });
-
-    expect(getMessageUseCase.execute).toHaveBeenCalledTimes(
-      EXPECTED_CALL_COUNT
-    );
+    expect(result.message).toBe(fakeMessageContent);
+    expect(getMessageUseCase.execute).toHaveBeenCalledTimes(EXPECTED_CALL_COUNT);
   });
 
   test("should set default error message on failure", async () => {
-    const getMessageUseCase = mock<GetMessageUseCase>({
-      execute: jest
-        .fn<() => Promise<Message>>()
-        .mockRejectedValue(new Error(faker.hacker.phrase())),
-    });
+    const fakeErrorMessage = faker.hacker.phrase();
 
-    jest.mocked(useResolve).mockReturnValue(getMessageUseCase);
+    const getMessageUseCase = {
+      execute: jest.fn<() => Promise<Message>>().mockRejectedValue(new Error(fakeErrorMessage)),
+    };
 
-    const { result } = renderHook(() => useHomeViewModel());
+    jest.mocked(container.resolve).mockReturnValue(getMessageUseCase);
 
-    await waitFor(() => {
-      expect(result.current.message).toBe(DEFAULT_ERROR_MESSAGE);
-    });
+    jest.spyOn(console, "error").mockImplementation(() => {});
 
-    expect(getMessageUseCase.execute).toHaveBeenCalledTimes(
-      EXPECTED_CALL_COUNT
+    const result = await useHomeViewModel();
+
+    expect(result.message).toBe(DEFAULT_MESSAGE);
+    expect(getMessageUseCase.execute).toHaveBeenCalledTimes(EXPECTED_CALL_COUNT);
+    expect(console.error).toHaveBeenCalledWith(
+      ERROR_FETCHING_MESSAGE,
+      expect.any(Error)
     );
   });
 });

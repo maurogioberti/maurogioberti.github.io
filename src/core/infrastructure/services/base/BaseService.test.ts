@@ -8,4 +8,11 @@ describe("BaseService", () => {
     const expectedInterfaceName = "TestService";
     expect(result).toBe(expectedInterfaceName);
   });
+
+  test("getInterface should return the same name if 'Impl' suffix is not present", () => {
+    class TestService extends BaseService {}
+    const result = TestService.getInterface();
+    const expectedInterfaceName = "TestService";
+    expect(result).toBe(expectedInterfaceName);
+  });
 });

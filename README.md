@@ -20,7 +20,7 @@
 
 <p>
   <a href="https://github.com/maurogioberti/next-clean-architecture" title="CodeScouts Academy" target="_blank">
-    <img src="https://img.shields.io/badge/built_with-Next.js | Clean Architecture | Codescouts Libraries-blue?style=for-the-badge" alt="Built with Next.js, Clean Architecture, and Codescouts" />
+    <img src="https://img.shields.io/badge/built_with-Next.js | Clean Architecture | " alt="Built with Next.js, Clean Architecture, used Codescouts as Reference" />
   </a>
 </p>
 
@@ -95,7 +95,7 @@ This structure ensures:
 ## 🧪 Testing
 
 Clean Architecture makes testing simple:
-- **Mockable Dependencies**: Repositories and services can be easily mocked using `@codescouts/di`.
+- **Mockable Dependencies**: Repositories and services can be easily mocked using `jest`.
 - **Unit Testing**: Business logic and use cases are isolated for thorough testing.
 
 ---

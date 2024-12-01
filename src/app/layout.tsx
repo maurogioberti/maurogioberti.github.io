@@ -1,8 +1,8 @@
 import { setupDependencies } from "../di";
 import layoutMetadata from "@/core/crosscutting/seo/layout";
 import "./globals.css";
-import { Header } from "@/app/components/header";
-import { Footer } from "@/app/components/footer";
+import { Header } from "@/app/components/Header";
+import { Footer } from "@/app/components/Footer";
 
 setupDependencies();
 

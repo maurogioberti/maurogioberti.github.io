@@ -12,15 +12,15 @@ export const linktreeViewModel = async () => {
   const getStandaloneSiteUseCase = container.useResolve(GetStandaloneSiteUseCase);
   const getProfileUseCase = container.useResolve(GetProfileUseCase);
 
-  const profileData = await getProfileUseCase.execute();
+  const profile = await getProfileUseCase.execute();
 
-  const htmlContent = await getStandaloneSiteUseCase.execute(LINKTREE_PAGE, {
-    GITHUB_URL: profileData.socials.github,
-    YOUTUBE_URL: profileData.socials.youtube,
-    TWITTER_URL: profileData.socials.twitter,
-    INSTAGRAM_URL: profileData.socials.instagram,
-    LINKEDIN_URL: profileData.socials.linkedin,
-    WEBSITE_URL: profileData.socials.website,
+  const htmlContent = getStandaloneSiteUseCase.execute(LINKTREE_PAGE, {
+    GITHUB_URL: profile.githubUrl,
+    YOUTUBE_URL: profile.youtubeUrl,
+    TWITTER_URL: profile.twitterUrl,
+    INSTAGRAM_URL: profile.instagramUrl,
+    LINKEDIN_URL: profile.linkedinUrl,
+    WEBSITE_URL: profile.websiteUrl,
   });
   return { htmlContent };
 };

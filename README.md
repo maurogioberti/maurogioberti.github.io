@@ -20,7 +20,7 @@
 
 <p>
   <a href="https://github.com/maurogioberti/next-clean-architecture" title="CodeScouts Academy" target="_blank">
-    <img src="https://img.shields.io/badge/built_with-Next.js | Clean Architecture | " alt="Built with Next.js, Clean Architecture, used Codescouts as Reference" />
+    <img src="https://img.shields.io/badge/built_with-Next.js | Clean Architecture-blue?style=for-the-badge" alt="Built with Next.js, Clean Architecture, used Codescouts React Clean Architecture as Reference" />
   </a>
 </p>
 

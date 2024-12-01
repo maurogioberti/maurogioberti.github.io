@@ -14,7 +14,7 @@ const layoutMetadata: Metadata = {
     siteName: "Mauro Gioberti Portfolio",
     images: [
       {
-        url: "/assets/open-graph/default-og-image.jpg",
+        url: "/assets/open-graph/default-og-image.png",
         width: 1200,
         height: 630,
         alt: "Mauro Gioberti's Portfolio",
@@ -25,7 +25,7 @@ const layoutMetadata: Metadata = {
     card: "summary_large_image",
     site: "@maurogioberti",
     creator: "@maurogioberti",
-    images: ["https://maurogioberti.com/assets/open-graph/twitter-card.jpg"],
+    images: ["https://maurogioberti.com/assets/open-graph/twitter-card.png"],
   },
   authors: [{ name: "Mauro Gioberti" }],
   keywords: [

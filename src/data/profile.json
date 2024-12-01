@@ -1,0 +1,24 @@
+{
+  "name": "Mauro",
+  "lastName": "Gioberti",
+  "position": "Software Engineer",
+  "additionalPositions": ["Devs Mentor", "Tech Interviewer"],
+  "shortDescription": "Building scalable solutions and mentoring others.",
+  "longDescription": "Hi! I'm Mauro Gioberti, a passionate Software Engineer with a love unit testing and mentoring.",
+  "socials": {
+    "linkedin": "https://linkedin.com/in/maurogioberti",
+    "twitter": "https://x.com/maurogioberti",
+    "github": "https://github.com/maurogioberti",
+    "youtube": "https://www.youtube.com/@maurogioberti",
+    "instagram": "https://www.instagram.com/maurogioberti/",
+    "website": "https://maurogioberti.com"
+  },
+  "avatarUrl": "assets/profile/maurogioberti-avatar.png",
+  "email": "maurogioberti@gmail.com",
+  "location": {
+    "city": "",
+    "country": "",
+    "description": ""
+  },
+  "skills": ["Clean Architecture", ".NET", "TypeScript", "Mentoring"]
+}

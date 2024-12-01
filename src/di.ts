@@ -5,6 +5,9 @@ import { MessageRepositoryImpl } from '@/core/infrastructure/repository/MessageR
 import { MessageServiceImpl } from '@/core/infrastructure/services/MessageServiceImpl';
 import { GetFooterContentUseCase } from '@/core/application/get-footer-content-usecase';
 import { GetHeaderContentUseCase } from '@/core/application/get-header-content-usecase';
+import { ProfileServiceImpl } from './core/infrastructure/services/ProfileServiceImpl';
+import { ProfileRepositoryImpl } from './core/infrastructure/repository/ProfileRepositoryImpl';
+import { GetProfileUseCase } from './core/application/get-profile-content-usecase';
 
 export function setupDependencies() {
   container.register(MessageServiceImpl.getInterface(), () => new MessageServiceImpl());
@@ -13,6 +16,13 @@ export function setupDependencies() {
   );
   container.register(GetMessageUseCase.name, () =>
     new GetMessageUseCase(container.resolve(MessageRepositoryImpl.getInterface()))
+  );
+  container.register(ProfileServiceImpl.getInterface(), () => new ProfileServiceImpl());
+  container.register(ProfileRepositoryImpl.getInterface(), () =>
+    new ProfileRepositoryImpl(container.resolve(ProfileServiceImpl.getInterface()))
+  );
+  container.register(GetProfileUseCase.name, () =>
+    new GetProfileUseCase(container.resolve(ProfileRepositoryImpl.getInterface()))
   );
   container.register(GetHeaderContentUseCase.name, () =>
     new GetHeaderContentUseCase()

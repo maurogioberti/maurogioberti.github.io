@@ -12,4 +12,8 @@ export class Profile {
     public readonly location?: { city: string; country: string; description: string;},
     public readonly skills: string[] = []
   ) {}
+  
+  get fullname(): string {
+    return `${this.name} ${this.lastName}`;
+  }
 }

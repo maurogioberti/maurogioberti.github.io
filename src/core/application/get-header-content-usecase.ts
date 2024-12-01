@@ -4,8 +4,8 @@ export class GetHeaderContentUseCase {
       return [
         { label: "Home", href: "/" },
         { label: "Resume", href: "/resume" },
-        { label: "Blog", href: "/blog" },
         { label: "Services", href: "/services" },
+        { label: "Blog", href: "/blog" },
       ];
     }
   }

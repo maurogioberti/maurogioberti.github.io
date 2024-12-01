@@ -36,9 +36,7 @@ describe("linktreeViewModel", () => {
       .mockResolvedValue(mockHtmlContent);
 
     const mockGetProfileUseCase = { execute: mockGetProfileExecute };
-    const mockGetStandaloneSiteUseCase = {
-      execute: mockGetStandaloneSiteExecute,
-    };
+    const mockGetStandaloneSiteUseCase = { execute: mockGetStandaloneSiteExecute };
 
     (container.useResolve as jest.Mock)
       .mockImplementationOnce(() => mockGetStandaloneSiteUseCase)

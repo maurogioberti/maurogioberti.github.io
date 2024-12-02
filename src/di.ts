@@ -35,14 +35,14 @@ export function setupDependencies() {
     new GetProfileUseCase(container.resolve(ProfileRepositoryImpl.getInterface()))
   );
 
+  container.register(GetStandaloneSiteUseCase.name, () =>
+    new GetStandaloneSiteUseCase()
+  );
   container.register(GetHeaderContentUseCase.name, () =>
     new GetHeaderContentUseCase()
   );
   container.register(GetFooterContentUseCase.name, () =>
     new GetFooterContentUseCase()
-  );
-  container.register(GetStandaloneSiteUseCase.name, () =>
-    new GetStandaloneSiteUseCase()
   );
 
   container.register(BlogServiceImpl.getInterface(), () => new BlogServiceImpl());

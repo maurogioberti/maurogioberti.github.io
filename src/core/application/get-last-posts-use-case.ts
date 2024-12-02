@@ -6,7 +6,7 @@ export class GetLastPostsUseCase {
   
   constructor(private readonly repository: PostRepository) {}
 
-  execute(): Post[] {
-    return this.repository.getLast(GetLastPostsUseCase.NUMBER_OF_POSTS);
+  async execute(): Promise<Post[]> {
+    return await this.repository.getLast(GetLastPostsUseCase.NUMBER_OF_POSTS);
   }
 }

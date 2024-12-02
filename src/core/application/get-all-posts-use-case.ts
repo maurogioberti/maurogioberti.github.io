@@ -4,7 +4,7 @@ import { PostRepository } from '@/core/domain/repository/PostRepository';
 export class GetAllPostsUseCase {
   constructor(private readonly repository: PostRepository) {}
 
-  execute(): Post[] {
-    return this.repository.getAll();
+  async execute(): Promise<Post[]> {
+    return await this.repository.getAll();
   }
 }

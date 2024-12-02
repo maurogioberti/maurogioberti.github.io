@@ -1,0 +1,9 @@
+{
+  "id": "2",
+  "title": "Why Unit Testing Matters",
+  "description": "The importance of unit testing in software development.",
+  "content": "Full content of unit testing...",
+  "tags": ["unit testing", "best practices", "testing"],
+  "imageUrl": "/assets/open-graph/default-og-image.png",
+  "postedDate": "2024-11-25T00:00:00Z"
+}

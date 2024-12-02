@@ -8,13 +8,20 @@ export class Post {
     public readonly content: string,
     public readonly tags: string[],
     public readonly imageUrl: string,
-    public readonly postedDate: Date,
+    public readonly postedDate?: Date,
   ) {
     this.slug = Post.generateSlug(this.title);
   }
 
   get formattedDate(): string {
-    return new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric" }).format(this.postedDate);
+    if (this.postedDate instanceof Date && !isNaN(this.postedDate.getTime())) {
+      return new Intl.DateTimeFormat("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      }).format(this.postedDate);
+    }
+    return "";
   }
 
   private static generateSlug(title: string): string {

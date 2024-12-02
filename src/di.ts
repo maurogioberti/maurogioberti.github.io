@@ -14,6 +14,7 @@ import { ProfileRepositoryImpl } from './core/infrastructure/repository/ProfileR
 
 import { MessageServiceImpl } from './core/infrastructure/services/MessageServiceImpl';
 import { ProfileServiceImpl } from './core/infrastructure/services/ProfileServiceImpl';
+import { BlogServiceImpl } from './core/infrastructure/services/BlogServiceImpl';
 import { PostRepositoryImpl } from '@/core/infrastructure/repository/PostRepositoryImpl';
 
 export function setupDependencies() {
@@ -44,8 +45,9 @@ export function setupDependencies() {
     new GetStandaloneSiteUseCase()
   );
 
+  container.register(BlogServiceImpl.getInterface(), () => new BlogServiceImpl());
   container.register(PostRepositoryImpl.getInterface(), () =>
-    new PostRepositoryImpl()
+    new PostRepositoryImpl( new BlogServiceImpl())
   );
   container.register(GetPostBySlugUseCase.name, () =>
     new GetPostBySlugUseCase(container.resolve(PostRepositoryImpl.getInterface()))

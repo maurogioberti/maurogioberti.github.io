@@ -3,6 +3,6 @@ import { container } from '@/core/crosscutting/injection/DependencyInjectionCont
 
 export async function postViewModel(slug: string) {
   const getPostBySlugUseCase = container.useResolve(GetPostBySlugUseCase);
-  const post = getPostBySlugUseCase.execute(slug);
+  const post = await getPostBySlugUseCase.execute(slug);
   return { post };
 }

@@ -4,7 +4,7 @@ import { PostRepository } from '@/core/domain/repository/PostRepository';
 export class GetPostBySlugUseCase {
   constructor(private readonly repository: PostRepository) {}
 
-  execute(slug: string): Post | undefined {
-    return this.repository.getBySlug(slug);
+  async execute(slug: string): Promise<Post | undefined> {
+    return await this.repository.getBySlug(slug);
   }
 }

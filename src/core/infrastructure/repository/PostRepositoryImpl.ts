@@ -16,8 +16,12 @@ export class PostRepositoryImpl extends BaseRepository implements PostRepository
   }
 
   async getBySlug(slug: string): Promise<Post | undefined> {
+    console.log("getBySlug")
     const posts = await this.getPosts();
-    return posts.find((post) => post.slug === slug);
+    console.log(`return slug posts ${posts}}`)
+    const slugPost = posts.find((post) => post.slug === slug);
+    console.log(`return slugPost ${slugPost}}`)
+    return slugPost;
   }
 
   async getAll(): Promise<Post[]> {
@@ -26,7 +30,9 @@ export class PostRepositoryImpl extends BaseRepository implements PostRepository
   }
 
   private async getPosts() {
+    console.log("fetch posts")
     const rawDataPosts = await this.blogService.fetchPosts();
+    console.log(`rawDataPosts ${rawDataPosts}`)
     const posts = rawDataPosts.map((rawDataPost) => new Post(
       rawDataPost.id,
       rawDataPost.title,
@@ -36,7 +42,7 @@ export class PostRepositoryImpl extends BaseRepository implements PostRepository
       rawDataPost.imageUrl,
       rawDataPost.postedDate,
     ));
-
+    console.log(`return posts ${posts}}`)
     return posts;
   }
 

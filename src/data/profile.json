@@ -1,6 +1,7 @@
 {
   "name": "Mauro",
   "lastName": "Gioberti",
+  "birthDate": "1992-05-16",
   "position": "Software Engineer",
   "additionalPositions": ["Devs Mentor", "Tech Interviewer"],
   "shortDescription": "Building scalable solutions and mentoring others.",

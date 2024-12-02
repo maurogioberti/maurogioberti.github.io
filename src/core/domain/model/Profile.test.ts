@@ -3,9 +3,12 @@ import { describe, test, expect } from "@jest/globals";
 import { faker } from "@faker-js/faker";
 
 describe("Profile", () => {
+  const INITIAL_EXPERIENCE_YEAR: number = 2014;
+  
   test("should create a Profile instance with required properties", () => {
     const name = faker.person.firstName();
     const lastName = faker.person.lastName();
+    const birthDate = faker.date.birthdate();
     const position = faker.person.jobTitle();
     const shortDescription = faker.lorem.sentence();
     const longDescription = faker.lorem.paragraph();
@@ -17,6 +20,7 @@ describe("Profile", () => {
     const profile = new Profile(
       name,
       lastName,
+      birthDate,
       position,
       [],
       shortDescription,
@@ -26,6 +30,7 @@ describe("Profile", () => {
 
     expect(profile.name).toBe(name);
     expect(profile.lastName).toBe(lastName);
+    expect(profile.birthDate).toBe(birthDate);
     expect(profile.position).toBe(position);
     expect(profile.shortDescription).toBe(shortDescription);
     expect(profile.longDescription).toBe(longDescription);
@@ -40,6 +45,7 @@ describe("Profile", () => {
   test("should create a Profile instance with all properties", () => {
     const name = faker.person.firstName();
     const lastName = faker.person.lastName();
+    const birthDate = faker.date.birthdate();
     const position = faker.person.jobTitle();
     const additionalPositions = [faker.person.jobTitle(), faker.person.jobTitle()];
     const shortDescription = faker.lorem.sentence();
@@ -60,6 +66,7 @@ describe("Profile", () => {
     const profile = new Profile(
       name,
       lastName,
+      birthDate,
       position,
       additionalPositions,
       shortDescription,
@@ -73,6 +80,7 @@ describe("Profile", () => {
 
     expect(profile.name).toBe(name);
     expect(profile.lastName).toBe(lastName);
+    expect(profile.birthDate).toBe(birthDate);
     expect(profile.position).toBe(position);
     expect(profile.additionalPositions).toEqual(additionalPositions);
     expect(profile.shortDescription).toBe(shortDescription);
@@ -83,40 +91,71 @@ describe("Profile", () => {
     expect(profile.location).toEqual(location);
     expect(profile.skills).toEqual(skills);
   });
-});
 
-test("should return the full name", () => {
-  const name = "John";
-  const lastName = "Doe";
-  const profile = new Profile(name, lastName, "Developer", [], "", "", {});
-  expect(profile.fullname).toBe("John Doe");
-});
+  test("should calculate the age correctly", () => {
+    const profile = new Profile(
+      faker.person.firstName(),
+      faker.person.lastName(),
+      faker.date.birthdate(),
+      faker.person.jobTitle(),
+      [],
+      "",
+      "",
+      {}
+    );
 
-test("should return the correct social media URLs", () => {
-  const socials = {
-    github: faker.internet.url(),
-    youtube: faker.internet.url(),
-    twitter: faker.internet.url(),
-    instagram: faker.internet.url(),
-    linkedin: faker.internet.url(),
-    website: faker.internet.url(),
-  };
-  const profile = new Profile(faker.person.firstName(), faker.person.lastName(), faker.person.jobTitle(), [], "", "", socials);
-  expect(profile.githubUrl).toBe(socials.github);
-  expect(profile.youtubeUrl).toBe(socials.youtube);
-  expect(profile.twitterUrl).toBe(socials.twitter);
-  expect(profile.instagramUrl).toBe(socials.instagram);
-  expect(profile.linkedinUrl).toBe(socials.linkedin);
-  expect(profile.websiteUrl).toBe(socials.website);
-});
+    const expectedAge = new Date().getFullYear() - 1990 - 1; // Adjust for month/day
+    expect(profile.age).toBeGreaterThanOrEqual(expectedAge);
+  });
 
-test("should return undefined for missing social media URLs", () => {
-  const socials = {};
-  const profile = new Profile(faker.person.firstName(), faker.person.lastName(), faker.person.jobTitle(), [], "", "", socials);
-  expect(profile.githubUrl).toBeUndefined();
-  expect(profile.youtubeUrl).toBeUndefined();
-  expect(profile.twitterUrl).toBeUndefined();
-  expect(profile.instagramUrl).toBeUndefined();
-  expect(profile.linkedinUrl).toBeUndefined();
-  expect(profile.websiteUrl).toBeUndefined();
+  test("should calculate the years of experience correctly", () => {
+    const profile = new Profile(
+      faker.person.firstName(),
+      faker.person.lastName(),
+      faker.date.birthdate(),
+      faker.person.jobTitle(),
+      [],
+      "",
+      "",
+      {}
+    );
+
+    const expectedYears = new Date().getFullYear() - INITIAL_EXPERIENCE_YEAR;
+    expect(profile.yearsOfExperience).toBe(expectedYears);
+  });
+  test("should return the full name", () => {
+    const name = faker.person.firstName();
+    const lastName = faker.person.lastName();
+    const profile = new Profile(name, lastName, faker.date.birthdate(), faker.person.jobTitle(), [], "", "", {});
+    expect(profile.fullname).toBe(`${name} ${lastName}`);
+  });
+  
+  test("should return the correct social media URLs", () => {
+    const socials = {
+      github: faker.internet.url(),
+      youtube: faker.internet.url(),
+      twitter: faker.internet.url(),
+      instagram: faker.internet.url(),
+      linkedin: faker.internet.url(),
+      website: faker.internet.url(),
+    };
+    const profile = new Profile(faker.person.firstName(), faker.person.lastName(), faker.date.birthdate(), faker.person.jobTitle(), [], "", "", socials);
+    expect(profile.githubUrl).toBe(socials.github);
+    expect(profile.youtubeUrl).toBe(socials.youtube);
+    expect(profile.twitterUrl).toBe(socials.twitter);
+    expect(profile.instagramUrl).toBe(socials.instagram);
+    expect(profile.linkedinUrl).toBe(socials.linkedin);
+    expect(profile.websiteUrl).toBe(socials.website);
+  });
+  
+  test("should return undefined for missing social media URLs", () => {
+    const socials = {};
+    const profile = new Profile(faker.person.firstName(), faker.person.lastName(), faker.date.birthdate(), faker.person.jobTitle(), [], "", "", socials);
+    expect(profile.githubUrl).toBeUndefined();
+    expect(profile.youtubeUrl).toBeUndefined();
+    expect(profile.twitterUrl).toBeUndefined();
+    expect(profile.instagramUrl).toBeUndefined();
+    expect(profile.linkedinUrl).toBeUndefined();
+    expect(profile.websiteUrl).toBeUndefined();
+  });
 });

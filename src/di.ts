@@ -47,7 +47,7 @@ export function setupDependencies() {
 
   container.register(BlogServiceImpl.getInterface(), () => new BlogServiceImpl());
   container.register(PostRepositoryImpl.getInterface(), () =>
-    new PostRepositoryImpl( new BlogServiceImpl())
+    new PostRepositoryImpl(container.resolve(BlogServiceImpl.getInterface()))
   );
   container.register(GetPostBySlugUseCase.name, () =>
     new GetPostBySlugUseCase(container.resolve(PostRepositoryImpl.getInterface()))

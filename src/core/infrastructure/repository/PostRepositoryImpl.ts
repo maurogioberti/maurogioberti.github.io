@@ -16,12 +16,16 @@ export class PostRepositoryImpl extends BaseRepository implements PostRepository
   }
 
   async getBySlug(slug: string): Promise<Post | undefined> {
-    console.log("getBySlug")
-    const posts = await this.getPosts();
-    console.log(`return slug posts ${posts}}`)
-    const slugPost = posts.find((post) => post.slug === slug);
-    console.log(`return slugPost ${slugPost}}`)
-    return slugPost;
+    
+    return new Post(
+      "1",
+      "Understanding Clean Architecture",
+      "A deep dive into Clean Architecture principles for modern applications.",
+      `Full content of Clean Architecture ${slug}...`,
+      ["clean architecture", "software engineering", "design patterns"],
+      "/assets/open-graph/default-og-image.png",
+      new Date("2024-12-01"),
+    )
   }
 
   async getAll(): Promise<Post[]> {

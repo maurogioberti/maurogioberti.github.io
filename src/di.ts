@@ -19,6 +19,16 @@ import { PostRepositoryImpl } from '@/core/infrastructure/repository/PostReposit
 
 export function setupDependencies() {
 
+  container.register(GetStandaloneSiteUseCase.name, () =>
+    new GetStandaloneSiteUseCase()
+  );
+  container.register(GetHeaderContentUseCase.name, () =>
+    new GetHeaderContentUseCase()
+  );
+  container.register(GetFooterContentUseCase.name, () =>
+    new GetFooterContentUseCase()
+  );
+
   container.register(MessageServiceImpl.getInterface(), () => new MessageServiceImpl());
   container.register(MessageRepositoryImpl.getInterface(), () =>
     new MessageRepositoryImpl(container.resolve(MessageServiceImpl.getInterface()))
@@ -35,15 +45,6 @@ export function setupDependencies() {
     new GetProfileUseCase(container.resolve(ProfileRepositoryImpl.getInterface()))
   );
 
-  container.register(GetStandaloneSiteUseCase.name, () =>
-    new GetStandaloneSiteUseCase()
-  );
-  container.register(GetHeaderContentUseCase.name, () =>
-    new GetHeaderContentUseCase()
-  );
-  container.register(GetFooterContentUseCase.name, () =>
-    new GetFooterContentUseCase()
-  );
 
   container.register(BlogServiceImpl.getInterface(), () => new BlogServiceImpl());
   container.register(PostRepositoryImpl.getInterface(), () =>

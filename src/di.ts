@@ -1,10 +1,10 @@
 import { container } from './core/crosscutting/injection/DependencyInjectionContainer';
 
-import { GetMessageUseCase } from './core/application/get-message-usecase';
-import { GetProfileUseCase } from './core/application/get-profile-content-usecase';
+import { GetStandaloneSiteUseCase } from './core/application/get-standalone-site-use-case';
 import { GetFooterContentUseCase } from './core/application/get-footer-content-usecase';
 import { GetHeaderContentUseCase } from './core/application/get-header-content-usecase';
-import { GetStandaloneSiteUseCase } from './core/application/get-standalone-site-use-case';
+import { GetMessageUseCase } from './core/application/get-message-usecase';
+import { GetProfileUseCase } from './core/application/get-profile-content-usecase';
 import { GetAllPostsUseCase } from './core/application/get-all-posts-use-case';
 import { GetPostBySlugUseCase } from './core/application/get-post-by-slug-use-case';
 import { GetLastPostsUseCase } from './core/application/get-last-posts-use-case';

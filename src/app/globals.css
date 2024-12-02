@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.prose img {
+  @apply w-full h-auto;
+}
+
 body {
   background-color: var(--vs-background);
   color: var(--vs-foreground);

@@ -1,0 +1,35 @@
+.blog-post-container {
+  padding: 1.5rem;
+  background-color: var(--vs-background);
+  color: var(--vs-foreground);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+}
+
+.blog-post {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.blog-main-image {
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 0 auto 2rem auto;
+  display: block;
+}
+
+.back-button {
+  margin-bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  color: var(--vs-primary);
+  text-decoration: none;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+}

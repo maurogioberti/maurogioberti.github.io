@@ -1,9 +1,9 @@
-import { Metadata } from "next";
-import Image from "next/image";
+import { Metadata } from 'next';
+import Image from 'next/image';
 
-import homeMetadata from "@/core/crosscutting/seo/home";
+import homeMetadata from '@/core/crosscutting/seo/home';
 
-import { homeViewModel } from "./homeViewModel";
+import { homeViewModel } from './homeViewModel';
 
 export const metadata: Metadata = {
   ...homeMetadata,
@@ -26,7 +26,7 @@ export default async function Home() {
           <div className="sm:ml-4 mt-4 sm:mt-0 text-center sm:text-left">
             <h1 className="text-3xl font-bold">Hi, I&apos;m {`Avatar of ${profile?.fullname}`}!</h1>
             <p className="text-lg">
-              {profile?.position} |  {profile?.additionalPositions.join(" | ")}
+              {profile?.position} |  {profile?.additionalPositions?.join(" | ")}
             </p>
           </div>
         </section>

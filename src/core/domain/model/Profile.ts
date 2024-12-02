@@ -13,7 +13,7 @@ export class Profile {
   constructor(
     public readonly name: string,
     public readonly lastName: string,
-    public readonly birthDate: Date, // Use Date type
+    public readonly birthDate: Date,
     public readonly position: string,
     public readonly additionalPositions: string[] = [],
     public readonly shortDescription: string,

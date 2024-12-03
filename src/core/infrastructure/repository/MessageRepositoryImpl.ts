@@ -1,8 +1,9 @@
-import { BaseRepository } from "./base/BaseRepository";
-import { Message } from "../../domain/model/Message";
-import { MessageRepository } from "../../domain/repository/MessageRepository";
-import { MessageService } from "../../domain/services/MessageService";
-import { Automapper } from "@/core/crosscutting/mapping/Automapper";
+
+
+import { Message } from '../../domain/model/Message';
+import { MessageRepository } from '../../domain/repository/MessageRepository';
+import { MessageService } from '../../domain/services/MessageService';
+import { BaseRepository } from './base/BaseRepository';
 
 export class MessageRepositoryImpl extends BaseRepository implements MessageRepository {
   private messageService: MessageService;
@@ -13,7 +14,6 @@ export class MessageRepositoryImpl extends BaseRepository implements MessageRepo
   }
 
   async getMessage(): Promise<Message> {
-    const rawDataMessage =  await this.messageService.fetchMessage();
-    return Automapper.map(rawDataMessage, Message);
+    return await this.messageService.fetchMessage();
   }
 }

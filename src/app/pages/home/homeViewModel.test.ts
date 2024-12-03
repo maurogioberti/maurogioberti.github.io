@@ -1,9 +1,11 @@
-import { homeViewModel } from './homeViewModel';
+import Container from 'ts-injecty';
+
 import { GetMessageUseCase } from '@/core/application/get-message-usecase';
 import { GetProfileUseCase } from '@/core/application/get-profile-content-usecase';
-import { container } from '@/core/crosscutting/injection/DependencyInjectionContainer';
-import { describe, test, expect, jest } from '@jest/globals';
 import { faker } from '@faker-js/faker';
+import { describe, expect, jest, test } from '@jest/globals';
+
+import { homeViewModel } from './homeViewModel';
 
 const EXPECTED_CALL_COUNT = 1;
 
@@ -36,7 +38,7 @@ describe('homeViewModel', () => {
       execute: jest.fn<() => Promise<typeof mockProfile>>().mockResolvedValue(mockProfile),
     };
 
-    (container.useResolve as jest.Mock).mockImplementation((useCase) => {
+    (Container.resolve as jest.Mock).mockImplementation((useCase) => {
       if (useCase === GetMessageUseCase) return getMessageUseCase;
       if (useCase === GetProfileUseCase) return getProfileUseCase;
       return undefined;

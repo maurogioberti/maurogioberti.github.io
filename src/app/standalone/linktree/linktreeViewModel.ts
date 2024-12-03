@@ -1,16 +1,18 @@
-import { container } from "@/core/crosscutting/injection/DependencyInjectionContainer";
-import { GetStandaloneSiteUseCase } from "../../../core/application/get-standalone-site-use-case";
-import { GetProfileUseCase } from "@/core/application/get-profile-content-usecase";
-import linktreeMetadata from "@/core/crosscutting/seo/linktree";
-import { Metadata } from "next";
+import { Metadata } from 'next';
+import { Container } from 'ts-injecty/dist/Container';
+
+import { GetProfileUseCase } from '@/core/application/get-profile-content-usecase';
+import linktreeMetadata from '@/core/crosscutting/seo/linktree';
+
+import { GetStandaloneSiteUseCase } from '../../../core/application/get-standalone-site-use-case';
 
 export const metadata: Metadata = {...linktreeMetadata};
 const LINKTREE_PAGE = "linktree";
 
 export const linktreeViewModel = async () => {
 
-  const getStandaloneSiteUseCase = container.useResolve(GetStandaloneSiteUseCase);
-  const getProfileUseCase = container.useResolve(GetProfileUseCase);
+  const getStandaloneSiteUseCase = Container.resolve(GetStandaloneSiteUseCase);
+  const getProfileUseCase = Container.resolve(GetProfileUseCase);
 
   const profile = await getProfileUseCase.execute();
 

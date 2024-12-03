@@ -2,7 +2,7 @@ import { GetPostBySlugUseCase } from '@/core/application/get-post-by-slug-use-ca
 import { container } from '@/core/crosscutting/injection/DependencyInjectionContainer';
 
 export async function postViewModel(slug: string) {
-  const getPostBySlugUseCase = container.useResolve(GetPostBySlugUseCase);
+  const getPostBySlugUseCase = container.resolve<GetPostBySlugUseCase>('GetPostBySlugUseCase');
   const post = await getPostBySlugUseCase.execute(slug);
   return { post };
 }

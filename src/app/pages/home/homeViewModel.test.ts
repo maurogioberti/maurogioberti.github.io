@@ -1,23 +1,22 @@
-import { homeViewModel } from './homeViewModel';
-import { GetMessageUseCase } from '@/core/application/get-message-usecase';
-import { GetProfileUseCase } from '@/core/application/get-profile-content-usecase';
 import { container } from '@/core/crosscutting/injection/DependencyInjectionContainer';
-import { describe, test, expect, jest } from '@jest/globals';
 import { faker } from '@faker-js/faker';
+import { describe, expect, jest, test } from '@jest/globals';
+
+import { homeViewModel } from './homeViewModel';
 
 const EXPECTED_CALL_COUNT = 1;
 
-jest.mock('@/core/crosscutting/injection/DependencyInjectionContainer', () => ({
+jest.mock("@/core/crosscutting/injection/DependencyInjectionContainer", () => ({
   container: {
-    useResolve: jest.fn(),
+    resolve: jest.fn(),
   },
 }));
 
-describe('homeViewModel', () => {
-  test('should fetch and return a message and profile', async () => {
+describe("homeViewModel", () => {
+  test("should fetch and return a message and profile", async () => {
     const fakeMessageContent = faker.lorem.sentence();
     const fakeProfile = {
-      name: faker.name.fullName(),
+      name: faker.person.fullName(),
       bio: faker.lorem.paragraph(),
       socials: {
         github: faker.internet.url(),
@@ -36,9 +35,9 @@ describe('homeViewModel', () => {
       execute: jest.fn<() => Promise<typeof mockProfile>>().mockResolvedValue(mockProfile),
     };
 
-    (container.useResolve as jest.Mock).mockImplementation((useCase) => {
-      if (useCase === GetMessageUseCase) return getMessageUseCase;
-      if (useCase === GetProfileUseCase) return getProfileUseCase;
+    (container.resolve as jest.Mock).mockImplementation((useCase) => {
+      if (useCase === "GetMessageUseCase") return getMessageUseCase;
+      if (useCase === 'GetProfileUseCase') return getProfileUseCase;
       return undefined;
     });
 

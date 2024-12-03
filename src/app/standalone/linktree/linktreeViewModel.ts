@@ -1,20 +1,21 @@
-import { container } from "@/core/crosscutting/injection/DependencyInjectionContainer";
-import { GetStandaloneSiteUseCase } from "../../../core/application/get-standalone-site-use-case";
-import { GetProfileUseCase } from "@/core/application/get-profile-content-usecase";
-import linktreeMetadata from "@/core/crosscutting/seo/linktree";
-import { Metadata } from "next";
+import { Metadata } from 'next';
+
+import { GetProfileUseCase } from '@/core/application/get-profile-content-usecase';
+import { container } from '@/core/crosscutting/injection/DependencyInjectionContainer';
+import linktreeMetadata from '@/core/crosscutting/seo/linktree';
+
+import { GetStandaloneSiteUseCase } from '../../../core/application/get-standalone-site-use-case';
 
 export const metadata: Metadata = {...linktreeMetadata};
 const LINKTREE_PAGE = "linktree";
 
 export const linktreeViewModel = async () => {
-
-  const getStandaloneSiteUseCase = container.useResolve(GetStandaloneSiteUseCase);
-  const getProfileUseCase = container.useResolve(GetProfileUseCase);
+  const getStandaloneSiteUseCase = container.resolve<GetStandaloneSiteUseCase>('GetStandaloneSiteUseCase');
+  const getProfileUseCase = container.resolve<GetProfileUseCase>('GetProfileUseCase');
 
   const profile = await getProfileUseCase.execute();
 
-  const htmlContent = getStandaloneSiteUseCase.execute(LINKTREE_PAGE, {
+  const htmlContent = await getStandaloneSiteUseCase.execute(LINKTREE_PAGE, {
     GITHUB_URL: profile.githubUrl,
     YOUTUBE_URL: profile.youtubeUrl,
     TWITTER_URL: profile.twitterUrl,

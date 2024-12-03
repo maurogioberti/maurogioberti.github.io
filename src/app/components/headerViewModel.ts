@@ -1,10 +1,11 @@
-import { container } from "@/core/crosscutting/injection/DependencyInjectionContainer";
-import { GetHeaderContentUseCase as GetHeaderContentUseCase } from "@/core/application/get-header-content-usecase";
-import { GetProfileUseCase } from "@/core/application/get-profile-content-usecase";
+import { GetHeaderContentUseCase } from '@/core/application/get-header-content-usecase';
+import { GetProfileUseCase } from '@/core/application/get-profile-content-usecase';
+import { container } from '@/core/crosscutting/injection/DependencyInjectionContainer';
 
 export async function headerViewModel() {
-  const getHeaderContentUseCase = container.useResolve(GetHeaderContentUseCase);
-  const getProfileUseCase = container.useResolve(GetProfileUseCase);
+  
+  const getHeaderContentUseCase = container.resolve<GetHeaderContentUseCase>(GetHeaderContentUseCase.name);
+  const getProfileUseCase = container.resolve<GetProfileUseCase>('GetProfileUseCase');
 
   const content = getHeaderContentUseCase.execute();
   const profile = await getProfileUseCase.execute();

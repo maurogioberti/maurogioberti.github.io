@@ -11,6 +11,7 @@ describe("ProfileRepositoryImpl", () => {
     const mockProfile = new Profile(
       faker.person.firstName(),
       faker.person.lastName(),
+      faker.date.birthdate(),
       faker.person.jobTitle(),
       [],
       faker.lorem.sentence(),
@@ -25,7 +26,7 @@ describe("ProfileRepositoryImpl", () => {
     const repository = new ProfileRepositoryImpl(mockProfileService);
     const result = await repository.getProfile();
 
-    expect(result).toBe(mockProfile);
+    expect(result).toStrictEqual(mockProfile);
     expect(mockProfileService.fetchProfile).toHaveBeenCalledTimes(EXPECTED_CALL_COUNT);
   });
 });

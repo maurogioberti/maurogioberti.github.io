@@ -1,6 +1,7 @@
-import { Profile } from "./Profile";
-import { describe, test, expect } from "@jest/globals";
-import { faker } from "@faker-js/faker";
+import { faker } from '@faker-js/faker';
+import { describe, expect, test } from '@jest/globals';
+
+import { Profile } from './Profile';
 
 describe("Profile", () => {
   const INITIAL_EXPERIENCE_YEAR: number = 2014;
@@ -104,7 +105,7 @@ describe("Profile", () => {
       {}
     );
 
-    const expectedAge = new Date().getFullYear() - 1990 - 1; // Adjust for month/day
+    const expectedAge = new Date().getFullYear() - profile.birthDate.getFullYear();
     expect(profile.age).toBeGreaterThanOrEqual(expectedAge);
   });
 

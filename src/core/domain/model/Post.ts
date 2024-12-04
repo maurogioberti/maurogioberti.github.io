@@ -1,5 +1,6 @@
 export class Post {
   public readonly slug: string;
+  private static readonly EMPTY_STRING = "";
 
   constructor(
     public readonly id: string,
@@ -21,7 +22,7 @@ export class Post {
         year: "numeric",
       }).format(this.postedDate);
     }
-    return "";
+    return Post.EMPTY_STRING;
   }
 
   private static generateSlug(title: string): string {

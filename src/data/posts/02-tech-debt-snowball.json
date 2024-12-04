@@ -1,0 +1,9 @@
+{
+  "id": "2",
+  "title": "⛄💸 Tech Debt: Why Letting It Snowball Is Not an Option!",
+  "description": "A discussion on the risks of tech debt and how to manage it effectively.",
+  "content": "Tech debt might seem benign at first, like a small snowball. But leave it unchecked, and it can snowball into an avalanche, hampering innovation and slowing down progress. \r\n\r\nWhy avoid it? It complicates future development and can degrade your system's integrity.\r\n\r\n- Tackling it: Regularly review and address tech debt before it accumulates. Small refactoring efforts can prevent larger issues.\r\n- Prevention: Invest in good coding practices from the start and allocate time for addressing potential tech debt in your development cycle.\r\n\r\nLet's not let tech debt snowball into an obstacle. Keep it manageable and your projects innovative and efficient!",
+  "tags": ["tech debt", "software development", "code quality", "innovation"],
+  "imageUrl": "/assets/open-graph/blog/tech-debt-snowball-og-image.png",
+  "postedDate": "2024-03-22T00:00:00Z"
+}

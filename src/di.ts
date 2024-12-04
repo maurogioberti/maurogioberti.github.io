@@ -8,8 +8,8 @@ import { GetMessageUseCase } from './core/application/get-message-usecase';
 import { GetPostBySlugUseCase } from './core/application/get-post-by-slug-use-case';
 import { GetProfileUseCase } from './core/application/get-profile-content-usecase';
 import { GetStandaloneSiteUseCase } from './core/application/get-standalone-site-use-case';
+import { BlogRepositoryImpl } from './core/infrastructure/repository/BlogRepositoryImpl';
 import { MessageRepositoryImpl } from './core/infrastructure/repository/MessageRepositoryImpl';
-import { PostRepositoryImpl } from './core/infrastructure/repository/PostRepositoryImpl';
 import { ProfileRepositoryImpl } from './core/infrastructure/repository/ProfileRepositoryImpl';
 import { BlogServiceImpl } from './core/infrastructure/services/BlogServiceImpl';
 import { MessageServiceImpl } from './core/infrastructure/services/MessageServiceImpl';
@@ -28,8 +28,8 @@ export function setupDependencies() {
   container.register(ProfileRepositoryImpl.getInterface(), () => 
     new ProfileRepositoryImpl(container.resolve(ProfileServiceImpl.getInterface()))
   );
-  container.register(PostRepositoryImpl.getInterface(), () => 
-    new PostRepositoryImpl(container.resolve(BlogServiceImpl.getInterface()))
+  container.register(BlogRepositoryImpl.getInterface(), () => 
+    new BlogRepositoryImpl(container.resolve(BlogServiceImpl.getInterface()))
   );
 
   // Use Cases
@@ -40,13 +40,13 @@ export function setupDependencies() {
     new GetProfileUseCase(container.resolve(ProfileRepositoryImpl.getInterface()))
   );
   container.register(GetAllPostsUseCase.name, () => 
-    new GetAllPostsUseCase(container.resolve(PostRepositoryImpl.getInterface()))
+    new GetAllPostsUseCase(container.resolve(BlogRepositoryImpl.getInterface()))
   );
   container.register('GetPostBySlugUseCase', () => 
-    new GetPostBySlugUseCase(container.resolve(PostRepositoryImpl.getInterface()))
+    new GetPostBySlugUseCase(container.resolve(BlogRepositoryImpl.getInterface()))
   );
   container.register(GetLastPostsUseCase.name, () => 
-    new GetLastPostsUseCase(container.resolve(PostRepositoryImpl.getInterface()))
+    new GetLastPostsUseCase(container.resolve(BlogRepositoryImpl.getInterface()))
   );
 
   // Use Cases without dependencies

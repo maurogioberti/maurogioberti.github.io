@@ -1,10 +1,10 @@
 import { Post } from '@/core/domain/model/Post';
-import { PostRepository } from '@/core/domain/repository/PostRepository';
+import { BlogRepository } from '@/core/domain/repository/BlogRepository';
 
 export class GetAllPostsUseCase {
-  constructor(private readonly repository: PostRepository) {}
+  constructor(private readonly repository: BlogRepository) {}
 
   async execute(): Promise<Post[]> {
-    return await this.repository.getAll();
+    return await this.repository.getAllPosts();
   }
 }

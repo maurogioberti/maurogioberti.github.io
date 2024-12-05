@@ -1,10 +1,10 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function NotFound() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-vs-background text-vs-foreground text-center p-4 sm:p-6">
       <h1 className="text-3xl sm:text-4xl font-bold text-vs-primary mb-6">
-        🛠️ 404 - 👾 Ohhh man, where did I get here?! 🌀
+        🛠️ 404 - 👾 Ohhh man, how did I get here?! 🌀
       </h1>
       <p className="text-base sm:text-lg mb-4">
         🤖 Hi Human 👽, it seems you&apos;ve wandered into a{" "}

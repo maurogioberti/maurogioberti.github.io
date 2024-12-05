@@ -32,7 +32,7 @@ export default async function Home() {
         </section>
         <h1 className="text-4xl font-bold text-vs-primary text-center mb-4">
         {message}<br />
-        So feel free to hang around 🧟 and explore 🧐, but I&apos;m not fully glammed up yet to assist you 💄.
+        So feel free to hang around 🧟 and explore 🧐, but I&apos;m not fully ready yet to assist you 💄.
       </h1>
         <p className="text-lg text-center">
           This is a demonstration of an early version of my personal website.

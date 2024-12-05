@@ -15,7 +15,7 @@ export class PostMetadata {
 
     return {
       ...blogMetadata,
-      title: post.title,
+      title:  `Mauro Gioberti Blog - ${post.title}`,
       description: post.description,
       openGraph: {
         ...blogMetadata.openGraph,

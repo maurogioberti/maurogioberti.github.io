@@ -47,7 +47,9 @@ export default async function PostPage({ params }: BlogDetailPageProps) {
           <Image src={post.imageUrl} alt={`Imagen de ${post.title}`} width={IMAGE_WIDTH} height={IMAGE_HEIGHT} className="blog-main-image" />
         </div>
 
-        <section className="prose prose-invert prose-lg max-w-none">{post.content}</section>
+        <section className="prose prose-invert prose-lg max-w-none">
+          <div dangerouslySetInnerHTML={{ __html: post.content }} />
+        </section>
       </article>
     </div>
   );

@@ -30,9 +30,18 @@ export abstract class BaseService {
 
         for (const file of files) {
           if (file.endsWith('.json')) {
-            const fileContent = JSON.parse(
-              fs.readFileSync(path.join(absoluteFolderPath, file), 'utf-8')
-            );
+            const jsonFilePath = path.join(absoluteFolderPath, file);
+            const fileContent = JSON.parse(fs.readFileSync(path.join(absoluteFolderPath, file), 'utf-8'));
+
+            const htmlFilePath = jsonFilePath.replace('.json', '.html');
+            if (fs.existsSync(htmlFilePath)) {
+              try {
+                fileContent.content = fs.readFileSync(htmlFilePath, 'utf-8');
+              } catch (htmlError) {
+                console.error(`Failed to read HTML file: ${htmlFilePath}`, htmlError);
+              }
+            }
+
             data.push(fileContent);
           }
         }

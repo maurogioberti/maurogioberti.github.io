@@ -1,4 +1,4 @@
-import { linktreeViewModel } from "./linktreeViewModel";
+import { linktreeViewModel } from './linktreeViewModel';
 
 export default async function LinktreePage() {
   const { htmlContent } = await linktreeViewModel();

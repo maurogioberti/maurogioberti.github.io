@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   ...homeMetadata,
 };
 
-export default async function Home() {
+export default async function HomePage() {
   const { message, profile } = await homeViewModel();
 
   return (

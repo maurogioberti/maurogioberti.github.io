@@ -1,9 +1,10 @@
-import servicesMetadata from "@/core/crosscutting/seo/services";
-import { Metadata } from "next";
+import { Metadata } from 'next';
+
+import servicesMetadata from '@/core/crosscutting/seo/services';
 
 export const metadata: Metadata = {...servicesMetadata};
 
-export default function Services() {
+export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-vs-background text-vs-foreground p-6">
       <header className="mb-12 text-center">
@@ -56,8 +57,7 @@ export default function Services() {
             href="https://www.linkedin.com/in/maurogioberti" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="px-6 py-2 bg-vs-primary text-white rounded-lg hover:bg-vs-primary-dark inline-block"
-          >
+            className="px-6 py-2 bg-vs-primary text-white rounded-lg hover:bg-vs-primary-dark inline-block">
             Connect on LinkedIn
           </a>
           <p className="mt-4 text-sm">
@@ -68,7 +68,6 @@ export default function Services() {
           </p>
         </div>
       </section>
-
     </div>
   );
 }

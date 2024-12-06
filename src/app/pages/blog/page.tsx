@@ -35,21 +35,33 @@ export default async function BlogPage() {
           <div
             key={post.id}
             className="group relative bg-vs-background-light rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-            <Image
-              src={post.imageUrl}
-              alt={`Open Graph image for ${post.title}`}
-              width={IMAGE_WIDTH}
-              height={IMAGE_HEIGHT}
-              className="h-48 w-full object-cover rounded-t-lg"
-            />
-            <div className="p-6">
-              <h2 className="text-2xl font-semibold text-vs-foreground group-hover:text-vs-primary transition-colors duration-300">{post.title}</h2>
-              <p className="text-sm text-gray-500 mt-1">{post.formattedDate}</p>
-              <p className="text-md text-gray-300 mt-2">{post.description}</p>
-              <Link href={`/pages/blog/${post.slug}`} className="inline-block mt-4 text-vs-primary font-semibold hover:underline">
-                Read More →
-              </Link>
-            </div>
+            <Link href={`/pages/blog/${post.slug}`} className="block">
+              <Image
+                src={post.imageUrl}
+                alt={`Open Graph image for ${post.title}`}
+                width={IMAGE_WIDTH}
+                height={IMAGE_HEIGHT}
+                className="h-48 w-full object-cover rounded-t-lg"
+              />
+              <div className="p-6">
+                <h2 className="text-2xl font-semibold text-vs-foreground group-hover:text-vs-primary transition-colors duration-300">{post.title}</h2>
+                <p className="text-sm text-gray-500 mt-1">{post.formattedDate}</p>
+                <p className="text-md text-gray-500 mt-2">{post.description}</p>
+
+                {post.tags && post.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    {post.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="bg-blue-500 text-white text-xs font-semibold py-1 px-3 rounded-full shadow hover:bg-blue-600 transition-colors">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                <strong className="inline-block mt-4 text-vs-primary font-semibold hover:underline">Read More →</strong>
+              </div>
+            </Link>
           </div>
         ))}
       </div>

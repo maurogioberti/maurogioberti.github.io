@@ -5,7 +5,6 @@ import { BlogService } from '../../domain/services/BlogService';
 import { BaseRepository } from './base/BaseRepository';
 
 export class BlogRepositoryImpl extends BaseRepository implements BlogRepository {
-
   constructor(private readonly blogService: BlogService) {
     super();
   }
@@ -28,14 +27,15 @@ export class BlogRepositoryImpl extends BaseRepository implements BlogRepository
   private async getPosts() {
     const rawDataPosts = await this.blogService.fetchPosts();
     const posts = rawDataPosts.map((rawDataPost) => new Post(
-      rawDataPost.id,
-      rawDataPost.title,
-      rawDataPost.description,
-      rawDataPost.content,
-      rawDataPost.tags,
-      rawDataPost.imageUrl,
-      rawDataPost.postedDate,
-    ));
+          rawDataPost.id,
+          rawDataPost.title,
+          rawDataPost.description,
+          rawDataPost.content,
+          rawDataPost.tags,
+          rawDataPost.imageUrl,
+          new Date(rawDataPost.postedDate ?? 0)
+        )
+    );
 
     return posts;
   }

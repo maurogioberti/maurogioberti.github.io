@@ -15,11 +15,11 @@ export class PostMetadata {
 
     return {
       ...blogMetadata,
-      title:  `Mauro Gioberti Blog - ${post.title}`,
+      title:  `Mauro Gioberti Blog | ${post.title}`,
       description: post.description,
       openGraph: {
         ...blogMetadata.openGraph,
-        title: post.title,
+        title: `Mauro Gioberti Blog | ${post.title}`,
         description: post.description,
         images: [
           {

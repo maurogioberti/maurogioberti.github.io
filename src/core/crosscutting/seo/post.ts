@@ -19,7 +19,7 @@ export class PostMetadata {
       description: post.description,
       openGraph: {
         ...blogMetadata.openGraph,
-        title: `Mauro Gioberti Blog | ${post.title}`,
+        title: post.title,
         description: post.description,
         images: [
           {

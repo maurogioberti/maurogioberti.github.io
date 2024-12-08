@@ -1,8 +1,8 @@
-import { setupDependencies } from "../di";
-import layoutMetadata from "@/core/crosscutting/seo/layout";
-import "./globals.css";
-import { Header } from "@/app/components/Header";
-import { Footer } from "@/app/components/Footer";
+import './globals.css';
+
+import layoutMetadata from '@/core/crosscutting/seo/layout';
+
+import { setupDependencies } from '../di';
 
 setupDependencies();
 
@@ -12,9 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen">
-        <Header />
         <main className="flex-grow">{children}</main>
-        <Footer />
       </body>
     </html>
   );

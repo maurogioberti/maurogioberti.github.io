@@ -39,7 +39,7 @@ export function setupDependencies() {
   container.register('GetProfileUseCase', () => 
     new GetProfileUseCase(container.resolve(ProfileRepositoryImpl.getInterface()))
   );
-  container.register(GetAllPostsUseCase.name, () => 
+  container.register('GetAllPostsUseCase', () => 
     new GetAllPostsUseCase(container.resolve(BlogRepositoryImpl.getInterface()))
   );
   container.register('GetPostBySlugUseCase', () => 

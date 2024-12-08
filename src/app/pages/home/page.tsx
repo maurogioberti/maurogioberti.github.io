@@ -30,14 +30,14 @@ export default async function HomePage() {
           <p>➡️{" "} <Link href="/resume" className="text-blue-500 underline">Resume:</Link> {" "} Dive into my professional journey.</p>
           <p>➡️{" "} <Link href="/services" className="text-blue-500 underline"> Services:</Link> {" "} Explore the ways I can help your business grow.</p>
           <p>➡️{" "} <Link href="/blog" className="text-blue-500 underline">Blog:</Link> {" "} Check out my latest thoughts on software engineering and beyond.</p>
-          <p className="mt-4">
-            <Link href="/contact" className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+          <div className="mt-4 flex flex-col sm:flex-row items-center sm:justify-center space-y-2 sm:space-y-0 sm:space-x-4">
+            <Link href="/contact" className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 text-center">
               📧 Contact Me!
             </Link>
-            <Link href={`${profile.linkedinUrl}`} className="ml-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+            <Link href={`${profile.linkedinUrl}`} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-center">
               👨‍💻 Let&apos;s Connect!
             </Link>
-          </p>
+          </div>
         </div>
         <div className="mt-8 text-center">
           <p className="font-bold text-vs-foreground/70 text-sm">🔎 Feeling Curious? 😍</p>

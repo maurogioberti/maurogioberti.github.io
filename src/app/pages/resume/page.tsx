@@ -41,7 +41,7 @@ export default async function ResumePage() {
                         {item.consultingCompanyLogoUrl && (
                           <Image src={item.consultingCompanyLogoUrl} alt={`${item.consultingCompany} logo`} width={56} height={56} className="w-14 h-14 rounded-md object-cover" />
                         )}
-                        <p className="text-base italic text-blue-300">
+                        <p className="text-base italic text-blue-500">
                           Services for{" "}
                           {item.consultingCompanyUrl ? (
                             <a href={item.consultingCompanyUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">
@@ -103,7 +103,7 @@ export default async function ResumePage() {
                     className="font-semibold text-vs-primary hover:underline">
                     {recommendation.name}
                   </a>
-                  <p className="italic text-blue-400">{recommendation.position}</p>
+                  <p className="italic text-blue-500">{recommendation.position}</p>
 
                   <p className="text-xs text-vs-foreground/60 mb-1">Recommended on: {recommendation.formattedDate}</p>
 

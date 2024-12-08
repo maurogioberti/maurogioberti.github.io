@@ -27,7 +27,7 @@ export default async function BlogPage() {
     <div className="min-h-screen p-6 bg-vs-background text-vs-foreground font-sans">
       <header className="mb-12 text-center">
         <h1 className="text-5xl font-extrabold text-vs-primary mb-4">📝 Blog</h1>
-        <p className="text-lg text-gray-400">Discover posts on software engineering, best practices, and Clean Architecture.</p>
+        <p className="text-lg">Discover posts on software engineering, best practices, and Clean Architecture.</p>
       </header>
 
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">

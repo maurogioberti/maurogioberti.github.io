@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 
 import { GetProfileUseCase } from '@/core/application/get-profile-content-usecase';
+import { DependencyIdentifiers } from '@/core/crosscutting/injection/DependencyIdentifiers';
 import { container } from '@/core/crosscutting/injection/DependencyInjectionContainer';
 import linktreeMetadata from '@/core/crosscutting/seo/linktree';
 
@@ -10,8 +11,8 @@ export const metadata: Metadata = {...linktreeMetadata};
 const LINKTREE_PAGE = "linktree";
 
 export const linktreeViewModel = async () => {
-  const getStandaloneSiteUseCase = container.resolve<GetStandaloneSiteUseCase>('GetStandaloneSiteUseCase');
-  const getProfileUseCase = container.resolve<GetProfileUseCase>('GetProfileUseCase');
+  const getStandaloneSiteUseCase = container.resolve<GetStandaloneSiteUseCase>(DependencyIdentifiers.USE_CASES.GET_STANDALONE_SITE);
+  const getProfileUseCase = container.resolve<GetProfileUseCase>(DependencyIdentifiers.USE_CASES.GET_PROFILE);
 
   const profile = await getProfileUseCase.execute();
 

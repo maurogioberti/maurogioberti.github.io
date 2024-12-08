@@ -1,3 +1,4 @@
+import { DependencyIdentifiers } from '@/core/crosscutting/injection/DependencyIdentifiers';
 import { container } from '@/core/crosscutting/injection/DependencyInjectionContainer';
 
 import { GetAllPostsUseCase } from './core/application/get-all-posts-use-case';
@@ -17,40 +18,27 @@ import { ProfileServiceImpl } from './core/infrastructure/services/ProfileServic
 
 export function setupDependencies() {
   // Services
-  container.register(MessageServiceImpl.getInterface(), () => new MessageServiceImpl());
-  container.register(ProfileServiceImpl.getInterface(), () => new ProfileServiceImpl());
-  container.register(BlogServiceImpl.getInterface(), () => new BlogServiceImpl());
+  container.register(DependencyIdentifiers.SERVICES.MESSAGE, () => new MessageServiceImpl());
+  container.register(DependencyIdentifiers.SERVICES.PROFILE, () => new ProfileServiceImpl());
+  container.register(DependencyIdentifiers.SERVICES.BLOG, () => new BlogServiceImpl());
 
   // Repositories
-  container.register(MessageRepositoryImpl.getInterface(), () => 
-    new MessageRepositoryImpl(container.resolve(MessageServiceImpl.getInterface()))
-  );
-  container.register(ProfileRepositoryImpl.getInterface(), () => 
-    new ProfileRepositoryImpl(container.resolve(ProfileServiceImpl.getInterface()))
-  );
-  container.register(BlogRepositoryImpl.getInterface(), () => 
-    new BlogRepositoryImpl(container.resolve(BlogServiceImpl.getInterface()))
-  );
+  container.register(DependencyIdentifiers.REPOSITORIES.MESSAGE, () => new MessageRepositoryImpl(container.resolve(DependencyIdentifiers.SERVICES.MESSAGE)));
+  container.register(DependencyIdentifiers.REPOSITORIES.PROFILE, () => new ProfileRepositoryImpl(container.resolve(DependencyIdentifiers.SERVICES.PROFILE)));
+  container.register(DependencyIdentifiers.REPOSITORIES.BLOG, () => new BlogRepositoryImpl(container.resolve(DependencyIdentifiers.SERVICES.BLOG)));
 
   // Use Cases
-  container.register('GetMessageUseCase', () => 
-    new GetMessageUseCase(container.resolve(MessageRepositoryImpl.getInterface()))
+  container.register(DependencyIdentifiers.USE_CASES.GET_MESSAGE, () => new GetMessageUseCase(container.resolve(DependencyIdentifiers.REPOSITORIES.MESSAGE)));
+  container.register(DependencyIdentifiers.USE_CASES.GET_PROFILE, () => new GetProfileUseCase(container.resolve(DependencyIdentifiers.REPOSITORIES.PROFILE)));
+  container.register(DependencyIdentifiers.USE_CASES.GET_ALL_POSTS, () => new GetAllPostsUseCase(container.resolve(DependencyIdentifiers.REPOSITORIES.BLOG)));
+  container.register(
+    DependencyIdentifiers.USE_CASES.GET_POST_BY_SLUG,
+    () => new GetPostBySlugUseCase(container.resolve(DependencyIdentifiers.REPOSITORIES.BLOG))
   );
-  container.register('GetProfileUseCase', () => 
-    new GetProfileUseCase(container.resolve(ProfileRepositoryImpl.getInterface()))
-  );
-  container.register('GetAllPostsUseCase', () => 
-    new GetAllPostsUseCase(container.resolve(BlogRepositoryImpl.getInterface()))
-  );
-  container.register('GetPostBySlugUseCase', () => 
-    new GetPostBySlugUseCase(container.resolve(BlogRepositoryImpl.getInterface()))
-  );
-  container.register(GetLastPostsUseCase.name, () => 
-    new GetLastPostsUseCase(container.resolve(BlogRepositoryImpl.getInterface()))
-  );
+  container.register(DependencyIdentifiers.USE_CASES.GET_LAST_POSTS, () => new GetLastPostsUseCase(container.resolve(DependencyIdentifiers.REPOSITORIES.BLOG)));
 
   // Use Cases without dependencies
-  container.register('GetStandaloneSiteUseCase', () => new GetStandaloneSiteUseCase());
-  container.register(GetFooterContentUseCase.name, () => new GetFooterContentUseCase());
-  container.register(GetHeaderContentUseCase.name, () => new GetHeaderContentUseCase());
+  container.register(DependencyIdentifiers.USE_CASES.GET_STANDALONE_SITE, () => new GetStandaloneSiteUseCase());
+  container.register(DependencyIdentifiers.USE_CASES.GET_FOOTER_CONTENT, () => new GetFooterContentUseCase());
+  container.register(DependencyIdentifiers.USE_CASES.GET_HEADER_CONTENT, () => new GetHeaderContentUseCase());
 }

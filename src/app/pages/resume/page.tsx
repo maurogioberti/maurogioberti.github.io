@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Image from 'next/image';
 
 import resumeMetadata from '@/core/crosscutting/seo/resume';
 
@@ -11,7 +12,7 @@ export default function ResumePage() {
     <div className="min-h-screen bg-vs-background text-vs-foreground p-6">
       <h1 className="text-5xl font-extrabold text-vs-primary mb-4">📜 Resume</h1>
       <div className="flex flex-col items-center mb-8">
-        <img src="/assets/profile/maurogioberti.png" alt="Mauro Gioberti" className="w-50 h-50 rounded-full object-cover shadow-lg" />
+        <Image src="/assets/profile/maurogioberti.png" alt="Mauro Gioberti" width={200} height={200} className="w-50 h-50 rounded-full object-cover shadow-lg" />
       </div>
       <section className="flex flex-col sm:flex-row gap-8">
         <div className="flex-1">
@@ -21,7 +22,9 @@ export default function ResumePage() {
             {timeline.map((item, index) => (
               <div key={index} className="relative pl-8 sm:pl-32 py-6 group">
                 <div className="flex items-center gap-4 mb-2">
-                  {item.logoUrl && <img src={item.logoUrl} alt={`${item.company} logo`} className="w-14 h-14 rounded-md object-cover" />}
+                  {item.logoUrl && (
+                    <Image src={item.logoUrl} alt={`${item.company} logo`} width={56} height={56} className="w-14 h-14 rounded-md object-cover" />
+                  )}
                   <div>
                     <div className="font-caveat font-medium text-2xl text-vs-primary">
                       {item.companyUrl ? (
@@ -35,7 +38,7 @@ export default function ResumePage() {
                     {item.consultingCompany && (
                       <div className="flex items-center gap-4">
                         {item.consultingCompanyLogoUrl && (
-                          <img src={item.consultingCompanyLogoUrl} alt={`${item.consultingCompany} logo`} className="w-14 h-14 rounded-md object-cover" />
+                          <Image src={item.consultingCompanyLogoUrl} alt={`${item.consultingCompany} logo`} width={56} height={56} className="w-14 h-14 rounded-md object-cover" />
                         )}
                         <p className="text-base italic text-blue-300">
                           Services for{" "}
@@ -90,8 +93,7 @@ export default function ResumePage() {
           <div className="space-y-6">
             {recommendations.map((recommendation, index) => (
               <div key={index} className="flex items-start gap-4 pb-6 border-b border-vs-primary">
-                <img src={recommendation.profilePictureUrl} alt={`${recommendation.name}'s profile`} className="w-12 h-12 rounded-full object-cover" />
-
+                <Image src={recommendation.profilePictureUrl} alt={`${recommendation.name}'s profile`} width={48} height={48} className="w-12 h-12 rounded-full object-cover" />
                 <div className="flex-1">
                   <a
                     href={recommendation.linkedInProfileUrl}

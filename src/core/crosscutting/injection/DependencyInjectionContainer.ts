@@ -1,8 +1,6 @@
 export class DependencyInjectionContainer {
-  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  private instances = new Map<string, any>();
-  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  private factories = new Map<string, () => any>();
+  private instances = new Map<string, unknown>();
+  private factories = new Map<string, () => unknown>();
   
   register<T>(key: string, factory: () => T): void {
     this.factories.set(key, factory);

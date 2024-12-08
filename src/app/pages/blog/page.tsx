@@ -2,21 +2,13 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { PostMetadata } from '@/core/crosscutting/seo/post';
+import blogMetadata from '@/core/crosscutting/seo/blog';
 
-import { postViewModel } from './[slug]/postViewModel';
 import { postsViewModel } from './postsViewModel';
 
-interface BlogDetailPageProps {
-  params: {
-    slug: string;
-  };
-}
-
-export async function generateMetadata({ params }: BlogDetailPageProps): Promise<Metadata> {
-  const { post } = await postViewModel(params.slug);
-  return PostMetadata.generate(post);
-}
+export const metadata: Metadata = {
+  ...blogMetadata,
+};
 
 export default async function BlogPage() {
   const { posts } = await postsViewModel();

@@ -1,3 +1,5 @@
+import { formatDate } from '@/core/crosscutting/utils/date';
+
 export class Post {
   public readonly slug: string;
   private static readonly EMPTY_STRING = "";
@@ -15,14 +17,7 @@ export class Post {
   }
 
   get formattedDate(): string {
-    if (this.postedDate instanceof Date && !isNaN(this.postedDate.getTime())) {
-      return new Intl.DateTimeFormat("en-US", {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-      }).format(this.postedDate);
-    }
-    return Post.EMPTY_STRING;
+    return formatDate(this.postedDate);
   }
 
   private static generateSlug(title: string): string {

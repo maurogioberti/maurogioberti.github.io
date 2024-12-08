@@ -1,0 +1,110 @@
+[
+  {
+    "year": "2024",
+    "title": "Software Engineer",
+    "company": "PayRetailers",
+    "companyUrl": "https://www.payretailers.com/",
+    "companyLogoUrl": "/assets/resume/payretailers-logo.png",
+    "consultingCompany": null,
+    "consultingCompanyUrl": null,
+    "consultingCompanyLogoUrl": null,
+    "description": "Focused on .NET Core, EF, and React, I advanced in software development with DDD and CQRS, optimizing backend solutions. Utilized continuous deployment, enhanced security via OAuth, and applied MediatR for command-query separation, embodying best practices in clean code and architecture for efficient software delivery.",
+    "tags": [".NET Core", "CQRS", "DDD", "OAuth", "React", "Clean Code"]
+  },
+  {
+    "year": "2023",
+    "title": "Software Engineer",
+    "company": "InnoIT Consulting",
+    "companyUrl": "https://www.innoit.es/",
+    "companyLogoUrl": "/assets/resume/innoit-logo.png",
+    "consultingCompany": null,
+    "consultingCompanyUrl": null,
+    "consultingCompanyLogoUrl": null,
+    "description": "Worked on various projects utilizing .NET Core, Microservices, DDD, and Entity Framework. Focused on relational databases like SQL Server and SQLite, and employed GitHub Actions for CI/CD pipelines.",
+    "tags": [".NET Core", "Microservices", "Entity Framework", "SQL Server", "CI/CD", "DDD"]
+  },
+  {
+    "year": "2021",
+    "title": "Software Engineer",
+    "company": "Bonzzu",
+    "companyUrl": "https://www.bonzzu.com/",
+    "companyLogoUrl": "/assets/resume/bonzzu-logo.png",
+    "consultingCompany": "Intelliflo – Invesco Ltd",
+    "consultingCompanyUrl": "https://www.intelliflo.com/",
+    "consultingCompanyLogoUrl": "/assets/resume/intelliflo-logo.png",
+    "description": "Collaborated on financial microservices, primarily for Intelliflo's key client, Invesco. Leveraged .NET Core, Entity Framework, SQL Server, Redis, GitHub Actions, and AWS infrastructure. Adopted SAFe methodologies and tools like Azure DevOps and Jira for agile workflows.",
+    "tags": [".NET Core", "Microservices", "AWS", "Redis", "SAFe", "SQL Server"]
+  },
+  {
+    "year": "2019",
+    "title": ".NET Software Developer",
+    "company": "NEORIS",
+    "companyUrl": "https://www.neoris.com/",
+    "companyLogoUrl": "/assets/resume/neoris-logo.png",
+    "consultingCompany": "Stock Market Trading Rosario",
+    "consultingCompanyUrl": "https://www.bcr.com.ar/",
+    "consultingCompanyLogoUrl": "/assets/resume/stock-market-trading-logo.png",
+    "description": "Developed and maintained web and desktop applications with WPF, MVC, .NET Core, and Angular in WCF-based SOA architectures. Managed Extranet security using digital certificates and mitigated inconsistencies in rural lease contracts using Microsoft Workflow Foundation. Mentored students and graduates for their first jobs.",
+    "tags": [".NET Core", "WPF", "SOA", "Digital Certificates", "Mentorship"]
+  },
+  {
+    "year": "2019",
+    "title": ".NET Developer",
+    "company": "Tesis IT & Automation",
+    "companyUrl": "https://tesis.com.ar/",
+    "companyLogoUrl": "/assets/resume/tesis-logo.png",
+    "consultingCompany": "Cordial Financial Company",
+    "consultingCompanyUrl": "https://www.cordialfinanciera.com.ar/",
+    "consultingCompanyLogoUrl": "/assets/resume/cordial-logo.png",
+    "description": "Maintained large-scale SOA applications and small accounting systems using VB6. Developed REST APIs with .NET Core and Angular. Worked on WCF web services and Java applications for call centers, alongside Oracle SQL management.",
+    "tags": [".NET Core", "REST APIs", "SOA", "VB6", "Oracle SQL"]
+  },
+  {
+    "year": "2018",
+    "title": "Software Developer",
+    "company": "Tecso",
+    "companyUrl": "https://www.tecso.coop/",
+    "companyLogoUrl": "/assets/resume/tecso-logo.png",
+    "consultingCompany": "Citibank Latin America",
+    "consultingCompanyUrl": "https://www.citigroup.com/",
+    "consultingCompanyLogoUrl": "/assets/resume/citi-logo.png",
+    "description": "Frontend development and maintenance for Citibank's home banking systems using Java, Citi proprietary frameworks, and Oracle SQL for database management.",
+    "tags": ["Java", "Oracle SQL", "Frontend", "Banking"]
+  },
+  {
+    "year": "2015",
+    "title": "Software Developer",
+    "company": "Integral Pack Express S.A.",
+    "companyUrl": "https://www.integralpack.com.ar/",
+    "companyLogoUrl": "/assets/resume/integral-pack-express-logo.png",
+    "consultingCompany": null,
+    "consultingCompanyUrl": null,
+    "consultingCompanyLogoUrl": null,
+    "description": "Developed billing systems and corporate API integrations using ASP.NET MVC, C#, and PHP. Maintained internal systems for logistics and administrative purposes with MSSQL, MySQL, and SQLite.",
+    "tags": ["ASP.NET MVC", "C#", "PHP", "REST APIs", "MSSQL"]
+  },
+  {
+    "year": "2011",
+    "title": "Electronics Technical Maintenance",
+    "company": "Sacoa Entertainment",
+    "companyUrl": "https://www.sacoa.com/",
+    "companyLogoUrl": "/assets/resume/sacoa-logo.png",
+    "consultingCompany": null,
+    "consultingCompanyUrl": null,
+    "consultingCompanyLogoUrl": null,
+    "description": "Maintained electronics, including arcade machines, network wiring, and custom computers for entertainment parks. Provided customer support and resolved technical claims for hardware/software.",
+    "tags": ["Electronics", "Networking", "Arcade", "Customer Support"]
+  },
+  {
+    "year": "1992",
+    "title": "Birth Argentina",
+    "company": null,
+    "companyUrl": null,
+    "companyLogoUrl": "/assets/resume/argentina-logo.png",
+    "consultingCompany": "Italian",
+    "consultingCompanyUrl": null,
+    "consultingCompanyLogoUrl": "/assets/resume/italy-logo.png",
+    "description": "Born in Rosario, Santa Fe, Argentina. I’m Italian because my family’s originally from there—third generation, like most of Argentinians.",
+    "tags": ["Birth", "Argentinian", "Italian"]
+  }
+]

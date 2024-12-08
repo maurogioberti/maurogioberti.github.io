@@ -3,11 +3,12 @@ import Image from 'next/image';
 
 import resumeMetadata from '@/core/crosscutting/seo/resume';
 
-import { recommendations, timeline } from './resumeViewModel';
+import { resumeViewModel } from './resumeViewModel';
 
 export const metadata: Metadata = { ...resumeMetadata };
 
-export default function ResumePage() {
+export default async function ResumePage() {
+  const { timeline, recommendations } = await resumeViewModel();
   return (
     <div className="min-h-screen bg-vs-background text-vs-foreground p-6">
       <h1 className="text-5xl font-extrabold text-vs-primary mb-4">📜 Resume</h1>
@@ -22,8 +23,8 @@ export default function ResumePage() {
             {timeline.map((item, index) => (
               <div key={index} className="relative pl-8 sm:pl-32 py-6 group">
                 <div className="flex items-center gap-4 mb-2">
-                  {item.logoUrl && (
-                    <Image src={item.logoUrl} alt={`${item.company} logo`} width={56} height={56} className="w-14 h-14 rounded-md object-cover" />
+                  {item.companyLogoUrl && (
+                    <Image src={item.companyLogoUrl} alt={`${item.company} logo`} width={56} height={56} className="w-14 h-14 rounded-md object-cover" />
                   )}
                   <div>
                     <div className="font-caveat font-medium text-2xl text-vs-primary">
@@ -104,7 +105,7 @@ export default function ResumePage() {
                   </a>
                   <p className="italic text-blue-400">{recommendation.position}</p>
 
-                  <p className="text-xs text-vs-foreground/60 mb-1">Recommended on: {recommendation.date}</p>
+                  <p className="text-xs text-vs-foreground/60 mb-1">Recommended on: {recommendation.formattedDate}</p>
 
                   <p className="text-xs text-blue-500 mb-2 italic">{recommendation.relation}</p>
                   {recommendation.translation && <p className="text-xs text-blue-400 italic mt-1">{recommendation.translation}</p>}

@@ -10,6 +10,9 @@ export default function ResumePage() {
   return (
     <div className="min-h-screen bg-vs-background text-vs-foreground p-6">
       <h1 className="text-5xl font-extrabold text-vs-primary mb-4">📜 Resume</h1>
+      <div className="flex flex-col items-center mb-8">
+        <img src="/assets/profile/maurogioberti.png" alt="Mauro Gioberti" className="w-50 h-50 rounded-full object-cover shadow-lg" />
+      </div>
       <section className="flex flex-col sm:flex-row gap-8">
         <div className="flex-1">
           <h2 className="text-4xl font-bold mb-6">📈 Professional Timeline</h2>

@@ -106,7 +106,7 @@ export const timeline = [
     consultingCompany: "Italian",
     consultingCompanyLogoUrl: "/assets/resume/italy-logo.png",
     logoUrl: "/assets/resume/argentina-logo.png",
-    description: "Born in Rosario, Santa Fe, Argentina. I'm Italian just because my 3rd generation family all came from it, like most of the Argentinian guys.",
+    description: "Born in Rosario, Santa Fe, Argentina. I’m Italian because my family’s originally from there—third generation, like most of Argentinians.",
     tags: ["Birth", "Argentinian", "Italian"],
   },
 ];

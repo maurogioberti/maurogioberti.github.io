@@ -2,9 +2,12 @@ import { Metadata } from 'next';
 
 import servicesMetadata from '@/core/crosscutting/seo/services';
 
+import { serviceViewModel } from './serviceViewModel';
+
 export const metadata: Metadata = {...servicesMetadata};
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const { services } = await serviceViewModel();
   return (
     <div className="min-h-screen bg-vs-background text-vs-foreground p-6">
       <header className="mb-12 text-center">
@@ -14,46 +17,25 @@ export default function ServicesPage() {
         </p>
       </header>
       <section className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
-        <div className="bg-vs-background-light p-6 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-semibold mb-4">🔍 Technical Interviews</h2>
-          <p>
-            I provide <strong>clear</strong> and <strong>impartial</strong> technical interviews to assess 
-            candidates <strong>skills</strong> and alignment with <strong>role expectations</strong>. 
-            Using <strong>extensive experience</strong> and cognitive techniques 
-            like <strong>Follow-up Questions</strong> and <strong>Memory Recall</strong>, 
-            I identify <strong>genuine expertise</strong> and ensure <strong>authenticity</strong> through 
-            strategic problem-solving exercises.
-          </p>
-      </div>
-      <div className="bg-vs-background-light p-6 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-semibold mb-4">⚙️ Microservices Development</h2>
-        <p>
-          With a <strong>solid and extensive background</strong> in microservices development, 
-          I deliver <strong>quick</strong>, <strong>efficient</strong>, and <strong>scalable</strong> solutions to modern infrastructure needs. 
-          I ensure <strong>high-quality code</strong> with <strong>exceptional test coverage</strong>, 
-          ensuring your codebase is <strong>easy to maintain</strong>, <strong>readable</strong>, and aligned with 
-          your <strong>architecture standards</strong>.
-        </p>
-        <div className="flex justify-center">
-          <div className="inline-block bg-blue-500 text-white text-xs font-semibold uppercase rounded-full px-3 py-1 mt-2">Fully Booked 🚫</div>
-        </div>
-        <div className="mt-2 p-4 bg-blue-600 text-white text-center text-sm font-semibold rounded-lg shadow">Please check back soon for availability! 😊</div>
-      </div>
-      <div className="bg-vs-background-light p-6 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-semibold mb-4">🎓 Mentorship</h2>
-        <p>
-          <strong>Personalized mentorship</strong> to aspiring developers, as well as junior and mid-level engineers, 
-          guiding them through their growth with <strong>practical advice</strong> and <strong>peer programming sessions</strong>. 
-          With experience in delivering <strong>technical talks</strong> and <strong>hands-on courses</strong>, 
-          I focus on cultivating strong coding principles, particularly in <strong>.NET testing practices</strong>, ensuring developers gain 
-          the skills to build robust and maintainable software.
-        </p>
-        <div className="flex justify-center">
-          <div className="inline-block bg-blue-500 text-white text-xs font-semibold uppercase rounded-full px-3 py-1 mt-2">Fully Booked 🚫</div>
-        </div>
-        <div className="mt-2 p-4 bg-blue-600 text-white text-center text-sm font-semibold rounded-lg shadow">Please check back soon for availability! 😊</div>
-      </div>
-    </section>
+        {services.map((service, index) => (
+          <div key={index} className="bg-vs-background-light p-6 rounded-lg shadow-lg">
+            <h2 className="text-2xl font-semibold mb-4">{service.title}</h2>
+            <div dangerouslySetInnerHTML={{ __html: service.content }} />
+            {!service.available && (
+              <>
+                <div className="flex justify-center">
+                  <div className="inline-block bg-blue-500 text-white text-xs font-semibold uppercase rounded-full px-3 py-1 mt-2">
+                    Fully Booked 🚫
+                  </div>
+                </div>
+                <div className="mt-2 p-4 bg-blue-600 text-white text-center text-sm font-semibold rounded-lg shadow">
+                  Please check back soon for availability! 😊
+                </div>
+              </>
+            )}
+          </div>
+        ))}
+      </section>
       <section className="mt-16 text-center">
         <h3 className="text-2xl font-semibold text-vs-primary">🌎 Location & Availability</h3>
         <p className="mt-4 max-w-xl mx-auto">

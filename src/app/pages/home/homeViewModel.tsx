@@ -1,5 +1,5 @@
-import { GetMessageUseCase } from '@/core/application/get-message-usecase';
-import { GetProfileUseCase } from '@/core/application/get-profile-content-usecase';
+import { GetMessageUseCase } from '@/core/application/get-message-use-case';
+import { GetProfileUseCase } from '@/core/application/get-profile-content-use-case';
 import { DependencyIdentifiers } from '@/core/crosscutting/injection/DependencyIdentifiers';
 import { container } from '@/core/crosscutting/injection/DependencyInjectionContainer';
 

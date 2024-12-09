@@ -2,12 +2,12 @@ import { DependencyIdentifiers } from '@/core/crosscutting/injection/DependencyI
 import { container } from '@/core/crosscutting/injection/DependencyInjectionContainer';
 
 import { GetAllPostsUseCase } from './core/application/get-all-posts-use-case';
-import { GetFooterContentUseCase } from './core/application/get-footer-content-usecase';
-import { GetHeaderContentUseCase } from './core/application/get-header-content-usecase';
+import { GetFooterContentUseCase } from './core/application/get-footer-content-use-case';
+import { GetHeaderContentUseCase } from './core/application/get-header-content-use-case';
 import { GetLastPostsUseCase } from './core/application/get-last-posts-use-case';
-import { GetMessageUseCase } from './core/application/get-message-usecase';
+import { GetMessageUseCase } from './core/application/get-message-use-case';
 import { GetPostBySlugUseCase } from './core/application/get-post-by-slug-use-case';
-import { GetProfileUseCase } from './core/application/get-profile-content-usecase';
+import { GetProfileUseCase } from './core/application/get-profile-content-use-case';
 import { GetRecommendationsUseCase } from './core/application/get-recommendations-use-case';
 import { GetServicesUseCase } from './core/application/get-services-use-case';
 import { GetStandaloneSiteUseCase } from './core/application/get-standalone-site-use-case';

@@ -1,18 +1,18 @@
-import { faker } from '@faker-js/faker';
-import { describe, expect, test } from '@jest/globals';
+import { faker } from "@faker-js/faker";
+import { describe, expect, test } from "@jest/globals";
 
-import { Timeline } from './Timeline';
+import { Timeline } from "./Timeline";
 
 describe("Timeline", () => {
   test("should create a Timeline instance with required properties", () => {
     const year = faker.date.past().getFullYear().toString();
     const title = faker.person.jobTitle();
     const company = faker.company.name();
-    const logoUrl = faker.internet.url();
-    const consultingCompany = faker.company.name();
-    const consultingCompanyLogoUrl = faker.internet.url();
-    const consultingCompanyUrl = faker.internet.url();
     const companyUrl = faker.internet.url();
+    const companyLogoUrl = faker.image.url();
+    const consultingCompany = faker.company.name();
+    const consultingCompanyUrl = faker.internet.url();
+    const consultingCompanyLogoUrl = faker.internet.url();
     const description = faker.lorem.paragraph();
     const tags = [faker.lorem.word(), faker.lorem.word()];
 
@@ -20,11 +20,11 @@ describe("Timeline", () => {
       year,
       title,
       company,
-      logoUrl,
-      consultingCompany,
-      consultingCompanyLogoUrl,
-      consultingCompanyUrl,
       companyUrl,
+      companyLogoUrl,
+      consultingCompany,
+      consultingCompanyUrl,
+      consultingCompanyLogoUrl,
       description,
       tags
     );
@@ -32,7 +32,7 @@ describe("Timeline", () => {
     expect(timeline.year).toBe(year);
     expect(timeline.title).toBe(title);
     expect(timeline.company).toBe(company);
-    expect(timeline.companyLogoUrl).toBe(logoUrl);
+    expect(timeline.companyLogoUrl).toBe(companyLogoUrl);
     expect(timeline.consultingCompany).toBe(consultingCompany);
     expect(timeline.consultingCompanyLogoUrl).toBe(consultingCompanyLogoUrl);
     expect(timeline.consultingCompanyUrl).toBe(consultingCompanyUrl);
@@ -45,16 +45,16 @@ describe("Timeline", () => {
     const year = faker.date.past().getFullYear().toString();
     const title = faker.person.jobTitle();
     const company = faker.company.name();
-    const logoUrl = faker.internet.url();
+    const companyLogoUrl = faker.internet.url();
     const description = faker.lorem.paragraph();
     const tags = [faker.lorem.word(), faker.lorem.word()];
 
-    const timeline = new Timeline(year, title, company, logoUrl, null, null, null, null, description, tags);
+    const timeline = new Timeline(year, title, company, null, companyLogoUrl, null, null, null, description, tags);
 
     expect(timeline.year).toBe(year);
     expect(timeline.title).toBe(title);
     expect(timeline.company).toBe(company);
-    expect(timeline.companyLogoUrl).toBe(logoUrl);
+    expect(timeline.companyLogoUrl).toBe(companyLogoUrl);
     expect(timeline.consultingCompany).toBeNull();
     expect(timeline.consultingCompanyLogoUrl).toBeNull();
     expect(timeline.consultingCompanyUrl).toBeNull();

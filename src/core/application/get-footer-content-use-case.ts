@@ -1,5 +1,4 @@
 export class GetFooterContentUseCase {
-  //TODO: Retreieve content from a repository
   execute() {
     return {
       sourceText: "Want to check my source? 🚀",

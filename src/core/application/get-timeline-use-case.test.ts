@@ -23,6 +23,7 @@ describe('GetTimelineUseCase', () => {
       title: faker.lorem.words(),
       company: faker.company.name(),
       logoUrl: faker.image.url(),
+      companyLogoUrl: faker.image.url(),
       description: faker.lorem.paragraph(),
       location: faker.address.city(),
       type: faker.lorem.word(),

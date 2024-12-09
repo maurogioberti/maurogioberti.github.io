@@ -1,4 +1,4 @@
-import { GetFooterContentUseCase } from '@/core/application/get-footer-content-usecase';
+import { GetFooterContentUseCase } from '@/core/application/get-footer-content-use-case';
 import { DependencyIdentifiers } from '@/core/crosscutting/injection/DependencyIdentifiers';
 import { container } from '@/core/crosscutting/injection/DependencyInjectionContainer';
 

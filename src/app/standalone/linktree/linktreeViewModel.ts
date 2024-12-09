@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import { GetProfileUseCase } from '@/core/application/get-profile-content-usecase';
+import { GetProfileUseCase } from '@/core/application/get-profile-content-use-case';
 import { DependencyIdentifiers } from '@/core/crosscutting/injection/DependencyIdentifiers';
 import { container } from '@/core/crosscutting/injection/DependencyInjectionContainer';
 import linktreeMetadata from '@/core/crosscutting/seo/linktree';

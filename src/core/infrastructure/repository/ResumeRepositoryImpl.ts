@@ -9,7 +9,10 @@ export class ResumeRepositoryImpl implements ResumeRepository {
 
   async getRecommendations(): Promise<Recommendation[]> {
     const rawRecommendations = await this.resumeService.fetchRecommendations();
-    return rawRecommendations.map((recommendation) => Automapper.map(recommendation, Recommendation));
+    return rawRecommendations.map((recommendation) => {
+      recommendation.date = new Date(recommendation.date);
+      return Automapper.map(recommendation, Recommendation);
+    });
   }
 
   async getTimeline(): Promise<Timeline[]> {

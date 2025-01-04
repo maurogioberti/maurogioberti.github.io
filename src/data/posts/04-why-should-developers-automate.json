@@ -1,0 +1,8 @@
+{
+  "id": "4",
+  "title": "🧑‍💻 Why Should Developers Automate? 🤖",
+  "description": "Explore why automation is key for modern developers. From validating HTTP endpoints to testing event-driven architectures, learn how automation saves time, reduces risk, and ensures consistency in your microservices.",
+  "tags": ["dotnet-core", "qa", "automation", "testing", "unit-testing", "functional-testing", "microservices", "event-driven", "clean architecture"],
+  "imageUrl": "/assets/open-graph/blog/why-should-developers-automate-og-image.png",
+  "postedDate": "2025-01-04T20:00:00Z"
+}

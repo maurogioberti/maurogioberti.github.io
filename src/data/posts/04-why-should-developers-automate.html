@@ -1,0 +1,81 @@
+<div class="max-w-4xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-gray-800 mb-6">🧑‍💻 Why Should Developers Automate Their Tests? 🤔🤖</h1>
+
+  <p class="text-lg text-gray-700 mb-4">
+    Automation is no longer optional—it's essential. Developers write unit tests, integration tests, and functional tests, yet bugs still creep into our applications. Why? Manual testing isn't enough to cover every edge case or ensure consistency. 
+    The solution? Automate early, automate often. Let's dive into some key automation use cases. 🚀
+  </p>
+
+  <h2 class="text-2xl font-semibold text-gray-800 mb-4">1️⃣ Automating HTTP Status Validation</h2>
+  <p class="text-lg text-gray-700 mb-4">
+    HTTP verbs like <strong>GET, POST, PUT, PATCH, DELETE</strong> are the backbone of APIs. Automating tests for HTTP responses (e.g., <strong>200, 201, 204, 400, 404</strong>) ensures consistent behavior for all endpoints.  
+    Here’s an example of validating a <strong>POST</strong> response:
+  </p>
+  <pre class="bg-gray-100 p-4 rounded-lg text-sm text-gray-800">
+  [Fact]
+  public async Task Given_Valid_Request_When_Post_Then_Return_Created()
+  {
+      var postPayload = new AppointmentPostBody("New Appointment", DateTime.UtcNow, DateTime.UtcNow.AddHours(1), "Description");
+      var request = RequestHelper.PostRequest(Url.Appointments.Post, postPayload);
+
+      var response = await Client.ExecuteAsync<AppointmentResponse>(request);
+
+      Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+      Assert.NotNull(response.Data);
+      Assert.Equal("New Appointment", response.Data.Title);
+  }
+  </pre>
+
+  <h2 class="text-2xl font-semibold text-gray-800 mb-4">2️⃣ Validating Event Bus Messages</h2>
+  <p class="text-lg text-gray-700 mb-4">
+    Modern microservices often rely on event-driven architectures. Automation ensures that listeners handle events as expected. For example, when an <strong>AppointmentNotificationEvent</strong> is published, the listener updates the database with the correct values.
+  </p>
+  <pre class="bg-gray-100 p-4 rounded-lg text-sm text-gray-800">
+  [Fact]
+  public async Task Given_Valid_Notification_Event_When_Handled_Then_Entity_Is_Updated()
+  {
+      var eventPayload = new AppointmentNotificationEvent("600-notification", "AppointmentNotificationEvent", "Updated Title");
+
+      await EventBus.PublishAsync(eventPayload, EventHelper.GetEventName<AppointmentNotificationEvent>());
+
+      var getRequest = RequestHelper.GetRequest($"{Url.Appointments.GetById(600)}");
+      var getResponse = await Client.ExecuteAsync<AppointmentResponse>(getRequest);
+
+      Assert.Equal(HttpStatusCode.OK, getResponse.StatusCode);
+      Assert.NotNull(getResponse.Data);
+      Assert.Equal(eventPayload.Title, getResponse.Data.Title);
+  }
+  </pre>
+  <h2 class="text-2xl font-semibold text-gray-800 mb-4">3️⃣ Testing Edge Cases: Not Found and Validation</h2>
+  <p class="text-lg text-gray-700 mb-4">
+    Automation also ensures your system gracefully handles edge cases. What happens if you try to delete a non-existent appointment? Your API should respond with <strong>404 Not Found</strong>. Here's how to test it:
+  </p>
+  <pre class="bg-gray-100 p-4 rounded-lg text-sm text-gray-800">
+  [Fact]
+  public async Task Given_Invalid_Id_When_Delete_Then_Return_NotFound()
+  {
+      var invalidId = 99999; // Non-existent ID
+      var request = RequestHelper.DeleteRequest(Url.Appointments.Delete(invalidId));
+
+      var response = await Client.ExecuteAsync(request);
+
+      Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+  }
+  </pre>
+
+  <h2 class="text-2xl font-semibold text-gray-800 mb-4">🔑 The Bottom Line</h2>
+  <p class="text-lg text-gray-700 mb-4">
+    Automation is about building confidence in your system. By automating HTTP status checks, event-driven workflows, and edge cases, you can identify bugs early, save time, and reduce QA overhead. The result? Faster development cycles and more reliable software. 
+  </p>
+  <img
+  src="/assets/images/solution-test-bus-demo.png"
+  alt="Event Bus Test Example"
+  class="w-full rounded-lg shadow-md my-4" />
+  
+  <p class="text-lg text-gray-700 mb-4 font-semibold">
+    😜 Curious to see it in action? Check out the <a href="https://github.com/maurogioberti/microservice-appointments" class="text-blue-600 hover:underline">demo appointments repository</a>
+    <br/>Github Link: <a href="https://github.com/maurogioberti/microservice-appointments" class="hover:underline">https://github.com/maurogioberti/microservice-appointments</a> 
+  </p>
+
+  <p class="text-center text-gray-500 text-sm mt-4">#DotNetCore #QA #Automation #Testing #UnitTesting #FunctionalTesting #CleanArchitecture</p>
+</div>

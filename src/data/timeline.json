@@ -8,8 +8,8 @@
     "consultingCompany": null,
     "consultingCompanyUrl": null,
     "consultingCompanyLogoUrl": null,
-    "description": "Focused on .NET Core, EF, and React, I advanced in software development with DDD and CQRS, optimizing backend solutions. Utilized continuous deployment, enhanced security via OAuth, and applied MediatR for command-query separation, embodying best practices in clean code and architecture for efficient software delivery.",
-    "tags": [".NET Core", "CQRS", "DDD", "OAuth", "React", "Clean Code"]
+    "description": "Focused on .NET Core, Entity Framework, and React while advancing in software development with DDD principles and CQRS. Maintained legacy systems and integrations while developing new solutions using Azure services like Functions, Logic Apps, and Web Apps. Enhanced backend solutions with domain logic principles, continuous deployment, and security improvements via OAuth. Applied MediatR for command-query separation, adhering to clean code and architectural best practices.",
+    "tags": [".NET Core", "CQRS", "DDD Principles", "OAuth", "React", "Clean Code", "Azure", "Azure Functions", "Logic Apps", "Web Apps"]
   },
   {
     "year": "2023",
@@ -20,8 +20,8 @@
     "consultingCompany": null,
     "consultingCompanyUrl": null,
     "consultingCompanyLogoUrl": null,
-    "description": "Worked on various projects utilizing .NET Core, Microservices, DDD, and Entity Framework. Focused on relational databases like SQL Server and SQLite, and employed GitHub Actions for CI/CD pipelines.",
-    "tags": [".NET Core", "Microservices", "Entity Framework", "SQL Server", "CI/CD", "DDD"]
+    "description": "Worked on internal projects utilizing .NET Core, Microservices, and DDD principles. Focused on relational databases like SQL Server and SQLite, leveraging ORMs for efficient data access, and implemented CI/CD pipelines using GitHub Actions.",
+    "tags": [".NET Core", "Microservices", "Entity Framework", "SQL Server", "CI/CD", "DDD Principles"]
   },
   {
     "year": "2021",
@@ -32,8 +32,8 @@
     "consultingCompany": "Intelliflo – Invesco Ltd",
     "consultingCompanyUrl": "https://www.intelliflo.com/",
     "consultingCompanyLogoUrl": "/assets/resume/intelliflo-logo.png",
-    "description": "Collaborated on financial microservices, primarily for Intelliflo's key client, Invesco. Leveraged .NET Core, Entity Framework, SQL Server, Redis, GitHub Actions, and AWS infrastructure. Adopted SAFe methodologies and tools like Azure DevOps and Jira for agile workflows.",
-    "tags": [".NET Core", "Microservices", "AWS", "Redis", "SAFe", "SQL Server"]
+    "description": "Designed and implemented many financial microservices from scratch for Intelliflo while maintaining and enhancing existing ones. Migrated legacy systems to modern architectures using a strangler fig approach, synchronizing data with jobs and pipelines. Used .NET Core, Entity Framework, SQL Server, Redis, and GitHub Actions on AWS infrastructure. Implemented robust security measures with API Gateway and multi-tenant authentication. Gained experience with AWS tools like Kinesis for big data pipelines and shard management. Adopted SAFe methodologies with tools like Azure DevOps and Jira for agile workflows.",
+    "tags": [".NET Core", "Microservices", "AWS", "Redis", "Big Data", "Kinesis", "Entity Framework", "SQL Server", "GitHub Actions", "SAFe", "Legacy Systems", "Data Synchronization", "API Gateway", "Multi-Tenant Authentication", "Security"]
   },
   {
     "year": "2019",
@@ -44,8 +44,8 @@
     "consultingCompany": "Stock Market Trading Rosario",
     "consultingCompanyUrl": "https://www.bcr.com.ar/",
     "consultingCompanyLogoUrl": "/assets/resume/stock-market-trading-logo.png",
-    "description": "Developed and maintained web and desktop applications with WPF, MVC, .NET Core, and Angular in WCF-based SOA architectures. Managed Extranet security using digital certificates and mitigated inconsistencies in rural lease contracts using Microsoft Workflow Foundation. Mentored students and graduates for their first jobs.",
-    "tags": [".NET Core", "WPF", "SOA", "Digital Certificates", "Mentorship"]
+    "description": "Developed WCF-based service-oriented architectures for large-scale legacy systems, primarily supporting the Stock Market Trading Rosario and other stock exchanges across Argentina. These systems were divided into five sections, integrating WCF services with WPF applications. Managed Extranet security with digital certificates for high-value contracts and maintained legacy web systems in ASPX and Razor. Implemented data synchronization between stock exchanges using a Microsoft framework. Occasionally developed REST APIs using DDD and CQRS. Mentored junior and mid-level developers in .NET programming as part of a training initiative.",
+    "tags": ["Mentorship", "Digital Certificates", ".NET", ".NET Core", "WPF", "WCF", "ASPX", "Razor", "REST APIs", "DDD Principles", "CQRS"]
   },
   {
     "year": "2019",
@@ -56,8 +56,8 @@
     "consultingCompany": "Cordial Financial Company",
     "consultingCompanyUrl": "https://www.cordialfinanciera.com.ar/",
     "consultingCompanyLogoUrl": "/assets/resume/cordial-logo.png",
-    "description": "Maintained large-scale SOA applications and small accounting systems using VB6. Developed REST APIs with .NET Core and Angular. Worked on WCF web services and Java applications for call centers, alongside Oracle SQL management.",
-    "tags": [".NET Core", "REST APIs", "SOA", "VB6", "Oracle SQL"]
+    "description": "Maintained large SOA applications with .NET Framework and small accounting systems using VB6. Developed internal tools with .NET Core, Angular, and Entity Framework Code First. Provided support for legacy systems, including Java Spring and Oracle SQL.",
+    "tags": [".NET Framework", ".NET Core", "SOA", "VB6", "Angular", "Entity Framework", "Spring Framework", "Oracle SQL"]
   },
   {
     "year": "2018",
@@ -68,8 +68,8 @@
     "consultingCompany": "Citibank Latin America",
     "consultingCompanyUrl": "https://www.citigroup.com/",
     "consultingCompanyLogoUrl": "/assets/resume/citi-logo.png",
-    "description": "Frontend development and maintenance for Citibank's home banking systems using Java, Citi proprietary frameworks, and Oracle SQL for database management.",
-    "tags": ["Java", "Oracle SQL", "Frontend", "Banking"]
+    "description": "Frontend development and maintenance for Citibank's home banking systems (desktop only) using Java, Angular, and Citi proprietary frameworks. Integrated middleware with Cobol-based backend systems and managed database operations with Oracle SQL.",
+    "tags": ["Java", "Spring Framework", "Angular", "Oracle SQL", "Banking", "Desktop Banking", "Middleware", "Cobol Integration"]
   },
   {
     "year": "2015",
@@ -80,8 +80,8 @@
     "consultingCompany": null,
     "consultingCompanyUrl": null,
     "consultingCompanyLogoUrl": null,
-    "description": "Developed billing systems and corporate API integrations using ASP.NET MVC, C#, and PHP. Maintained internal systems for logistics and administrative purposes with MSSQL, MySQL, and SQLite.",
-    "tags": ["ASP.NET MVC", "C#", "PHP", "REST APIs", "MSSQL"]
+    "description": "Developed billing systems and corporate API integrations using ASP.NET MVC, Razor, PHP, and REST APIs. Worked with MSSQL and SQLite for database management. Led integration efforts with major corporate clients, including Amway, Netshoes, and Dafiti.",
+    "tags": ["ASP.NET MVC", "Razor", "PHP", "REST APIs", "MSSQL", "SQLite", "OAuth"]
   },
   {
     "year": "2011",
@@ -92,8 +92,8 @@
     "consultingCompany": null,
     "consultingCompanyUrl": null,
     "consultingCompanyLogoUrl": null,
-    "description": "Maintained electronics, including arcade machines, network wiring, and custom computers for entertainment parks. Provided customer support and resolved technical claims for hardware/software.",
-    "tags": ["Electronics", "Networking", "Arcade", "Customer Support"]
+    "description": "Maintained electronics, including arcades, redemption machines, and ATMs for card loading systems in entertainment parks. Managed network wiring and custom computers. Provided customer support and resolved technical claims for hardware/software.",
+    "tags": ["Electronics", "Networking", "Arcade", "Redemption Machines", "ATMs", "Technical Support", "Customer Issues Support"]
   },
   {
     "year": "1992",
@@ -104,7 +104,7 @@
     "consultingCompany": "Italian",
     "consultingCompanyUrl": null,
     "consultingCompanyLogoUrl": "/assets/resume/italy-logo.png",
-    "description": "Born in Rosario, Santa Fe, Argentina. I’m Italian because my family’s originally from there—third generation, like most of Argentinians.",
+    "description": "Born in Rosario, Santa Fe, Argentina. I'm Italian because my family's originally from there—third generation, like most Argentinians.",
     "tags": ["Birth", "Argentinian", "Italian"]
   }
 ]

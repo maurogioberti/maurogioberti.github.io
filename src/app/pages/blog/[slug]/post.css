@@ -34,13 +34,13 @@
   text-decoration: underline;
 }
 
-a {
+.blog-post-container a {
   color: #3b82f6;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-a:hover {
+.blog-post-container a:hover {
   color: #1d4ed8;
   text-decoration: underline;
 }

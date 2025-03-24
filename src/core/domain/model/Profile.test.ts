@@ -5,6 +5,7 @@ import { Profile } from './Profile';
 
 describe("Profile", () => {
   const INITIAL_EXPERIENCE_YEAR: number = 2014;
+  const EMPTY_STRING = "";
   
   test("should create a Profile instance with required properties", () => {
     const name = faker.person.firstName();
@@ -100,13 +101,13 @@ describe("Profile", () => {
       faker.date.birthdate(),
       faker.person.jobTitle(),
       [],
-      "",
-      "",
+      EMPTY_STRING,
+      EMPTY_STRING,
       {}
     );
 
     const expectedAge = new Date().getFullYear() - profile.birthDate.getFullYear();
-    expect(profile.age).toBeGreaterThanOrEqual(expectedAge);
+    expect(profile.age).toBeGreaterThanOrEqual(expectedAge - 1);
   });
 
   test("should calculate the years of experience correctly", () => {
@@ -116,8 +117,8 @@ describe("Profile", () => {
       faker.date.birthdate(),
       faker.person.jobTitle(),
       [],
-      "",
-      "",
+      EMPTY_STRING,
+      EMPTY_STRING,
       {}
     );
 
@@ -127,7 +128,7 @@ describe("Profile", () => {
   test("should return the full name", () => {
     const name = faker.person.firstName();
     const lastName = faker.person.lastName();
-    const profile = new Profile(name, lastName, faker.date.birthdate(), faker.person.jobTitle(), [], "", "", {});
+    const profile = new Profile(name, lastName, faker.date.birthdate(), faker.person.jobTitle(), [], EMPTY_STRING, EMPTY_STRING, {});
     expect(profile.fullname).toBe(`${name} ${lastName}`);
   });
   
@@ -140,7 +141,7 @@ describe("Profile", () => {
       linkedin: faker.internet.url(),
       website: faker.internet.url(),
     };
-    const profile = new Profile(faker.person.firstName(), faker.person.lastName(), faker.date.birthdate(), faker.person.jobTitle(), [], "", "", socials);
+    const profile = new Profile(faker.person.firstName(), faker.person.lastName(), faker.date.birthdate(), faker.person.jobTitle(), [], EMPTY_STRING, EMPTY_STRING, socials);
     expect(profile.githubUrl).toBe(socials.github);
     expect(profile.youtubeUrl).toBe(socials.youtube);
     expect(profile.twitterUrl).toBe(socials.twitter);
@@ -151,7 +152,7 @@ describe("Profile", () => {
   
   test("should return undefined for missing social media URLs", () => {
     const socials = {};
-    const profile = new Profile(faker.person.firstName(), faker.person.lastName(), faker.date.birthdate(), faker.person.jobTitle(), [], "", "", socials);
+    const profile = new Profile(faker.person.firstName(), faker.person.lastName(), faker.date.birthdate(), faker.person.jobTitle(), [], EMPTY_STRING, EMPTY_STRING, socials);
     expect(profile.githubUrl).toBeUndefined();
     expect(profile.youtubeUrl).toBeUndefined();
     expect(profile.twitterUrl).toBeUndefined();

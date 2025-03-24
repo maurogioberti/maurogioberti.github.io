@@ -6,7 +6,7 @@ import { Recommendation } from '../domain/model/Recommendation';
 import { Timeline } from '../domain/model/Timeline';
 import { GetTimelineUseCase } from './get-timeline-use-case';
 
-describe('GetTimelineUseCase', () => {
+describe("GetTimelineUseCase", () => {
   let mockRepository: jest.Mocked<ResumeRepository>;
   let useCase: GetTimelineUseCase;
   let mockTimeline: Timeline[];
@@ -25,7 +25,7 @@ describe('GetTimelineUseCase', () => {
       logoUrl: faker.image.url(),
       companyLogoUrl: faker.image.url(),
       description: faker.lorem.paragraph(),
-      location: faker.address.city(),
+      location: faker.location.city(),
       type: faker.lorem.word(),
       consultingCompany: faker.company.name(),
       consultingCompanyLogoUrl: faker.image.url(),
@@ -42,15 +42,15 @@ describe('GetTimelineUseCase', () => {
     useCase = new GetTimelineUseCase(mockRepository);
   });
 
-  test('execute should return timeline', async () => {
+  test("execute should return timeline", async () => {
     const result = await useCase.execute();
 
     expect(result).toStrictEqual(mockTimeline);
     expect(mockRepository.getTimeline).toHaveBeenCalledTimes(1);
   });
 
-  test('execute should handle repository errors', async () => {
-    const errorMessage = 'Repository error';
+  test("execute should handle repository errors", async () => {
+    const errorMessage = "Repository error";
     mockRepository.getTimeline.mockRejectedValueOnce(new Error(errorMessage));
 
     await expect(useCase.execute()).rejects.toThrow(errorMessage);

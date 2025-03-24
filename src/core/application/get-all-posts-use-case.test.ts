@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, jest, test } from '@jest/globals';
 
 import { GetAllPostsUseCase } from './get-all-posts-use-case';
 
-describe('GetAllPostsUseCase', () => {
+describe("GetAllPostsUseCase", () => {
   let mockRepository: jest.Mocked<BlogRepository>;
   let useCase: GetAllPostsUseCase;
   let mockPosts: Post[];
@@ -35,7 +35,7 @@ describe('GetAllPostsUseCase', () => {
     useCase = new GetAllPostsUseCase(mockRepository);
   });
 
-  test('execute should return all posts', async () => {
+  test("execute should return all posts", async () => {
     const result = await useCase.execute();
     
     expect(result).toHaveLength(mockPosts.length);

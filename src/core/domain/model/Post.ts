@@ -24,9 +24,9 @@ export class Post {
     return title
     .toLowerCase()
     .trim()
-    .replace(/[^a-z0-9\s]/g, "")
+    .replace(/[^a-z0-9\s]/g, this.EMPTY_STRING)
     .replace(/\s+/g, "-")
     .replace(/-+/g, "-")
-    .replace(/^-+|-+$/g, "");
+    .replace(/^-+|-+$/g, this.EMPTY_STRING);
   }
 }

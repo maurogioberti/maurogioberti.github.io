@@ -5,7 +5,12 @@ import { Post } from '../../domain/model/Post';
 import { BlogService } from '../../domain/services/BlogService';
 import { BlogRepositoryImpl } from './BlogRepositoryImpl';
 
-describe('BlogRepositoryImpl', () => {
+describe("BlogRepositoryImpl", () => {
+  const MIN_POSTS_COUNT = 1;
+  const MAX_POSTS_COUNT = 10;
+  const ADDITIONAL_POSTS = 5;
+  const TOTAL_POSTS = 5;
+
   let blogService: BlogService;
   let blogRepository: BlogRepositoryImpl;
 
@@ -16,9 +21,9 @@ describe('BlogRepositoryImpl', () => {
     blogRepository = new BlogRepositoryImpl(blogService);
   });
 
-  test('getLastPosts should return the last N posts', async () => {
-    const count = faker.number.int({ min: 1, max: 10 });
-    const posts = Array.from({ length: count + 5 }, () => new Post(
+  test("getLastPosts should return the last N posts", async () => {
+    const count = faker.number.int({ min: MIN_POSTS_COUNT, max: MAX_POSTS_COUNT });
+    const posts = Array.from({ length: count + ADDITIONAL_POSTS }, () => new Post(
       faker.number.int().toString(),
       faker.lorem.word(),
       faker.lorem.text(),
@@ -36,8 +41,8 @@ describe('BlogRepositoryImpl', () => {
     expect(result).toEqual(posts.slice(-count).reverse());
   });
 
-  test('getPostBySlug should return the post with the given slug', async () => {
-    const posts = Array.from({ length: 5 }, () => {
+  test("getPostBySlug should return the post with the given slug", async () => {
+    const posts = Array.from({ length: TOTAL_POSTS }, () => {
       return new Post(
         faker.number.int().toString(),
         faker.lorem.word(),
@@ -57,8 +62,8 @@ describe('BlogRepositoryImpl', () => {
     expect(result).toEqual(posts.find((post) => post.slug === slug));
   });
 
-  test('getAllPosts should return all posts sorted by date descending', async () => {
-    const posts = Array.from({ length: 5 }, () => new Post(
+  test("getAllPosts should return all posts sorted by date descending", async () => {
+    const posts = Array.from({ length: TOTAL_POSTS }, () => new Post(
       faker.number.int().toString(),
       faker.lorem.word(),
       faker.lorem.text(),
@@ -72,6 +77,6 @@ describe('BlogRepositoryImpl', () => {
 
     const result = await blogRepository.getAllPosts();
 
-    expect(result).toEqual(posts.sort((a, b) => new Date(b.postedDate ?? 0).getTime() - new Date(a.postedDate ?? 0).getTime()));
+expect(result).toEqual(posts.sort((a, b) => new Date(b.postedDate ?? 0).getTime() - new Date(a.postedDate ?? 0).getTime()));
   });
 });

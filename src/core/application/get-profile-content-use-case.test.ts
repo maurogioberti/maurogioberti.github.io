@@ -1,7 +1,8 @@
-import { faker } from '@faker-js/faker';
-import { beforeEach, describe, expect, jest, test } from '@jest/globals';
 import { Profile } from '@/core/domain/model/Profile';
 import { ProfileRepository } from '@/core/domain/repository/ProfileRepository';
+import { faker } from '@faker-js/faker';
+import { beforeEach, describe, expect, jest, test } from '@jest/globals';
+
 import { GetProfileUseCase } from './get-profile-content-use-case';
 
 describe("GetProfileUseCase", () => {
@@ -24,7 +25,7 @@ describe("GetProfileUseCase", () => {
       { github: faker.internet.url(), linkedin: faker.internet.url() },
       faker.internet.url(),
       faker.internet.email(),
-      { city: faker.address.city(), country: faker.address.country(), description: faker.lorem.sentence() },
+      { city: faker.location.city(), country: faker.location.country(), description: faker.lorem.sentence() },
       ["React", "Node.js", "TypeScript"]
     );
 

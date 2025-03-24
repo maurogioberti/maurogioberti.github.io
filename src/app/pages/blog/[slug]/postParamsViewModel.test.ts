@@ -4,16 +4,17 @@ import { beforeEach, describe, expect, jest, test } from '@jest/globals';
 
 import { postParamsViewModel } from './postParamsViewModel';
 
-describe('postParamsViewModel', () => {
+describe("postParamsViewModel", () => {
   const EXPECTED_CALL_COUNT = 1;
-  
+  const MAX_POSTS_COUNT = 5;
+
   beforeEach(() => {
     jest.clearAllMocks();
     jest.spyOn(container, "resolve");
   });
 
-  test('should return a list of post slugs', async () => {
-    const mockPosts = Array.from({ length: 5 }, () => ({
+  test("should return a list of post slugs", async () => {
+    const mockPosts = Array.from({ length: MAX_POSTS_COUNT }, () => ({
       id: faker.number.int().toString(),
       title: faker.lorem.sentence(),
       description: faker.lorem.paragraph(),

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mauro Gioberti - Tech Talks</title>
+    <meta name="description" content="Resources and feedback for Mauro Gioberti's tech talks. Access slides, code, and leave your feedback." />
+    <meta name="keywords" content="Mauro Gioberti, Software Engineer, Tech Talks, Backend, Presentations, Programming" />
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <header class="section">
+        <div class="container-2">
+          <img src="/assets/profile/maurogioberti-avatar.png" alt="Profile picture of Mauro Gioberti" class="avatar" />
+        </div>
+        <div class="container">
+          <div class="title">
+            <h1 class="profile typing-effect-delay">Mauro Gioberti</h1>
+            <h2 class="profession typing-effect">Tech Talks & Presentations</h2>
+          </div>
+          <p class="talk-title">📌 Latest Talk: <strong>Automating Backend Processes</strong></p>
+          <p class="talk-description">Exploring automation techniques in backend development using event-driven architecture.</p>
+        </div>
+      </header>
+
+      <main class="container">
+        <br />
+        <h3 class="section-title">🔗 Useful Links</h3>
+        <div class="links">
+          <a href="{REPOSITORY_URL}" target="_blank" class="link-item"> <i class="fab fa-github"></i> Source Code </a>
+          <a href="{SLIDES_URL}" target="_blank" class="link-item"> <i class="fas fa-file-powerpoint"></i> Slides </a>
+          <a href="{POST_URL}" target="_blank" class="link-item"> <i class="fas fa-blog"></i> Related Blog Post </a>
+          <a href="{SLIDES_URL}" target="_blank" class="link-item"> <i class="fas fa-book"></i> Additional Resources </a>
+        </div>
+        <h3 class="section-title">📩 Feedback</h3>
+        <a href="https://forms.gle/3HZwpcgXhD9VFRZu5" target="_blank" class="feedback-button"> <i class="fas fa-comment-alt"></i> Leave Your Feedback </a>
+
+        <h3 class="section-title">🌐 Connect with Me</h3>
+        <div class="social">
+          <a href="{LINKEDIN_URL}" target="_blank" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="{GITHUB_URL}" target="_blank" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="{INSTAGRAM_URL}" target="_blank" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="{YOUTUBE_URL}" target="_blank" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="{TWITTER_URL}" target="_blank" class="social-link" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+          <a href="{WEBSITE_URL}" target="_blank" class="social-link" aria-label="Personal Website"><i class="fas fa-globe"></i></a>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
+<style>
+  /* General Styles */
+  body {
+    font-family: "Poppins", sans-serif;
+    background-color: #12141d;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .wrapper {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+  }
+
+  .container-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Profile */
+  .avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+  }
+
+  /* Titles */
+  h1,
+  h2,
+  h3 {
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 300;
+  }
+
+  .talk-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .talk-description {
+    font-size: 1rem;
+    font-weight: 300;
+    opacity: 0.8;
+  }
+
+  /* Links Section */
+  .links,
+  .social {
+    margin: 20px 0;
+  }
+
+  .link-item,
+  .feedback-button {
+    display: block;
+    background: #007acc;
+    color: white;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 5px;
+    margin: 5px 0;
+    font-size: 1rem;
+    transition: 0.3s ease;
+  }
+
+  .link-item i,
+  .feedback-button i {
+    margin-right: 8px;
+  }
+
+  .link-item:hover,
+  .feedback-button:hover {
+    background: #0d2476;
+  }
+
+  /* Social Links */
+  .social {
+    display: flex;
+    justify-content: center;
+  }
+
+  .social-link {
+    font-size: 1.5rem;
+    margin: 0 10px;
+    color: white;
+    transition: 0.3s ease;
+  }
+
+  .social-link:hover {
+    color: #ff934f;
+  }
+
+  /* Mobile Styles */
+  @media (max-width: 600px) {
+    .wrapper {
+      padding: 10px;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+    }
+
+    .link-item {
+      font-size: 0.9rem;
+    }
+  }
+</style>

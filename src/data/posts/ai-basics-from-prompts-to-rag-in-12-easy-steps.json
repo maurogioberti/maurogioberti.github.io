@@ -1,0 +1,8 @@
+{
+  "id": "5",
+  "title": "🧠 AI Basics: From Prompts to RAG in 12 Easy Steps 🚀",
+  "description": "Just starting with AI? I've broken down 12 key concepts like LLMs, Embeddings, Fine-tuning, LangChain, MCP, and RAG—explained simply and with emojis!",
+  "tags": ["ai", "llm", "rag", "langchain", "semantic-kernel", "flowise", "orchestration", "fine-tuning", "embedding", "mcp"],
+  "imageUrl": "/assets/open-graph/blog/ai-basics-prompts-to-rag-og-image.png",
+  "postedDate": "2025-04-03T12:00:00Z"
+  }

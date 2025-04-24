@@ -13,7 +13,7 @@ describe("Presentation", () => {
     const slug = faker.helpers.slugify(title.toLowerCase());
     const sponsor = faker.company.name();
     const sponsorSlug = faker.helpers.slugify(sponsor.toLowerCase());
-    const type = PRESENTATION_TYPE.WEBINAR;
+    const type = PRESENTATION_TYPE.ONLINE;
     const description = faker.lorem.paragraph();
     const place = faker.location.city();
     const language = faker.location.country();
@@ -33,6 +33,8 @@ describe("Presentation", () => {
       language,
       date,
       imageUrl,
+      undefined,
+      undefined,
       undefined,
       undefined,
       undefined,
@@ -61,7 +63,9 @@ describe("Presentation", () => {
     expect(presentation.postUrl).toBeUndefined();
     expect(presentation.repositoryUrl).toBeUndefined();
     expect(presentation.slidesUrl).toBeUndefined();
+    expect(presentation.demoVideoUrl).toBeUndefined();
     expect(presentation.videoUrl).toBeUndefined();
+    expect(presentation.registrationUrl).toBeUndefined();
     expect(presentation.resourcesUrl).toBeUndefined();
     expect(presentation.feedbackUrl).toBeUndefined();
   });
@@ -82,8 +86,10 @@ describe("Presentation", () => {
     const location = faker.location.streetAddress();
     const postUrl = faker.internet.url();
     const repositoryUrl = faker.internet.url();
-    const slidesUrl = faker.internet.url({ protocol: 'https', appendSlash: false });
+    const slidesUrl = faker.internet.url({ protocol: "https", appendSlash: false });
+    const demoVideoUrl = faker.internet.url();
     const videoUrl = faker.internet.url();
+    const registrationUrl = faker.internet.url();
     const resourcesUrl = faker.internet.url();
     const feedbackUrl = faker.internet.url();
     const tags = [faker.lorem.word(), faker.lorem.word()];
@@ -105,7 +111,9 @@ describe("Presentation", () => {
       postUrl,
       repositoryUrl,
       slidesUrl,
+      demoVideoUrl,
       videoUrl,
+      registrationUrl,
       resourcesUrl,
       feedbackUrl,
       tags
@@ -127,7 +135,9 @@ describe("Presentation", () => {
     expect(presentation.postUrl).toBe(postUrl);
     expect(presentation.repositoryUrl).toBe(repositoryUrl);
     expect(presentation.slidesUrl).toBe(slidesUrl);
+    expect(presentation.demoVideoUrl).toBe(demoVideoUrl);
     expect(presentation.videoUrl).toBe(videoUrl);
+    expect(presentation.registrationUrl).toBe(registrationUrl);
     expect(presentation.resourcesUrl).toBe(resourcesUrl);
     expect(presentation.feedbackUrl).toBe(feedbackUrl);
     expect(presentation.tags).toEqual(tags);
@@ -148,6 +158,7 @@ describe("Presentation", () => {
     const eventName = faker.company.name();
     const videoUrl = faker.internet.url();
     const repositoryUrl = faker.internet.url();
+    const registrationUrl = faker.internet.url();
     const tags = [faker.lorem.word(), faker.lorem.word()];
 
     const presentation = new Presentation(
@@ -167,7 +178,9 @@ describe("Presentation", () => {
       undefined,
       repositoryUrl,
       undefined,
+      undefined,
       videoUrl,
+      registrationUrl,
       undefined,
       undefined,
       tags
@@ -178,7 +191,9 @@ describe("Presentation", () => {
     expect(presentation.postUrl).toBeUndefined();
     expect(presentation.repositoryUrl).toBe(repositoryUrl);
     expect(presentation.slidesUrl).toBeUndefined();
+    expect(presentation.demoVideoUrl).toBeUndefined();
     expect(presentation.videoUrl).toBe(videoUrl);
+    expect(presentation.registrationUrl).toBe(registrationUrl);
     expect(presentation.resourcesUrl).toBeUndefined();
     expect(presentation.feedbackUrl).toBeUndefined();
   });
@@ -193,12 +208,14 @@ describe("Presentation", () => {
       faker.helpers.slugify(faker.lorem.sentence()),
       faker.company.name(),
       faker.helpers.slugify(faker.company.name()),
-      PRESENTATION_TYPE.WEBINAR,
+      PRESENTATION_TYPE.ONLINE,
       faker.lorem.paragraph(),
       faker.location.city(),
       faker.location.country(),
       futureDate,
       faker.image.url(),
+      undefined,
+      undefined,
       undefined,
       undefined,
       undefined,
@@ -228,6 +245,8 @@ describe("Presentation", () => {
       faker.location.country(),
       today,
       faker.image.url(),
+      undefined,
+      undefined,
       undefined,
       undefined,
       undefined,
@@ -266,6 +285,8 @@ describe("Presentation", () => {
       undefined,
       undefined,
       undefined,
+      undefined,
+      undefined,
       []
     );
 
@@ -286,6 +307,8 @@ describe("Presentation", () => {
         faker.location.country(),
         new Date(),
         faker.image.url(),
+        undefined,
+        undefined,
         undefined,
         undefined,
         undefined,

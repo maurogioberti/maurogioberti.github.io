@@ -1,5 +1,5 @@
 export const PRESENTATION_TYPE = {
-  WEBINAR: "webinar",
+  ONLINE: "online",
   ONSITE: "onsite",
   HYBRID: "hybrid",
 } as const;
@@ -31,7 +31,9 @@ export class Presentation {
     public postUrl?: string,
     public repositoryUrl?: string,
     public slidesUrl?: string,
+    public demoVideoUrl?: string,
     public videoUrl?: string,
+    public registrationUrl?: string,
     public resourcesUrl?: string,
     public feedbackUrl?: string,
     public tags: string[] = []

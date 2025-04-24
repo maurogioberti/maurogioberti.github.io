@@ -27,7 +27,7 @@ describe("talktreeViewModel", () => {
     sponsorSlug: mockSponsorSlug,
     postUrl: faker.internet.url(),
     slidesUrl: faker.internet.url(),
-    videoUrl: faker.internet.url(),
+    demoVideoUrl: faker.internet.url(),
     repositoryUrl: faker.internet.url(),
     resourcesUrl: faker.internet.url(),
     feedbackUrl: faker.internet.url(),
@@ -98,7 +98,7 @@ describe("talktreeViewModel", () => {
         WEBSITE_URL: mockProfileData.websiteUrl,
         POST_URL: mockPresentationData.postUrl,
         SLIDES_URL: mockPresentationData.slidesUrl,
-        VIDEO_URL: mockPresentationData.videoUrl,
+        VIDEO_URL: mockPresentationData.demoVideoUrl,
         REPOSITORY_URL: mockPresentationData.repositoryUrl,
         RESOURCES_URL: mockPresentationData.resourcesUrl,
         FEEDBACK_URL: mockPresentationData.feedbackUrl,
@@ -113,7 +113,7 @@ describe("talktreeViewModel", () => {
       ...mockPresentationData,
       postUrl: undefined,
       slidesUrl: null,
-      videoUrl: undefined,
+      demoVideoUrl: undefined,
     };
 
     const mockGetProfileExecute = jest.fn<() => Promise<typeof mockProfileData>>().mockResolvedValue(mockProfileData);

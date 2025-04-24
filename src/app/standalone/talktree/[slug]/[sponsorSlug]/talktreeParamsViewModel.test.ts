@@ -21,7 +21,7 @@ describe("talktreeParamsViewModel", () => {
       slug: faker.lorem.slug(),
       sponsor: faker.company.name(),
       sponsorSlug: faker.helpers.slugify(faker.company.name().toLowerCase()),
-      type: PRESENTATION_TYPE.WEBINAR,
+      type: PRESENTATION_TYPE.ONLINE,
       description: faker.lorem.paragraph(),
       place: faker.location.city(),
       language: faker.location.country(),

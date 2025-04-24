@@ -33,6 +33,8 @@ describe("GetPresentationBySlugUseCase", () => {
             faker.internet.url(),
             faker.internet.url(),
             faker.internet.url(),
+            faker.internet.url(),
+            faker.internet.url(),
             [faker.lorem.word(), faker.lorem.word()]);
 
     mockRepository = {

@@ -9,6 +9,7 @@ import { PresentationRepositoryImpl } from './PresentationRepositoryImpl';
 describe("PresentationRepositoryImpl", () => {
   const MIN_PRESENTATIONS = 3;
   const MAX_PRESENTATIONS = 10;
+  const PRESENTATION_COUNT = 3;
 
   let presentationService: PresentationService;
   let presentationRepository: PresentationRepository;
@@ -33,7 +34,7 @@ describe("PresentationRepositoryImpl", () => {
         faker.lorem.slug(),
         faker.company.name(),
         faker.lorem.slug(),
-        PRESENTATION_TYPE.WEBINAR,
+        PRESENTATION_TYPE.ONLINE,
         faker.lorem.paragraph(),
         faker.location.city(),
         faker.location.country(),
@@ -41,6 +42,8 @@ describe("PresentationRepositoryImpl", () => {
         faker.image.url(),
         faker.company.name(),
         faker.location.streetAddress(),
+        faker.internet.url(),
+        faker.internet.url(),
         faker.internet.url(),
         faker.internet.url(),
         faker.internet.url(),
@@ -67,7 +70,7 @@ describe("PresentationRepositoryImpl", () => {
       MOCK_SLUG,
       faker.company.name(),
       MOCK_SPONSOR_SLUG,
-      PRESENTATION_TYPE.WEBINAR,
+      PRESENTATION_TYPE.ONLINE,
       faker.lorem.paragraph(),
       faker.location.city(),
       faker.location.country(),
@@ -75,6 +78,8 @@ describe("PresentationRepositoryImpl", () => {
       faker.image.url(),
       undefined,
       undefined,
+      faker.internet.url(),
+      faker.internet.url(),
       faker.internet.url(),
       faker.internet.url(),
       faker.internet.url(),
@@ -91,7 +96,7 @@ describe("PresentationRepositoryImpl", () => {
         faker.lorem.slug(),
         faker.company.name(),
         faker.lorem.slug(),
-        PRESENTATION_TYPE.WEBINAR,
+        PRESENTATION_TYPE.ONLINE,
         faker.lorem.paragraph(),
         faker.location.city(),
         faker.location.country(),
@@ -99,6 +104,8 @@ describe("PresentationRepositoryImpl", () => {
         faker.image.url(),
         undefined,
         undefined,
+        faker.internet.url(),
+        faker.internet.url(),
         faker.internet.url(),
         faker.internet.url(),
         faker.internet.url(),
@@ -128,7 +135,7 @@ describe("PresentationRepositoryImpl", () => {
         faker.lorem.slug(),
         faker.company.name(),
         faker.lorem.slug(),
-        PRESENTATION_TYPE.WEBINAR,
+        PRESENTATION_TYPE.ONLINE,
         faker.lorem.paragraph(),
         faker.location.city(),
         faker.location.country(),
@@ -136,6 +143,8 @@ describe("PresentationRepositoryImpl", () => {
         faker.image.url(),
         undefined,
         undefined,
+        faker.internet.url(),
+        faker.internet.url(),
         faker.internet.url(),
         faker.internet.url(),
         faker.internet.url(),
@@ -162,7 +171,7 @@ describe("PresentationRepositoryImpl", () => {
       MOCK_SLUG,
       faker.company.name(),
       faker.lorem.slug(),
-      PRESENTATION_TYPE.WEBINAR,
+      PRESENTATION_TYPE.ONLINE,
       faker.lorem.paragraph(),
       faker.location.city(),
       faker.location.country(),
@@ -170,6 +179,8 @@ describe("PresentationRepositoryImpl", () => {
       faker.image.url(),
       undefined,
       undefined,
+      faker.internet.url(),
+      faker.internet.url(),
       faker.internet.url(),
       faker.internet.url(),
       faker.internet.url(),
@@ -185,7 +196,7 @@ describe("PresentationRepositoryImpl", () => {
       faker.lorem.slug(),
       faker.company.name(),
       MOCK_SPONSOR_SLUG,
-      PRESENTATION_TYPE.WEBINAR,
+      PRESENTATION_TYPE.ONLINE,
       faker.lorem.paragraph(),
       faker.location.city(),
       faker.location.country(),
@@ -193,6 +204,8 @@ describe("PresentationRepositoryImpl", () => {
       faker.image.url(),
       undefined,
       undefined,
+      faker.internet.url(),
+      faker.internet.url(),
       faker.internet.url(),
       faker.internet.url(),
       faker.internet.url(),
@@ -214,5 +227,95 @@ describe("PresentationRepositoryImpl", () => {
       .rejects.toThrow(PRESENTATION_NOT_FOUND_ERROR);
 
     expect(presentationService.fetchPresentations).toHaveBeenCalled();
+  });
+
+  test("getAllPresentations should return presentations sorted by date descending", async () => {
+    const dates = [
+      faker.date.past({ years: 1 }),
+      faker.date.recent(),
+      faker.date.past({ years: 2 })
+    ].sort((a, b) => a.getTime() - b.getTime()); // ordenamos ascendente para controlar el input
+  
+    const mockPresentations = dates.map(date =>
+      new Presentation(
+        faker.string.uuid(),
+        faker.lorem.sentence(),
+        faker.lorem.slug(),
+        faker.company.name(),
+        faker.lorem.slug(),
+        PRESENTATION_TYPE.ONLINE,
+        faker.lorem.paragraph(),
+        faker.location.city(),
+        faker.location.country(),
+        date,
+        faker.image.url(),
+        faker.company.name(),
+        faker.location.streetAddress(),
+        faker.internet.url(),
+        faker.internet.url(),
+        faker.internet.url(),
+        faker.internet.url(),
+        faker.internet.url(),
+        faker.internet.url(),
+        faker.internet.url(),
+        faker.internet.url(),
+        [faker.lorem.word(), faker.lorem.word()]
+      )
+    );
+  
+    (presentationService.fetchPresentations as jest.MockedFunction<typeof presentationService.fetchPresentations>)
+      .mockResolvedValue(mockPresentations);
+  
+    const result = await presentationRepository.getAllPresentations();
+  
+    expect(result).toHaveLength(mockPresentations.length);
+    for (let i = 0; i < result.length - 1; i++) {
+      expect(result[i].date.getTime()).toBeGreaterThanOrEqual(result[i + 1].date.getTime());
+    }
+  });
+  
+  test("getAllPresentations should return presentations sorted by date descending", async () => {
+    const sortedDatesAsc = [
+      faker.date.past({ years: 2 }),
+      faker.date.past({ years: 1 }),
+      faker.date.recent()
+    ];
+  
+    const mockPresentations = sortedDatesAsc.map(date =>
+      new Presentation(
+        faker.string.uuid(),
+        faker.lorem.sentence(),
+        faker.lorem.slug(),
+        faker.company.name(),
+        faker.lorem.slug(),
+        PRESENTATION_TYPE.ONLINE,
+        faker.lorem.paragraph(),
+        faker.location.city(),
+        faker.location.country(),
+        date,
+        faker.image.url(),
+        faker.company.name(),
+        faker.location.streetAddress(),
+        faker.internet.url(),
+        faker.internet.url(),
+        faker.internet.url(),
+        faker.internet.url(),
+        faker.internet.url(),
+        faker.internet.url(),
+        faker.internet.url(),
+        faker.internet.url(),
+        [faker.lorem.word(), faker.lorem.word()]
+      )
+    );
+  
+    (presentationService.fetchPresentations as jest.MockedFunction<typeof presentationService.fetchPresentations>)
+      .mockResolvedValue(mockPresentations);
+  
+    const result = await presentationRepository.getAllPresentations();
+  
+    expect(result).toHaveLength(PRESENTATION_COUNT);
+    for (let i = 0; i < result.length - 1; i++) {
+      expect(result[i].date.getTime()).toBeGreaterThanOrEqual(result[i + 1].date.getTime());
+    }
   });
 });

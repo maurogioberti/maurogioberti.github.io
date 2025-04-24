@@ -35,7 +35,7 @@ export default async function PostPage({ params }: BlogDetailPageProps) {
         </div>
         <header className="mb-8 text-center">
           <h1 className="text-5xl font-bold text-vs-primary mb-4">{post.title}</h1>
-          <p className="text-sm text-gray-500">{post.formattedDate}</p>
+          <p className="text-sm">{post.formattedDate}</p>
         </header>
         <section className="prose prose-invert prose-lg max-w-none">
           <div dangerouslySetInnerHTML={{ __html: post.content }} />

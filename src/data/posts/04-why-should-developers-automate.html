@@ -1,7 +1,7 @@
 <div class="max-w-4xl mx-auto px-4 py-8">
-  <h1 class="text-3xl font-bold text-gray-800 mb-6">🧑‍💻 Why Should Developers Automate Their Code? 🤔🤖</h1>
+  <h1 class="text-3xl font-bold mb-6">🧑‍💻 Why Should Developers Automate Their Code? 🤔🤖</h1>
 
-  <p class="text-lg text-gray-700 mb-4">
+  <p class="text-lg mb-4">
     We run <strong>unit</strong>, <strong>integration</strong>, and <strong>functional tests</strong>, yet bugs still pop up in our apps! 🪲 I'm here to show you a 
     <strong>fun solution</strong> for those pesky QA tickets that bounce back to dev and even those sneaky bugs that make it to production 😅. 
     <br/><br/>
@@ -9,14 +9,14 @@
     less than an hour can save us tons of headaches 🤯 and catch bugs way earlier! 🏆
   </p>
 
-  <h2 class="text-2xl font-semibold text-gray-800 mb-4">1️⃣ Automating HTTP Status Validation</h2>
-  <p class="text-lg text-gray-700 mb-4">
+  <h2 class="text-2xl font-semibold mb-4">1️⃣ Automating HTTP Status Validation</h2>
+  <p class="text-lg mb-4">
     HTTP verbs like <strong>GET, POST, PUT, PATCH, DELETE</strong> are the backbone of APIs. Automating tests for HTTP responses (e.g., <strong>200, 201, 204, 400, 404</strong>) 
     makes sure every endpoint behaves the way we expect. 🚀  
     <br/><br/>
     Here's an example of validating a <strong>POST</strong> response:
   </p>
-  <pre class="bg-gray-100 p-4 rounded-lg text-sm text-gray-800">
+  <pre class="bg-gray-100 p-4 rounded-lg text-sm">
 [Fact]
 public async Task Given_Valid_Request_When_Post_Then_Return_Created()
 {
@@ -31,12 +31,12 @@ public async Task Given_Valid_Request_When_Post_Then_Return_Created()
 }
   </pre>
 
-  <h2 class="text-2xl font-semibold text-gray-800 mb-4">2️⃣ Validating Event Bus Messages</h2>
-  <p class="text-lg text-gray-700 mb-4">
+  <h2 class="text-2xl font-semibold mb-4">2️⃣ Validating Event Bus Messages</h2>
+  <p class="text-lg mb-4">
     Modern microservices often rely on event-driven architectures. <strong>Automating</strong> these checks ensures listeners process events as expected. 
     For instance, when an <strong>AppointmentNotificationEvent</strong> is published, the listener updates the database with the right data. ⚙️
   </p>
-  <pre class="bg-gray-100 p-4 rounded-lg text-sm text-gray-800">
+  <pre class="bg-gray-100 p-4 rounded-lg text-sm">
 [Fact]
 public async Task Given_Valid_Notification_Event_When_Handled_Then_Entity_Is_Updated()
 {
@@ -53,12 +53,12 @@ public async Task Given_Valid_Notification_Event_When_Handled_Then_Entity_Is_Upd
 }
   </pre>
 
-  <h2 class="text-2xl font-semibold text-gray-800 mb-4">3️⃣ Testing Edge Cases: Not Found and Validation</h2>
-  <p class="text-lg text-gray-700 mb-4">
+  <h2 class="text-2xl font-semibold mb-4">3️⃣ Testing Edge Cases: Not Found and Validation</h2>
+  <p class="text-lg mb-4">
     Automation also ensures your system gracefully handles edge cases. What if you try to delete a non-existent appointment? Your API should reply with 
     <strong>404 Not Found</strong>. Let's see how we can test that:
   </p>
-  <pre class="bg-gray-100 p-4 rounded-lg text-sm text-gray-800">
+  <pre class="bg-gray-100 p-4 rounded-lg text-sm">
 [Fact]
 public async Task Given_Invalid_Id_When_Delete_Then_Return_NotFound()
 {
@@ -71,15 +71,15 @@ public async Task Given_Invalid_Id_When_Delete_Then_Return_NotFound()
 }
   </pre>
 
-  <h2 class="text-2xl font-semibold text-gray-800 mb-4">🔑 The Bottom Line</h2>
-  <p class="text-lg text-gray-700 mb-4">
+  <h2 class="text-2xl font-semibold mb-4">🔑 The Bottom Line</h2>
+  <p class="text-lg mb-4">
     <strong>Automation</strong> is all about having confidence in your system. By automating <strong>HTTP status checks</strong>, <strong>event-driven workflows</strong>, 
     and <strong>edge cases</strong>, you can spot bugs early, save time, and reduce QA overhead. 
     <br/>
     The result? <strong>Faster development cycles</strong> and <strong>more reliable software</strong>! 🚀
   </p>
 
-  <p class="text-lg text-gray-700 mb-4 font-semibold">
+  <p class="text-lg mb-4 font-semibold">
     😜 <strong>Curious</strong> to see it in action? Check out the 
     <a href="https://github.com/maurogioberti/microservice-appointments" class="text-blue-600 hover:underline">
       demo appointments repository
@@ -91,7 +91,7 @@ public async Task Given_Invalid_Id_When_Delete_Then_Return_NotFound()
     </a>
   </p>
 
-  <p class="text-center text-gray-500 text-sm mt-4">
+  <p class="text-center text-sm mt-4">
     #DotNetCore #QA #Automation #Testing #UnitTesting #FunctionalTesting #CleanArchitecture
   </p>
 </div>

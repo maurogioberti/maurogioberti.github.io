@@ -37,8 +37,8 @@ export default async function BlogPage() {
               />
               <div className="p-6">
                 <h2 className="text-2xl font-semibold text-vs-foreground group-hover:text-vs-primary transition-colors duration-300">{post.title}</h2>
-                <p className="text-sm text-gray-500 mt-1">{post.formattedDate}</p>
-                <p className="text-md text-gray-500 mt-2">{post.description}</p>
+                <p className="text-sm mt-1">{post.formattedDate}</p>
+                <p className="text-md mt-2">{post.description}</p>
 
                 {post.tags && post.tags.length > 0 && (
                   <div className="flex flex-wrap gap-2 mt-4">

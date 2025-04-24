@@ -3,9 +3,9 @@ import { PRESENTATION_TYPE } from '@/core/domain/model/Presentation';
 import { faker } from '@faker-js/faker';
 import { beforeEach, describe, expect, jest, test } from '@jest/globals';
 
-import { talktreeParamsViewModel } from './talktreeParamsViewModel';
+import { talkParamsViewModel } from './talkParamsViewModel';
 
-describe("talktreeParamsViewModel", () => {
+describe("talkParamsViewModel", () => {
   const EXPECTED_CALL_COUNT = 1;
   const NUMBER_OF_MOCKS = 5;
 
@@ -38,7 +38,7 @@ describe("talktreeParamsViewModel", () => {
 
     (container.resolve as jest.Mock).mockImplementationOnce(() => mockGetAllPresentationsUseCase);
 
-    const result = await talktreeParamsViewModel();
+    const result = await talkParamsViewModel();
 
     expect(result).toStrictEqual(mockPresentations.map(presentation => ({ 
       slug: presentation.slug,

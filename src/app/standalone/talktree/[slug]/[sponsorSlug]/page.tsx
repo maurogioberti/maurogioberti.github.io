@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
 
+import { talkParamsViewModel } from '@/app/pages/talks/[slug]/[sponsorSlug]/talkParamsViewModel';
 import { TalktreeMetadata } from '@/core/crosscutting/seo/talktree';
 
 import { talktreeInfoViewModel } from './talktreeInfoViewModel';
-import { talktreeParamsViewModel } from './talktreeParamsViewModel';
 import { talktreeViewModel } from './talktreeViewModel';
 
 type TalktreePageProps = {
@@ -21,6 +21,6 @@ export default async function TalktreePage({ params }: TalktreePageProps) {
 }
 
 export async function generateStaticParams() {
-  const params = await talktreeParamsViewModel();
+  const params = await talkParamsViewModel();
   return params;
 }

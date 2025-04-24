@@ -4,8 +4,8 @@ import { container } from '@/core/crosscutting/injection/DependencyInjectionCont
 import { GetPresentationBySlugUseCase } from '../../../../../core/application/get-presentation-by-slug-use-case';
 
 export const talktreeInfoViewModel = async (slug: string, sponsorSlug: string) => {
-  const GetPresentationContentUseCase = container.resolve<GetPresentationBySlugUseCase>(DependencyIdentifiers.USE_CASES.GET_PRESENTATION_CONTENT);
+  const getPresentationContentUseCase = container.resolve<GetPresentationBySlugUseCase>(DependencyIdentifiers.USE_CASES.GET_PRESENTATION_CONTENT);
 
-  const presentation = await GetPresentationContentUseCase.execute(slug, sponsorSlug);
+  const presentation = await getPresentationContentUseCase.execute(slug, sponsorSlug);
   return { presentation };
 };

@@ -29,6 +29,7 @@ export default async function HomePage() {
         <div className="mt-6 text-lg text-center">
           <p>➡️{" "} <Link href="/pages/resume" className="text-blue-500 underline">Resume:</Link> {" "} Dive into my professional journey.</p>
           <p>➡️{" "} <Link href="/pages/services" className="text-blue-500 underline"> Services:</Link> {" "} Explore the ways I can help your business grow.</p>
+          <p>➡️{" "} <Link href="/pages/talks" className="text-blue-500 underline">Talks:</Link> {" "} Discover my thoughts, lessons, and code from real-world experiences.</p>
           <p>➡️{" "} <Link href="/pages/blog" className="text-blue-500 underline">Blog:</Link> {" "} Check out my latest thoughts on software engineering and beyond.</p>
           <div className="mt-4 flex flex-col sm:flex-row items-center sm:justify-center space-y-2 sm:space-y-0 sm:space-x-4">
             <Link href="/pages/services" className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 text-center">

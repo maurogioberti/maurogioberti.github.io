@@ -25,15 +25,16 @@ export default async function TalkPage({ params }: TalksPageProps) {
   if (!talk) {
     notFound();
   }
-
+  
   const formattedDate = formatDate(talk.date);
 
-  const formattedTime = talk.date.toLocaleTimeString('en-US', {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: true,
-  });
+  const timeOptions: Intl.DateTimeFormatOptions = { hour: '2-digit', minute: '2-digit', hour12: true, };
 
+  const timeEastern = talk.date.toLocaleTimeString('en-US', { ...timeOptions, timeZone: 'America/New_York' });
+  const timeCentral = talk.date.toLocaleTimeString('en-US', { ...timeOptions, timeZone: 'America/Chicago' });
+  const timeSpain = talk.date.toLocaleTimeString('en-US', { ...timeOptions, timeZone: 'Europe/Madrid' });
+  const timeArgentina = talk.date.toLocaleTimeString('en-US', { ...timeOptions, timeZone: 'America/Argentina/Buenos_Aires' });
+  
   return (
     <div className="min-h-screen bg-vs-background text-vs-foreground">
       <div className="relative">
@@ -94,13 +95,17 @@ export default async function TalkPage({ params }: TalksPageProps) {
                   </>
                 )}
               </div>
-              <div className="flex items-center">
-                <span role="img" aria-label="calendar" className="mr-2">📅</span>
-                {formattedDate}
-                <span className="mx-2">•</span>
-                <span role="img" aria-label="clock" className="mr-2">⏰</span>
-                {formattedTime}
-              </div>
+              <div className="flex flex-col gap-1 text-gray-300 pb-2">
+                <div>
+                <div className="font-semibold mb-1">📅 {formattedDate}</div>
+                  <ul className="space-y-1 text-sm text-gray-300">
+                    <li>🕒 🇺🇸 Eastern Time (ET) — {timeEastern}</li>
+                    <li>🕒 🇺🇸 Central Time (CT) — {timeCentral}</li>
+                    <li>🕒 🇪🇸 Spain (CEST) — {timeSpain}</li>
+                    <li>🕒 🇦🇷 Argentina (ART) — {timeArgentina}</li>
+                  </ul>
+                </div>
+            </div>
             </div>
           </div>
         </div>
@@ -149,12 +154,16 @@ export default async function TalkPage({ params }: TalksPageProps) {
                 <div className="flex items-start mb-4">
                   <span role="img" aria-label="calendar" className="mt-1 mr-3 text-vs-primary">📅</span>
                   <div>
-                    <h3 className="font-semibold text-vs-foreground">Date & Time</h3>
-                    <p className="text-vs-foreground/80">{formattedDate} at {formattedTime}</p>
+                  <h3 className="font-semibold text-vs-foreground">Date & Time</h3>
+                  <p className="text-sm text-gray-300">
+                    May 7, 2025 — Shown above in your local time zones 👆
+                  </p>
                     <p className="text-vs-foreground/60 text-sm mt-1">
-                      {talk.status === PRESENTATION_STATUS.UPCOMING && "Coming soon!"}
-                      {talk.status === PRESENTATION_STATUS.ONGOING && "Happening today!"}
-                      {talk.status === PRESENTATION_STATUS.PAST && "This event has already taken place."}
+                      <b>
+                        {talk.status === PRESENTATION_STATUS.UPCOMING && "Coming soon!"}
+                        {talk.status === PRESENTATION_STATUS.ONGOING && "Happening today!"}
+                        {talk.status === PRESENTATION_STATUS.PAST && "This event has already taken place."}
+                      </b>
                     </p>
                   </div>
                 </div>
@@ -276,7 +285,10 @@ export default async function TalkPage({ params }: TalksPageProps) {
               <div>
                 <h3 className="text-xl font-semibold text-vs-foreground mb-2">{profile.fullname}</h3>
                 <p className="text-vs-foreground/80 mb-4">
-                  {profile.position}
+                  {profile?.position} {profile?.additionalPositions && `| ${profile?.additionalPositions.join(" | ")}`}
+                </p>
+                <p className="text-vs-foreground/80 mb-4">
+                  {profile?.shortDescription}
                 </p>
                 <div className="flex gap-3">
                   {profile.githubUrl && (

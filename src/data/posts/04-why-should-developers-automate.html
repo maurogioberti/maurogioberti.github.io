@@ -9,7 +9,11 @@
     less than an hour can save us tons of headaches 🤯 and catch bugs way earlier! 🏆
   </p>
 
-  <h2 class="text-2xl font-semibold mb-4">1️⃣ Automating HTTP Status Validation</h2>
+  <p class="text-lg mb-6">
+    👉 Here are three key areas where automation can make a huge difference:
+  </p>
+
+  <h2 class="text-2xl font-semibold mb-4">✅ Automating HTTP Status Validations</h2>
   <p class="text-lg mb-4">
     HTTP verbs like <strong>GET, POST, PUT, PATCH, DELETE</strong> are the backbone of APIs. Automating tests for HTTP responses (e.g., <strong>200, 201, 204, 400, 404</strong>) 
     makes sure every endpoint behaves the way we expect. 🚀  
@@ -31,7 +35,7 @@ public async Task Given_Valid_Request_When_Post_Then_Return_Created()
 }
   </pre>
 
-  <h2 class="text-2xl font-semibold mb-4">2️⃣ Validating Event Bus Messages</h2>
+  <h2 class="text-2xl font-semibold mb-4">✅ Automating Event Handling Validations</h2>
   <p class="text-lg mb-4">
     Modern microservices often rely on event-driven architectures. <strong>Automating</strong> these checks ensures listeners process events as expected. 
     For instance, when an <strong>AppointmentNotificationEvent</strong> is published, the listener updates the database with the right data. ⚙️
@@ -53,7 +57,7 @@ public async Task Given_Valid_Notification_Event_When_Handled_Then_Entity_Is_Upd
 }
   </pre>
 
-  <h2 class="text-2xl font-semibold mb-4">3️⃣ Testing Edge Cases: Not Found and Validation</h2>
+  <h2 class="text-2xl font-semibold mb-4">✅ Automating Edge Case Validations</h2>
   <p class="text-lg mb-4">
     Automation also ensures your system gracefully handles edge cases. What if you try to delete a non-existent appointment? Your API should reply with 
     <strong>404 Not Found</strong>. Let's see how we can test that:
@@ -70,6 +74,10 @@ public async Task Given_Invalid_Id_When_Delete_Then_Return_NotFound()
     Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 }
   </pre>
+
+  <p class="text-lg mb-6">
+    🔥 And that's just the start! Every project has its own key flows worth automating.
+  </p>
 
   <h2 class="text-2xl font-semibold mb-4">🔑 The Bottom Line</h2>
   <p class="text-lg mb-4">

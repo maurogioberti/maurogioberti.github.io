@@ -15,7 +15,7 @@
     "location": "Buenos Aires, Argentina",
     "postUrl": "https://www.maurogioberti.com/pages/blog/why-should-developers-automate",
     "repositoryUrl": "https://github.com/maurogioberti/microservice-appointments",
-    "slidesUrl": "https://docs.google.com/presentation/d/abc123",
+    "slidesUrl": "https://docs.google.com/presentation/d/11asQvwJ3sAHzPf5ihDk6UnjPgaB3K8ZS4n7C7QNcWtU/edit?usp=sharing",
     "demoVideoUrl": "https://www.youtube.com/watch?v=A0L6IDF1hx0",
     "videoUrl": "https://youtu.be/naD8EmxEeiQ?t=6375",
     "registrationUrl": "https://youtu.be/naD8EmxEeiQ?t=6375",
@@ -39,12 +39,12 @@
     "location": "Barcelona, Spain",
     "postUrl": "https://www.maurogioberti.com/pages/blog/why-should-developers-automate",
     "repositoryUrl": "https://github.com/maurogioberti/microservice-appointments",
-    "slidesUrl": "https://docs.google.com/presentation/d/abc123",
+    "slidesUrl": "https://docs.google.com/presentation/d/11asQvwJ3sAHzPf5ihDk6UnjPgaB3K8ZS4n7C7QNcWtU/edit?usp=sharing",
     "demoVideoUrl": "https://www.youtube.com/watch?v=A0L6IDF1hx0",
     "videoUrl": "",
     "registrationUrl": "https://inno-it.es/automation",
     "resourcesUrl": "https://github.com/maurogioberti/microservice-appointments",
-    "feedbackUrl": "https://forms.gle/3HZwpcgXhD9VFRZu5",
+    "feedbackUrl": "https://forms.gle/Wh7wE4TYacDHvyU79",
     "tags": ["automation", "testing", "dotnet", "qa", "microservices",  "unit-testing", "functional-testing",  "clean-architecture", "event-driven"]
   }
 ]

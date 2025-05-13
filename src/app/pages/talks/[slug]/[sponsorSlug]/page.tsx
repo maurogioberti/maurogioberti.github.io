@@ -155,7 +155,7 @@ export default async function TalkPage({ params }: TalksPageProps) {
                   <span role="img" aria-label="calendar" className="mt-1 mr-3 text-vs-primary">📅</span>
                   <div>
                   <h3 className="font-semibold text-vs-foreground">Date & Time</h3>
-                  <p className="text-sm text-gray-300">
+                  <p className="text-sm">
                     May 7, 2025 — Shown above in your local time zones 👆
                   </p>
                     <p className="text-vs-foreground/60 text-sm mt-1">

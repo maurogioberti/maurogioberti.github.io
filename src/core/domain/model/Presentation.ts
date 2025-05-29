@@ -45,4 +45,10 @@ export class Presentation {
     if (this.date.toDateString() === now.toDateString()) return PRESENTATION_STATUS.ONGOING;
     return PRESENTATION_STATUS.PAST;
   }
+
+  get thumbnailUrl(): string {
+    const safeSlug = this.slug.toLowerCase().replace(/[^a-z0-9-]/g, '');
+    const safeSponsor = this.sponsorSlug.toLowerCase().replace(/[^a-z0-9-]/g, '');
+    return `/assets/presentation/thumbnail/${safeSlug}-${safeSponsor}.png`;
+  }
 }

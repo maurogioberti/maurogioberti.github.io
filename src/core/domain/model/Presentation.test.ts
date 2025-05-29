@@ -324,3 +324,110 @@ describe("Presentation", () => {
     });
   });
 });
+
+test("should generate correct thumbnailUrl from slug and sponsorSlug", () => {
+  const title = faker.lorem.words(2);
+  const slug = faker.helpers.slugify(title.toLowerCase());
+  const sponsor = faker.company.name();
+  const sponsorSlug = faker.helpers.slugify(sponsor.toLowerCase());
+  
+  const presentation = new Presentation(
+    faker.string.uuid(),
+    title,
+    slug,
+    sponsor,
+    sponsorSlug,
+    PRESENTATION_TYPE.ONLINE,
+    faker.lorem.paragraph(),
+    faker.location.city(),
+    faker.location.country(),
+    new Date(),
+    faker.image.url(),
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    []
+  );
+
+  const expectedThumbnailUrl = `/assets/presentation/thumbnail/${slug}-${sponsorSlug}.png`;
+  expect(presentation.thumbnailUrl).toBe(expectedThumbnailUrl);
+});
+
+test("should sanitize special characters in thumbnailUrl", () => {
+  const title = `${faker.lorem.word()}: ${faker.lorem.word()}!`;
+  const slug = faker.helpers.slugify(title.toLowerCase());
+  const sponsor = `${faker.company.name()} & ${faker.company.buzzPhrase()}$`;
+  const sponsorSlug = faker.helpers.slugify(sponsor.toLowerCase());
+  
+  const presentation = new Presentation(
+    faker.string.uuid(),
+    title,
+    slug,
+    sponsor,
+    sponsorSlug,
+    PRESENTATION_TYPE.ONLINE,
+    faker.lorem.paragraph(),
+    faker.location.city(),
+    faker.location.country(),
+    new Date(),
+    faker.image.url(),
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    []
+  );
+
+  const sanitizedSlug = slug.replace(/[^a-z0-9-]/g, '');
+  const sanitizedSponsorSlug = sponsorSlug.replace(/[^a-z0-9-]/g, '');
+  const expectedThumbnailUrl = `/assets/presentation/thumbnail/${sanitizedSlug}-${sanitizedSponsorSlug}.png`;
+  expect(presentation.thumbnailUrl).toBe(expectedThumbnailUrl);
+});
+
+test("should convert uppercase characters to lowercase in thumbnailUrl", () => {
+  const title = faker.lorem.words(2).toUpperCase();
+  const slug = title.replace(/\s+/g, '-');
+  const sponsor = `${faker.lorem.word()} ${faker.lorem.word().toUpperCase()}`;
+  const sponsorSlug = sponsor.replace(/\s+/g, '-');
+  
+  const presentation = new Presentation(
+    faker.string.uuid(),
+    title,
+    slug,
+    sponsor,
+    sponsorSlug,
+    PRESENTATION_TYPE.ONLINE,
+    faker.lorem.paragraph(),
+    faker.location.city(),
+    faker.location.country(),
+    new Date(),
+    faker.image.url(),
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    []
+  );
+
+  const expectedThumbnailUrl = `/assets/presentation/thumbnail/${slug.toLowerCase()}-${sponsorSlug.toLowerCase()}.png`;
+  expect(presentation.thumbnailUrl).toBe(expectedThumbnailUrl);
+});

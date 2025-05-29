@@ -16,7 +16,7 @@ export default async function TalkPage() {
   const { talks } = await talksViewModel();
   const IMAGE_WIDTH = 400;
   const IMAGE_HEIGHT = 200;
-
+  
   return (
     <div className="min-h-screen p-6 bg-vs-background text-vs-foreground font-sans">
       <header className="mb-12 text-center">
@@ -46,11 +46,11 @@ export default async function TalkPage() {
               <Link href={`/pages/talks/${talk.slug}/${talk.sponsorSlug}`} className="block">
                 <div className="relative">
                   <Image
-                    src={`${talk.imageUrl}`}
+                    src={`${talk.thumbnailUrl}`}
                     alt={`Event image for ${talk.title}`}
                     width={IMAGE_WIDTH}
                     height={IMAGE_HEIGHT}
-                    className={`w-full object-cover ${talk.status === PRESENTATION_STATUS.PAST ? "h-48 opacity-90" : "h-52"}`}
+                    className={`w-full object-cover ${talk.status === PRESENTATION_STATUS.PAST ? "aspect-video opacity-90" : "aspect-video"}`}
                     priority={talk.status !== PRESENTATION_STATUS.PAST}
                   />
                   <span className="absolute top-4 left-4 bg-blue-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow">{talk.sponsor}</span>

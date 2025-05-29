@@ -41,7 +41,7 @@ export default async function TalkPage({ params }: TalksPageProps) {
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-vs-background z-10"></div>
         <div className="h-[400px] overflow-hidden">
           <Image
-            src={`/assets/presentations/background-image.png`}
+            src={`/assets/presentation/background-image.png`}
             alt={talk.title}
             className="w-full h-full object-cover object-center"
             fill

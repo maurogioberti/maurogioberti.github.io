@@ -33,7 +33,7 @@ export default async function BlogPage() {
                 alt={`Open Graph image for ${post.title}`}
                 width={IMAGE_WIDTH}
                 height={IMAGE_HEIGHT}
-                className="h-48 w-full object-cover rounded-t-lg"
+                className="h-85 w-full object-fill rounded-t-lg"
               />
               <div className="p-6">
                 <h2 className="text-2xl font-semibold text-vs-foreground group-hover:text-vs-primary transition-colors duration-300">{post.title}</h2>

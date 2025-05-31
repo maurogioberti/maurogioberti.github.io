@@ -1,0 +1,8 @@
+{
+  "id": "6",
+  "title": "🚩 Why NOT Use the Explicit Operator for Mapping?",
+  "description": "Thinking of using the explicit operator for mapping? Here's why that's a bad idea, and why you have to think twice before implementing a new C# feature without understanding the real purpose behind it.",
+  "tags": [ "csharp", "clean-code", "mapping", "dotnet", "software-craftsmanship", "best-practices", "explicit-operator", "software-development", "programming-tips" ],
+  "imageUrl": "/assets/open-graph/blog/why-not-use-explicit-operator-for-mapping-og-image.png",
+  "postedDate": "2025-06-01T01:01:01Z"
+}

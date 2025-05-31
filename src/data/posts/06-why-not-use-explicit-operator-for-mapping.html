@@ -1,0 +1,114 @@
+<div class="max-w-4xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">🚩 Why NOT Use the Explicit Operator for Mapping in C#? 🤨</h1>
+
+  <p class="text-lg mb-4">
+    Just because C# lets you do something, doesn't mean you should. Lately, I've seen guys using the <strong>explicit operator</strong> to map domain models to DTOs. 
+    Looks fancy, using something new right? Well, not really you are just dumpling into new features without thinking it through. Here's a quick look:
+  </p>
+
+  <pre class="bg-gray-100 p-4 rounded-lg text-sm mb-4">
+public class DomainModel
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+}
+
+public class Dto
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+
+    public static explicit operator Dto(DomainModel model)
+    {
+        return new Dto
+        {
+            Id = model.Id,
+            Name = model.Name
+        };
+    }
+}
+
+// Usage:
+var domainModel = new DomainModel { Id = 1, Name = "Example" };
+var dto = (Dto)domainModel;
+  </pre>
+
+  <p class="text-lg mb-4">
+    <strong>Sounds cool, but here's why it's not a great idea:</strong>
+  </p>
+  <ul class="list-disc pl-6 text-lg mb-6">
+    <li><strong>Not intuitive:</strong> Casting should be for simple or related types, not business logic mapping.</li>
+    <li><strong>Hides logic:</strong> <code>(Dto)domainModel</code> looks simple, but there's hidden magic going on.</li>
+    <li><strong>Hard to maintain:</strong> As mapping grows, this gets messy. Reverse mapping? Even worse.</li>
+    <li><strong>Breaks clean code:</strong> It surprises devs and mixes responsibilities.</li>
+    <li><strong>It's just not the C# way:</strong> Most devs expect named methods or constructors for this stuff.</li>
+    <li><strong>Not the purpose of the explicit operator:</strong> It's meant for low-level type conversions, not business logic.</li>
+  </ul>
+
+  <p class="text-lg mb-4">
+    <strong>What's the real purpose of the <code>explicit operator</code>?</strong><br/>
+    It's designed for <strong>controlled type conversions</strong> between types that are closely related—like converting a value type to another value type, or turning a wrapper object into its underlying value. You use it when automatic (implicit) conversion doesn't make sense or could cause data loss. <br/>
+    <br/>
+    In fact: it's for low-level data conversions, <strong>not</strong> for mapping business objects or models.
+  </p>
+
+  <pre class="bg-gray-100 p-4 rounded-lg text-sm mb-4">
+public struct Meters
+{
+    public double Value { get; }
+    public Meters(double value) => Value = value;
+    public static explicit operator double(Meters m) => m.Value;
+}
+
+// Usage:
+Meters meters = new Meters(12.5);
+double metersAsDouble = (double)meters; // Explicit, not automatic!
+</pre>
+
+  <blockquote class="border-l-4 border-blue-500 bg-blue-50 px-4 py-3 mb-6 text-blue-900 italic font-semibold">
+    The <strong>explicit operator</strong> is <u>not</u> meant for mapping business models. This isn't about performance—<br />
+    it's about <strong>clarity of intent</strong> and <strong>maintainability</strong>. Use explicit operators for tight type conversions, not for business object mapping.
+  </blockquote>
+
+  <h2 class="text-2xl font-semibold mb-4">✅ Clean Code: Keep It Simple & Obvious</h2>
+  <p class="text-lg mb-4">
+    If Uncle Bob saw your code, he'd want mapping to be <strong>obvious</strong> and <strong>easy to find</strong>. No tricks, no surprises.
+    The best way? A simple static method or a clear constructor that tells you exactly what's happening:
+  </p>
+
+  <pre class="bg-gray-100 p-4 rounded-lg text-sm mb-4">
+public class Dto
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+
+    public static Dto FromDomainModel(DomainModel model)
+    {
+        return new Dto
+        {
+            Id = model.Id,
+            Name = model.Name
+        };
+    }
+}
+
+// Usage:
+var dto = Dto.FromDomainModel(domainModel);
+  </pre>
+
+  <p class="text-lg mb-4">
+    Or just a regular constructor on your DTO. No magic, no guessing. If mapping ever gets more complex or needs to be reused across your app, that's when you move the logic to a dedicated <code>Mapper</code> class. 
+    <br/><br/>
+    <strong>Keep it simple, keep it readable.</strong>
+  </p>
+
+  <h2 class="text-2xl font-semibold mb-4">🔑 The Takeaway</h2>
+  <p class="text-lg mb-4">
+    <strong>Don't jump on every new C# feature</strong> just because it's there. If it doesn't make your code better, just skip it.
+    So think twice and ask yourself: "Does this really make my code better?". Classic solutions win: your team and your future self will thank you!
+  </p>
+
+  <p class="text-center text-sm mt-4">
+    #CSharp #CleanCode #Mapping #DotNet #SoftwareCraftsmanship #BestPractices #ExplicitOperator #BestPractices #SoftwareDevelopment #ProgrammingTips
+  </p>
+</div>

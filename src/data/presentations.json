@@ -46,5 +46,29 @@
     "resourcesUrl": "https://github.com/maurogioberti/microservice-appointments",
     "feedbackUrl": "https://forms.gle/Wh7wE4TYacDHvyU79",
     "tags": ["automation", "testing", "dotnet", "qa", "microservices",  "unit-testing", "functional-testing",  "clean-architecture", "event-driven"]
+  },
+  {
+    "id": "3",
+    "title": "Why Should Developers Automate?",
+    "slug": "why-should-devs-automate",
+    "sponsor": "Ministery of Testing",
+    "sponsorSlug": "mot",
+    "type": "onsite",
+    "description": "This session explores how smart automation practices from a developer's perspective can drastically reduce bugs, cut costs, and accelerate delivery before issues reach QA or production environments.<br/><br/>Through language-agnostic concepts and real-world examples in modern architectures like microservices, database integrations, and event-driven systems. The talk demonstrates how fast, repeatable tests build confidence, improve workflows, and lead to more reliable software.<br/><br/>Whether you're working with monoliths or distributed systems, this talk offers practical takeaways to help you automate smarter and develop with peace of mind.<br/>",
+    "place": "Mytheresa Office, 4th Floor, Av. d’Icària, 199 - 08005 ",
+    "language": "English",
+    "date": "2025-06-17T16:00:00Z",
+    "imageUrl": "/assets/open-graph/presentation/why-should-devs-automate.png",
+    "eventName": "Ministry of Testing Barcelona - Reloading!",
+    "location": "Barcelona, Spain",
+    "postUrl": "https://www.maurogioberti.com/pages/blog/why-should-developers-automate",
+    "repositoryUrl": "https://github.com/maurogioberti/microservice-appointments",
+    "slidesUrl": "",
+    "demoVideoUrl": "https://www.youtube.com/watch?v=A0L6IDF1hx0",
+    "videoUrl": "",
+    "registrationUrl": "https://www.meetup.com/mot-barcelona/events/308225855/",
+    "resourcesUrl": "https://github.com/maurogioberti/microservice-appointments",
+    "feedbackUrl": "https://forms.gle/2Zk9iaw336qGecYu7",
+    "tags": ["automation", "testing", "dotnet", "qa", "microservices",  "unit-testing", "functional-testing",  "clean-architecture", "event-driven"]
   }
 ]

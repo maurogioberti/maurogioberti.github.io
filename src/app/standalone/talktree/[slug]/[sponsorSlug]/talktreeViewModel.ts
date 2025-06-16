@@ -23,6 +23,8 @@ export const talktreeViewModel = async (slug: string, sponsorSlug: string) => {
     INSTAGRAM_URL: profile.instagramUrl,
     LINKEDIN_URL: profile.linkedinUrl,
     WEBSITE_URL: profile.websiteUrl,
+    TALK_NAME: presentation.title ?? EMPTY_STRING,
+    TALK_DESCRIPTION: `${presentation.eventName} <br/> ${presentation.place} ${presentation.location ? ` - ${presentation.location}` : EMPTY_STRING}`,
     POST_URL: presentation.postUrl ?? EMPTY_STRING,
     SLIDES_URL: presentation.slidesUrl ?? EMPTY_STRING,
     VIDEO_URL: presentation.demoVideoUrl ?? EMPTY_STRING,

@@ -102,6 +102,8 @@ describe("talktreeViewModel", () => {
         REPOSITORY_URL: mockPresentationData.repositoryUrl,
         RESOURCES_URL: mockPresentationData.resourcesUrl,
         FEEDBACK_URL: mockPresentationData.feedbackUrl,
+        TALK_DESCRIPTION: expect.any(String),
+        TALK_NAME: expect.any(String),
       }
     );
     
@@ -140,6 +142,8 @@ describe("talktreeViewModel", () => {
           POST_URL: EMPTY_STRING,
           SLIDES_URL: EMPTY_STRING,
           VIDEO_URL: EMPTY_STRING,
+          TALK_DESCRIPTION: expect.any(String),
+          TALK_NAME: expect.any(String),
         })
       );
 

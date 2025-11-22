@@ -10,7 +10,7 @@ export default async function ServicesPage() {
   const { services } = await serviceViewModel();
   return (
     <div className="min-h-screen bg-vs-background text-vs-foreground p-6">
-      <header className="mb-12 text-center">
+      <header className="mb-6 text-center">
       <h1 className="text-5xl font-extrabold text-vs-primary mb-4">🕵️‍♂️ Services I Offer</h1>
         <p className="mt-4 text-lg">
           Leveraging expertise in software engineering to deliver impactful solutions across the United States.

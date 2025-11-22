@@ -22,6 +22,7 @@ describe("GetProfileUseCase", () => {
       ["Developer", "Mentor"],
       faker.lorem.sentence(),
       faker.lorem.paragraph(),
+      faker.lorem.sentence(),
       { github: faker.internet.url(), linkedin: faker.internet.url() },
       faker.internet.url(),
       faker.internet.email(),

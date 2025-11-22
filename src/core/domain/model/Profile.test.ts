@@ -19,6 +19,8 @@ describe("Profile", () => {
       twitter: faker.internet.url(),
     };
 
+    const conciseDescription = faker.lorem.sentence();
+
     const profile = new Profile(
       name,
       lastName,
@@ -27,6 +29,7 @@ describe("Profile", () => {
       [],
       shortDescription,
       longDescription,
+      conciseDescription,
       socials
     );
 
@@ -36,6 +39,7 @@ describe("Profile", () => {
     expect(profile.position).toBe(position);
     expect(profile.shortDescription).toBe(shortDescription);
     expect(profile.longDescription).toBe(longDescription);
+    expect(profile.conciseDescription).toBe(conciseDescription);
     expect(profile.socials).toEqual(socials);
     expect(profile.additionalPositions).toEqual([]);
     expect(profile.avatarUrl).toBeUndefined();
@@ -64,6 +68,7 @@ describe("Profile", () => {
       description: faker.lorem.sentence(),
     };
     const skills = [faker.hacker.verb(), faker.hacker.verb()];
+    const conciseDescription = faker.lorem.sentence();
 
     const profile = new Profile(
       name,
@@ -73,6 +78,7 @@ describe("Profile", () => {
       additionalPositions,
       shortDescription,
       longDescription,
+      conciseDescription,
       socials,
       avatarUrl,
       email,
@@ -87,6 +93,7 @@ describe("Profile", () => {
     expect(profile.additionalPositions).toEqual(additionalPositions);
     expect(profile.shortDescription).toBe(shortDescription);
     expect(profile.longDescription).toBe(longDescription);
+    expect(profile.conciseDescription).toBe(conciseDescription);
     expect(profile.socials).toEqual(socials);
     expect(profile.avatarUrl).toBe(avatarUrl);
     expect(profile.email).toBe(email);
@@ -101,6 +108,7 @@ describe("Profile", () => {
       faker.date.birthdate(),
       faker.person.jobTitle(),
       [],
+      EMPTY_STRING,
       EMPTY_STRING,
       EMPTY_STRING,
       {}
@@ -119,6 +127,7 @@ describe("Profile", () => {
       [],
       EMPTY_STRING,
       EMPTY_STRING,
+      EMPTY_STRING,
       {}
     );
 
@@ -128,7 +137,7 @@ describe("Profile", () => {
   test("should return the full name", () => {
     const name = faker.person.firstName();
     const lastName = faker.person.lastName();
-    const profile = new Profile(name, lastName, faker.date.birthdate(), faker.person.jobTitle(), [], EMPTY_STRING, EMPTY_STRING, {});
+    const profile = new Profile(name, lastName, faker.date.birthdate(), faker.person.jobTitle(), [], EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, {});
     expect(profile.fullname).toBe(`${name} ${lastName}`);
   });
   
@@ -141,7 +150,7 @@ describe("Profile", () => {
       linkedin: faker.internet.url(),
       website: faker.internet.url(),
     };
-    const profile = new Profile(faker.person.firstName(), faker.person.lastName(), faker.date.birthdate(), faker.person.jobTitle(), [], EMPTY_STRING, EMPTY_STRING, socials);
+    const profile = new Profile(faker.person.firstName(), faker.person.lastName(), faker.date.birthdate(), faker.person.jobTitle(), [], EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, socials);
     expect(profile.githubUrl).toBe(socials.github);
     expect(profile.youtubeUrl).toBe(socials.youtube);
     expect(profile.twitterUrl).toBe(socials.twitter);
@@ -152,7 +161,7 @@ describe("Profile", () => {
   
   test("should return undefined for missing social media URLs", () => {
     const socials = {};
-    const profile = new Profile(faker.person.firstName(), faker.person.lastName(), faker.date.birthdate(), faker.person.jobTitle(), [], EMPTY_STRING, EMPTY_STRING, socials);
+    const profile = new Profile(faker.person.firstName(), faker.person.lastName(), faker.date.birthdate(), faker.person.jobTitle(), [], EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, socials);
     expect(profile.githubUrl).toBeUndefined();
     expect(profile.youtubeUrl).toBeUndefined();
     expect(profile.twitterUrl).toBeUndefined();

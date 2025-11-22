@@ -8,10 +8,15 @@ import { resumeViewModel } from './resumeViewModel';
 export const metadata: Metadata = { ...resumeMetadata };
 
 export default async function ResumePage() {
-  const { timeline, recommendations } = await resumeViewModel();
+  const { profile, timeline, recommendations } = await resumeViewModel();
   return (
     <div className="min-h-screen bg-vs-background text-vs-foreground p-6">
-      <h1 className="text-5xl font-extrabold text-vs-primary mb-4">📜 Resume</h1>
+      <header className="mb-12 text-center">
+        <h1 className="text-5xl font-extrabold mb-4">📜 Resume</h1>
+        <p className="text-lg mt-4">
+          {profile.conciseDescription}
+        </p>
+      </header>
       <div className="flex flex-col items-center mb-8">
         <Image src="/assets/profile/maurogioberti.png" alt="Mauro Gioberti" width={200} height={200} className="w-50 h-50 rounded-full object-cover shadow-lg" />
       </div>

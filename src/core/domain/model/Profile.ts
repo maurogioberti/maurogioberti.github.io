@@ -18,6 +18,7 @@ export class Profile {
     public readonly additionalPositions: string[] = [],
     public readonly shortDescription: string,
     public readonly longDescription: string,
+    public readonly conciseDescription: string,
     public readonly socials: { [key: string]: string },
     public readonly avatarUrl?: string,
     public readonly email?: string,

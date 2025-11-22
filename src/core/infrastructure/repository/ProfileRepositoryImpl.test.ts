@@ -1,8 +1,9 @@
-import { ProfileRepositoryImpl } from "./ProfileRepositoryImpl";
-import { ProfileService } from "../../domain/services/ProfileService";
-import { Profile } from "../../domain/model/Profile";
-import { describe, test, expect, jest } from "@jest/globals";
-import { faker } from "@faker-js/faker";
+import { faker } from '@faker-js/faker';
+import { describe, expect, jest, test } from '@jest/globals';
+
+import { Profile } from '../../domain/model/Profile';
+import { ProfileService } from '../../domain/services/ProfileService';
+import { ProfileRepositoryImpl } from './ProfileRepositoryImpl';
 
 describe("ProfileRepositoryImpl", () => {
   const EXPECTED_CALL_COUNT = 1;
@@ -16,6 +17,7 @@ describe("ProfileRepositoryImpl", () => {
       [],
       faker.lorem.sentence(),
       faker.lorem.paragraph(),
+      faker.lorem.sentence(),
       { github: faker.internet.url() }
     );
 

@@ -17,7 +17,7 @@ export default async function HomePage() {
     <>
       <div className="min-h-screen flex flex-col items-center justify-center bg-vs-background text-vs-foreground font-sans p-10">
         <section className="flex flex-col items-center sm:flex-row sm:items-center sm:justify-start mb-8">
-          <Image src="../assets/profile/maurogioberti-avatar.png" alt={`Avatar of ${profile?.fullname}`} width={150} height={150} className="rounded-full" />
+          <Image src="../assets/profile/maurogioberti-happy.png" alt={`Picture of ${profile?.fullname} smiling`} width={180} height={180} className="rounded-full" />
           <div className="sm:ml-4 mt-4 sm:mt-0 text-center sm:text-left">
             <h1 className="text-3xl font-bold">Hi, I&apos;m {profile?.fullname}!</h1>
             <p className="text-lg">

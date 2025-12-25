@@ -39,7 +39,9 @@ This website serves as a personal platform to showcase my work, share my blog po
 ### Key Features
 - **Portfolio**: Highlighting my skills, work history, and key achievements.
 - **Blog**: Sharing insights and lessons learned from my experience in technology and consulting.
-- **Professional Services**: A dedicated section for showcasing the services I offer.
+- **Talks**: Showcasing presentations and speaking engagements.
+- **Resume**: Comprehensive timeline and professional recommendations.
+- **Services**: A dedicated section for showcasing the professional services I offer.
 
 ---
 
@@ -101,6 +103,7 @@ This structure ensures:
 Clean Architecture makes testing simple:
 - **Mockable Dependencies**: Repositories and services can be easily mocked using `jest`.
 - **Unit Testing**: Business logic and use cases are isolated for thorough testing.
+- **Continuous Integration**: Unit tests are automatically executed via CI on every push to ensure code quality.
 
 ---
 

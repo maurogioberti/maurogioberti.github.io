@@ -73,17 +73,21 @@ project-root/
 │   ├── core/
 │   │   ├── domain/  # Business rules
 │   │   ├── application/  # Use cases
-│   │   └── infrastructure/  # External services
-│   └── app/
-│       ├── layout.tsx  # Global layout
-│       ├── pages/  # Next.js pages
-│       │   ├── index.tsx  # Homepage
-│       │   ├── blogs/  # Blog section
-│       │   ├── events/  # Events section
-│       │   └── services/  # Services section
-│       └── components/  # Reusable UI components
-├── public/  # Static assets
-└── di.ts  # Dependency injection configuration
+│   │   ├── infrastructure/  # External services
+│   │   └── crosscutting/  # Shared concerns (DI, mapping, SEO, utils)
+│   ├── app/
+│   │   ├── layout.tsx  # Global layout
+│   │   ├── pages/  # Next.js pages
+│   │   │   ├── home/  # Homepage
+│   │   │   ├── blog/  # Blog section
+│   │   │   ├── talks/  # Talks section
+│   │   │   ├── resume/  # Resume section
+│   │   │   └── services/  # Services section
+│   │   ├── components/  # Reusable UI components
+│   │   └── standalone/  # Standalone pages (linktree, talktree)
+│   ├── data/  # JSON data files
+│   └── di.ts  # Dependency injection configuration
+└── public/  # Static assets
 ```
 
 This structure ensures:

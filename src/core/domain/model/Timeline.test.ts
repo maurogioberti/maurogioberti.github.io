@@ -1,7 +1,7 @@
-import { faker } from "@faker-js/faker";
-import { describe, expect, test } from "@jest/globals";
+import { faker } from '@faker-js/faker';
+import { describe, expect, test } from '@jest/globals';
 
-import { Timeline } from "./Timeline";
+import { Timeline } from './Timeline';
 
 describe("Timeline", () => {
   test("should create a Timeline instance with required properties", () => {
@@ -10,6 +10,8 @@ describe("Timeline", () => {
     const company = faker.company.name();
     const companyUrl = faker.internet.url();
     const companyLogoUrl = faker.image.url();
+    const location = faker.location.country();
+    const workType = faker.helpers.arrayElement(['Remote', 'Hybrid', 'On-site']);
     const consultingCompany = faker.company.name();
     const consultingCompanyUrl = faker.internet.url();
     const consultingCompanyLogoUrl = faker.internet.url();
@@ -22,6 +24,8 @@ describe("Timeline", () => {
       company,
       companyUrl,
       companyLogoUrl,
+      location,
+      workType,
       consultingCompany,
       consultingCompanyUrl,
       consultingCompanyLogoUrl,
@@ -33,6 +37,8 @@ describe("Timeline", () => {
     expect(timeline.title).toBe(title);
     expect(timeline.company).toBe(company);
     expect(timeline.companyLogoUrl).toBe(companyLogoUrl);
+    expect(timeline.location).toBe(location);
+    expect(timeline.workType).toBe(workType);
     expect(timeline.consultingCompany).toBe(consultingCompany);
     expect(timeline.consultingCompanyLogoUrl).toBe(consultingCompanyLogoUrl);
     expect(timeline.consultingCompanyUrl).toBe(consultingCompanyUrl);
@@ -49,12 +55,14 @@ describe("Timeline", () => {
     const description = faker.lorem.paragraph();
     const tags = [faker.lorem.word(), faker.lorem.word()];
 
-    const timeline = new Timeline(year, title, company, null, companyLogoUrl, null, null, null, description, tags);
+    const timeline = new Timeline(year, title, company, null, companyLogoUrl, null, null, null, null, null, description, tags);
 
     expect(timeline.year).toBe(year);
     expect(timeline.title).toBe(title);
     expect(timeline.company).toBe(company);
     expect(timeline.companyLogoUrl).toBe(companyLogoUrl);
+    expect(timeline.location).toBeNull();
+    expect(timeline.workType).toBeNull();
     expect(timeline.consultingCompany).toBeNull();
     expect(timeline.consultingCompanyLogoUrl).toBeNull();
     expect(timeline.consultingCompanyUrl).toBeNull();

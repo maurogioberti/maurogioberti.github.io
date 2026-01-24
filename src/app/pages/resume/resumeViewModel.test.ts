@@ -29,8 +29,18 @@ describe("resumeViewModel", () => {
   }));
 
   const mockTimeline = Array.from({ length: 5 }, () => ({
-    id: faker.number.int(),
-    event: faker.lorem.sentence(),
+    year: faker.date.past().getFullYear().toString(),
+    title: faker.person.jobTitle(),
+    company: faker.company.name(),
+    companyUrl: faker.internet.url(),
+    companyLogoUrl: faker.image.url(),
+    location: faker.location.country(),
+    workType: faker.helpers.arrayElement(['Remote', 'Hybrid', 'On-site']),
+    consultingCompany: null,
+    consultingCompanyUrl: null,
+    consultingCompanyLogoUrl: null,
+    description: faker.lorem.paragraph(),
+    tags: [faker.lorem.word(), faker.lorem.word()],
   }));
 
   beforeEach(() => {

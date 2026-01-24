@@ -61,6 +61,11 @@ export default async function ResumePage() {
                   </div>
                 </div>
 
+                    {(item.location || item.workType) && (
+                      <div className="text-sm text-vs-foreground-muted mt-1">
+                        {item.location}{item.location && item.workType && ' - '}{item.workType}
+                      </div>
+                    )}
                 <div
                   className="flex flex-col sm:flex-row items-start mb-1 group-last:before:hidden 
                       before:absolute before:left-2 sm:before:left-0 before:h-full before:px-px before:bg-blue-600 

@@ -1,10 +1,10 @@
-import { Recommendation } from "@/core/domain/model/Recommendation";
-import { Timeline } from "@/core/domain/model/Timeline";
-import { ResumeService } from "@/core/domain/services/ResumeService";
-import { faker } from "@faker-js/faker";
-import { beforeEach, describe, expect, jest, test } from "@jest/globals";
+import { Recommendation } from '@/core/domain/model/Recommendation';
+import { Timeline } from '@/core/domain/model/Timeline';
+import { ResumeService } from '@/core/domain/services/ResumeService';
+import { faker } from '@faker-js/faker';
+import { beforeEach, describe, expect, jest, test } from '@jest/globals';
 
-import { ResumeRepositoryImpl } from "./ResumeRepositoryImpl";
+import { ResumeRepositoryImpl } from './ResumeRepositoryImpl';
 
 describe("ResumeRepositoryImpl", () => {
   let resumeService: jest.Mocked<ResumeService>;
@@ -33,6 +33,8 @@ describe("ResumeRepositoryImpl", () => {
     company: faker.company.name(),
     companyUrl: faker.helpers.arrayElement([faker.internet.url(), null]),
     companyLogoUrl: faker.image.url(),
+    location: faker.helpers.arrayElement([faker.location.country(), null]),
+    workType: faker.helpers.arrayElement(['Remote', 'Hybrid', 'On-site', null]),
     consultingCompany: faker.helpers.arrayElement([faker.company.name(), null]),
     consultingCompanyUrl: faker.helpers.arrayElement([faker.internet.url(), null]),
     consultingCompanyLogoUrl: faker.helpers.arrayElement([faker.image.url(), null]),
@@ -87,6 +89,8 @@ describe("ResumeRepositoryImpl", () => {
             tl.company,
             tl.companyUrl,
             tl.companyLogoUrl,
+            tl.location,
+            tl.workType,
             tl.consultingCompany,
             tl.consultingCompanyUrl,
             tl.consultingCompanyLogoUrl,

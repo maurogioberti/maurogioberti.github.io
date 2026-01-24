@@ -16,21 +16,17 @@ describe("GetTimelineUseCase", () => {
 
   beforeEach(() => {
     mockTimeline = Array.from({ length: TOTAL_TIMELINE }, () => ({
-      id: faker.number.int(),
-      event: faker.lorem.sentence(),
-      date: faker.date.past().toISOString(),
       year: faker.date.past().getFullYear().toString(),
-      title: faker.lorem.words(),
+      title: faker.person.jobTitle(),
       company: faker.company.name(),
-      logoUrl: faker.image.url(),
-      companyLogoUrl: faker.image.url(),
-      description: faker.lorem.paragraph(),
-      location: faker.location.city(),
-      type: faker.lorem.word(),
-      consultingCompany: faker.company.name(),
-      consultingCompanyLogoUrl: faker.image.url(),
-      consultingCompanyUrl: faker.internet.url(),
       companyUrl: faker.internet.url(),
+      companyLogoUrl: faker.image.url(),
+      location: faker.location.country(),
+      workType: faker.helpers.arrayElement(['Remote', 'Hybrid', 'On-site']),
+      consultingCompany: faker.company.name(),
+      consultingCompanyUrl: faker.internet.url(),
+      consultingCompanyLogoUrl: faker.image.url(),
+      description: faker.lorem.paragraph(),
       tags: Array.from({ length: TOTAL_TAGS }, () => faker.lorem.word()),
     }));
 

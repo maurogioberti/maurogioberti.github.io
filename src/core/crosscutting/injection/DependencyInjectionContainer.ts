@@ -1,11 +1,11 @@
 export class DependencyInjectionContainer {
   private instances = new Map<string, unknown>();
   private factories = new Map<string, () => unknown>();
-  
+
   register<T>(key: string, factory: () => T): void {
     this.factories.set(key, factory);
   }
-  
+
   resolve<T>(key: string): T {
     if (!this.instances.has(key)) {
       const factory = this.factories.get(key);
@@ -23,4 +23,13 @@ export class DependencyInjectionContainer {
   }
 }
 
-export const container = new DependencyInjectionContainer();
+const globalForDI = globalThis as unknown as {
+  __diContainer?: DependencyInjectionContainer;
+};
+
+export const container =
+  globalForDI.__diContainer ?? new DependencyInjectionContainer();
+
+if (!globalForDI.__diContainer) {
+  globalForDI.__diContainer = container;
+}

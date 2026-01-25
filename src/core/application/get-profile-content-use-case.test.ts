@@ -26,6 +26,7 @@ describe("GetProfileUseCase", () => {
       { github: faker.internet.url(), linkedin: faker.internet.url() },
       faker.internet.url(),
       faker.internet.email(),
+      faker.phone.number(),
       { city: faker.location.city(), country: faker.location.country(), description: faker.lorem.sentence() },
       ["React", "Node.js", "TypeScript"]
     );

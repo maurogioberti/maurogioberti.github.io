@@ -7,7 +7,7 @@ import { serviceViewModel } from './serviceViewModel';
 export const metadata: Metadata = {...servicesMetadata};
 
 export default async function ServicesPage() {
-  const { services } = await serviceViewModel();
+  const { services, profile } = await serviceViewModel();
   return (
     <div className="min-h-screen bg-vs-background text-vs-foreground p-6">
       <header className="mb-6 text-center">
@@ -36,26 +36,51 @@ export default async function ServicesPage() {
           </div>
         ))}
       </section>
-      <section className="mt-16 text-center">
-        <h3 className="text-2xl font-semibold text-vs-primary">🌎 Location & Availability</h3>
-        <p className="mt-4 max-w-xl mx-auto">
-          Flexible scheduling aligned with U.S. business hours, ensuring seamless collaboration and availability during prime working times. 
-          Ideal for businesses seeking reliable support and real-time accessibility.
+      <section className="mt-16 max-w-3xl mx-auto">
+        <h3 className="text-2xl font-semibold text-vs-primary text-center">
+          📞 Direct Contact for Professional Inquiries
+        </h3>
+
+        <p className="mt-4 text-base text-vs-foreground/80 text-center">
+          I work with companies on architecture reviews, technical interviews, and team development initiatives. If you&apos;re reaching out regarding a consulting engagement, speaking opportunity, or technical collaboration, you can use the direct contact options below. Please include your organization and a brief description of your needs so I can respond appropriately.
         </p>
-        <div className="mt-6">
-          <a 
-            href="https://www.linkedin.com/in/maurogioberti" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="px-6 py-2 bg-vs-primary rounded-lg hover:bg-vs-primary-dark inline-block">
-            Connect on LinkedIn
-          </a>
-          <p className="mt-4 text-sm">
-            Prefer to contact me via phone? 
-            Send me a message 
-            on <a href="mailto:giobertimauro@gmail.com" className="text-vs-primary hover:underline"> my email</a> to 
-            request my U.S. phone number.
-          </p>
+
+        <div className="mt-8 grid gap-8 md:grid-cols-2">
+          <div className="bg-vs-background-light p-6 rounded-lg shadow-md">
+            <h4 className="text-lg font-semibold text-vs-foreground">
+              U.S. Business Phone
+            </h4>
+            <p className="mt-2 text-sm text-vs-foreground/80">
+              Available for consulting and project-related discussions. Calls or text messages (SMS) are welcome. Conversations are typically scheduled in advance between <strong>1:00 PM – 6:00 PM Eastern Time (ET) / 12:00 PM – 5:00 PM Central Time (CT)</strong>. A short introduction and the purpose of your inquiry are appreciated.
+            </p>
+
+            {profile.phone && (
+              <a
+                href={`tel:${profile.phoneInternational}`}
+                className="mt-4 inline-flex text-sm text-vs-primary hover:underline"
+              >
+                {profile.phone}
+              </a>
+            )}
+          </div>
+          <div className="bg-vs-background-light p-6 rounded-lg shadow-md">
+            <h4 className="text-lg font-semibold text-vs-foreground">
+              WhatsApp
+            </h4>
+            <p className="mt-2 text-sm text-vs-foreground/80">
+              The same number is available on WhatsApp for those who prefer it. For faster responses, please include context about your project or organization.
+            </p>
+
+            {profile.phone && (
+              <a
+                href={`https://wa.me/${profile.phoneWhatsApp}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex text-sm text-vs-primary hover:underline">
+                Open WhatsApp chat
+              </a>
+            )}
+          </div>
         </div>
       </section>
     </div>

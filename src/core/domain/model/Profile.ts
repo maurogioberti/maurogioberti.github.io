@@ -23,6 +23,7 @@ export class Profile {
     public readonly socials: { [key: string]: string },
     public readonly avatarUrl?: string,
     public readonly email?: string,
+    public readonly phone?: string,
     public readonly location?: { city: string; country: string; description: string },
     public readonly skills: string[] = []
   ) {}
@@ -78,5 +79,15 @@ export class Profile {
 
   get websiteUrl(): string {
     return this.socials[SOCIAL_KEYS.WEBSITE];
+  }
+
+  get phoneInternational(): string | undefined {
+    return this.phone ? this.phone.replace(/[^+\d]/g, '') : undefined;
+  }
+
+  get phoneWhatsApp(): string | undefined {
+    if (!this.phone) return undefined;
+    const cleaned = this.phone.replace(/[^+\d]/g, '');
+    return cleaned.startsWith('+') ? cleaned.substring(1) : cleaned;
   }
 }

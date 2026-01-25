@@ -7,6 +7,10 @@ describe("Profile", () => {
   const INITIAL_EXPERIENCE_YEAR: number = 2014;
   const EMPTY_STRING = "";
   
+  const generatePhoneWithHyphens = () => `+1-${faker.string.numeric(3)}-${faker.string.numeric(3)}-${faker.string.numeric(4)}`;
+  const generatePhoneWithParentheses = () => `+1 (${faker.string.numeric(3)}) ${faker.string.numeric(3)}-${faker.string.numeric(4)}`;
+  const generateNumericPhone = () => `1${faker.string.numeric(10)}`;
+  
   test("should create a Profile instance with required properties", () => {
     const name = faker.person.firstName();
     const lastName = faker.person.lastName();
@@ -44,6 +48,7 @@ describe("Profile", () => {
     expect(profile.additionalPositions).toEqual([]);
     expect(profile.avatarUrl).toBeUndefined();
     expect(profile.email).toBeUndefined();
+    expect(profile.phone).toBeUndefined();
     expect(profile.location).toBeUndefined();
     expect(profile.skills).toEqual([]);
   });
@@ -62,6 +67,7 @@ describe("Profile", () => {
     };
     const avatarUrl = faker.internet.url();
     const email = faker.internet.email();
+    const phone = faker.phone.number();
     const location = {
       city: faker.location.city(),
       country: faker.location.country(),
@@ -82,6 +88,7 @@ describe("Profile", () => {
       socials,
       avatarUrl,
       email,
+      phone,
       location,
       skills
     );
@@ -97,6 +104,7 @@ describe("Profile", () => {
     expect(profile.socials).toEqual(socials);
     expect(profile.avatarUrl).toBe(avatarUrl);
     expect(profile.email).toBe(email);
+    expect(profile.phone).toBe(phone);
     expect(profile.location).toEqual(location);
     expect(profile.skills).toEqual(skills);
   });
@@ -171,5 +179,123 @@ describe("Profile", () => {
     expect(profile.tiktokUrl).toBeUndefined();
     expect(profile.linkedinUrl).toBeUndefined();
     expect(profile.websiteUrl).toBeUndefined();
+  });
+
+  describe("Phone formatting", () => {
+    test("should format phone number for tel link", () => {
+      const phoneNumber = generatePhoneWithHyphens();
+      const profile = new Profile(
+        faker.person.firstName(),
+        faker.person.lastName(),
+        faker.date.birthdate(),
+        faker.person.jobTitle(),
+        [],
+        EMPTY_STRING,
+        EMPTY_STRING,
+        EMPTY_STRING,
+        {},
+        undefined,
+        undefined,
+        phoneNumber
+      );
+
+      const expected = phoneNumber.replace(/[^+\d]/g, '');
+      expect(profile.phoneInternational).toBe(expected);
+    });
+
+    test("should format phone number for WhatsApp", () => {
+      const phoneNumber = generatePhoneWithHyphens();
+      const profile = new Profile(
+        faker.person.firstName(),
+        faker.person.lastName(),
+        faker.date.birthdate(),
+        faker.person.jobTitle(),
+        [],
+        EMPTY_STRING,
+        EMPTY_STRING,
+        EMPTY_STRING,
+        {},
+        undefined,
+        undefined,
+        phoneNumber
+      );
+
+      const cleaned = phoneNumber.replace(/[^+\d]/g, '');
+      const expected = cleaned.startsWith('+') ? cleaned.substring(1) : cleaned;
+      expect(profile.phoneWhatsApp).toBe(expected);
+    });
+
+    test("should handle phone number without country code prefix for WhatsApp", () => {
+      const phoneNumber = generateNumericPhone();
+      const profile = new Profile(
+        faker.person.firstName(),
+        faker.person.lastName(),
+        faker.date.birthdate(),
+        faker.person.jobTitle(),
+        [],
+        EMPTY_STRING,
+        EMPTY_STRING,
+        EMPTY_STRING,
+        {},
+        undefined,
+        undefined,
+        phoneNumber
+      );
+
+      expect(profile.phoneWhatsApp).toBe(phoneNumber);
+    });
+
+    test("should return undefined for tel link when phone is missing", () => {
+      const profile = new Profile(
+        faker.person.firstName(),
+        faker.person.lastName(),
+        faker.date.birthdate(),
+        faker.person.jobTitle(),
+        [],
+        EMPTY_STRING,
+        EMPTY_STRING,
+        EMPTY_STRING,
+        {}
+      );
+
+      expect(profile.phoneInternational).toBeUndefined();
+    });
+
+    test("should return undefined for WhatsApp when phone is missing", () => {
+      const profile = new Profile(
+        faker.person.firstName(),
+        faker.person.lastName(),
+        faker.date.birthdate(),
+        faker.person.jobTitle(),
+        [],
+        EMPTY_STRING,
+        EMPTY_STRING,
+        EMPTY_STRING,
+        {}
+      );
+
+      expect(profile.phoneWhatsApp).toBeUndefined();
+    });
+
+    test("should remove all non-numeric characters except plus sign for tel link", () => {
+      const phoneNumber = generatePhoneWithParentheses();
+      const profile = new Profile(
+        faker.person.firstName(),
+        faker.person.lastName(),
+        faker.date.birthdate(),
+        faker.person.jobTitle(),
+        [],
+        EMPTY_STRING,
+        EMPTY_STRING,
+        EMPTY_STRING,
+        {},
+        undefined,
+        undefined,
+        phoneNumber
+      );
+
+      const expected = phoneNumber.replace(/[^+\d]/g, '');
+      expect(profile.phoneInternational).toBe(expected);
+    });
   });
 });

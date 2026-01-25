@@ -3,6 +3,7 @@ const SOCIAL_KEYS = {
   YOUTUBE: "youtube",
   TWITTER: "twitter",
   INSTAGRAM: "instagram",
+  TIKTOK: "tiktok",
   LINKEDIN: "linkedin",
   WEBSITE: "website",
 };
@@ -65,6 +66,10 @@ export class Profile {
 
   get instagramUrl(): string {
     return this.socials[SOCIAL_KEYS.INSTAGRAM];
+  }
+
+  get tiktokUrl(): string {
+    return this.socials[SOCIAL_KEYS.TIKTOK];
   }
 
   get linkedinUrl(): string {

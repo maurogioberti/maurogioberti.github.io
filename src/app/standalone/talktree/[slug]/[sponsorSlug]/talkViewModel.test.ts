@@ -17,6 +17,7 @@ describe("talktreeViewModel", () => {
     youtubeUrl: faker.internet.url(),
     twitterUrl: faker.internet.url(),
     instagramUrl: faker.internet.url(),
+    tiktokUrl: faker.internet.url(),
     linkedinUrl: faker.internet.url(),
     websiteUrl: faker.internet.url(),
   };
@@ -94,6 +95,7 @@ describe("talktreeViewModel", () => {
         YOUTUBE_URL: mockProfileData.youtubeUrl,
         TWITTER_URL: mockProfileData.twitterUrl,
         INSTAGRAM_URL: mockProfileData.instagramUrl,
+        TIKTOK_URL: mockProfileData.tiktokUrl,
         LINKEDIN_URL: mockProfileData.linkedinUrl,
         WEBSITE_URL: mockProfileData.websiteUrl,
         POST_URL: mockPresentationData.postUrl,
@@ -137,6 +139,7 @@ describe("talktreeViewModel", () => {
           YOUTUBE_URL: mockProfileData.youtubeUrl,
           TWITTER_URL: mockProfileData.twitterUrl,
           INSTAGRAM_URL: mockProfileData.instagramUrl,
+          TIKTOK_URL: mockProfileData.tiktokUrl,
           LINKEDIN_URL: mockProfileData.linkedinUrl,
           WEBSITE_URL: mockProfileData.websiteUrl,
           POST_URL: EMPTY_STRING,

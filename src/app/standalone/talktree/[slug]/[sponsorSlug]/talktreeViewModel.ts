@@ -21,6 +21,7 @@ export const talktreeViewModel = async (slug: string, sponsorSlug: string) => {
     YOUTUBE_URL: profile.youtubeUrl,
     TWITTER_URL: profile.twitterUrl,
     INSTAGRAM_URL: profile.instagramUrl,
+    TIKTOK_URL: profile.tiktokUrl,
     LINKEDIN_URL: profile.linkedinUrl,
     WEBSITE_URL: profile.websiteUrl,
     TALK_NAME: presentation.title ?? EMPTY_STRING,

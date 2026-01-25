@@ -21,6 +21,7 @@ export const linktreeViewModel = async () => {
     YOUTUBE_URL: profile.youtubeUrl,
     TWITTER_URL: profile.twitterUrl,
     INSTAGRAM_URL: profile.instagramUrl,
+    TIKTOK_URL: profile.tiktokUrl,
     LINKEDIN_URL: profile.linkedinUrl,
     WEBSITE_URL: profile.websiteUrl,
   });

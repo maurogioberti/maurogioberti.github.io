@@ -147,6 +147,7 @@ describe("Profile", () => {
       youtube: faker.internet.url(),
       twitter: faker.internet.url(),
       instagram: faker.internet.url(),
+      tiktok: faker.internet.url(),
       linkedin: faker.internet.url(),
       website: faker.internet.url(),
     };
@@ -155,6 +156,7 @@ describe("Profile", () => {
     expect(profile.youtubeUrl).toBe(socials.youtube);
     expect(profile.twitterUrl).toBe(socials.twitter);
     expect(profile.instagramUrl).toBe(socials.instagram);
+    expect(profile.tiktokUrl).toBe(socials.tiktok);
     expect(profile.linkedinUrl).toBe(socials.linkedin);
     expect(profile.websiteUrl).toBe(socials.website);
   });
@@ -166,6 +168,7 @@ describe("Profile", () => {
     expect(profile.youtubeUrl).toBeUndefined();
     expect(profile.twitterUrl).toBeUndefined();
     expect(profile.instagramUrl).toBeUndefined();
+    expect(profile.tiktokUrl).toBeUndefined();
     expect(profile.linkedinUrl).toBeUndefined();
     expect(profile.websiteUrl).toBeUndefined();
   });

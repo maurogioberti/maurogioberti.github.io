@@ -70,5 +70,29 @@
     "resourcesUrl": "https://github.com/maurogioberti/microservice-appointments",
     "feedbackUrl": "https://forms.gle/2Zk9iaw336qGecYu7",
     "tags": ["automation", "testing", "dotnet", "qa", "microservices",  "unit-testing", "functional-testing",  "clean-architecture", "event-driven"]
+  },
+  {
+    "id": "4",
+    "title": "Benchmarking LLM RAGs: Python vs .NET",
+    "slug": "benchmarking-llm-rags-python-vs-dotnet",
+    "sponsor": "Power Platform Bootcamp Buenos Aires",
+    "sponsorSlug": "gppb2026",
+    "type": "online",
+    "description": "In this session, I walk through a real-world RAG (Retrieval-Augmented Generation) benchmark built for a Human Resources use case: analyzing and ranking candidates from CVs using LLMs. The same solution is implemented twice, once in Python (LangChain) and once in .NET (Semantic Kernel), using the same data, questions, and ranking logic. The goal is not to debate frameworks, but to show why retrieval design, architecture, and evaluation matter far more than the orchestration tool itself. We cover the full pipeline, from data preprocessing and vector indexing to retrieval strategies, embeddings, and automated evaluation using an LLM-as-a-Judge approach. This is a practical, demo-driven talk focused on real technical decisions, trade-offs, and lessons learned from building and comparing production-like RAG systems.",
+    "place": "Room 1",
+    "language": "Spanish",
+    "date": "2026-02-20T14:05:00Z",
+    "imageUrl": "/assets/open-graph/presentation/benchmarking-llm-rags-python-vs-dotnet.png",
+    "eventName": "Power Platform Bootcamp Buenos Aires 2026",
+    "location": "Buenos Aires, Argentina",
+    "postUrl": "",
+    "repositoryUrl": "",
+    "slidesUrl": "",
+    "demoVideoUrl": "",
+    "videoUrl": "",
+    "registrationUrl": "https://www.powerplatformbootcamp.com/2026/location-detail/?id=3ec2e91b-b94c-ef11-b8e8-6045bd0c9548&event=buenos-aires",
+    "resourcesUrl": "",
+    "feedbackUrl": "",
+    "tags": ["ai", "llm", "rag", "retrieval-augmented-generation", "rrhh", "power-platform", "intermediate"]
   }
 ]

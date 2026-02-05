@@ -210,9 +210,10 @@ describe("recordingsViewModel", () => {
     const newestTitle = faker.company.catchPhrase();
     const middleTitle = faker.company.catchPhrase();
     
-    const newestDate = faker.date.recent({ days: RECENT_DAYS_NEWEST });
-    const middleDate = faker.date.recent({ days: RECENT_DAYS_MIDDLE });
-    const oldestDate = faker.date.past({ years: PAST_YEARS_OLDEST });
+    const now = new Date();
+    const newestDate = new Date(now.getTime() - (RECENT_DAYS_NEWEST * 24 * 60 * 60 * 1000));
+    const middleDate = new Date(now.getTime() - (RECENT_DAYS_MIDDLE * 24 * 60 * 60 * 1000));
+    const oldestDate = new Date(now.getTime() - (PAST_YEARS_OLDEST * 365 * 24 * 60 * 60 * 1000));
     
     const mockPresentations: Presentation[] = [
       createMockPresentation({ 

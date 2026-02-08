@@ -13,6 +13,10 @@ export class TalkMetadata {
       };
     }
 
+    const absoluteImageUrl = talk.imageUrl.startsWith('http') 
+      ? talk.imageUrl 
+      : `https://maurogioberti.com${talk.imageUrl}`;
+
     return {
       ...talksMetadata,
       title: `Mauro Gioberti Talks | ${talk.title}`,
@@ -23,7 +27,7 @@ export class TalkMetadata {
         description: talk.description,
         images: [
           {
-            url: talk.imageUrl,
+            url: absoluteImageUrl,
             alt: `Mauro Gioberti Talks - ${talk.title}`,
           },
         ],
@@ -37,7 +41,7 @@ export class TalkMetadata {
         card: "summary_large_image",
         title: talk.title,
         description: talk.description,
-        images: [talk.imageUrl],
+        images: [absoluteImageUrl],
       },
     };
   }

@@ -243,9 +243,15 @@ a:hover {
 }
 
 .prose pre {
-  @apply rounded-xl shadow-2xl border border-gray-200 dark:border-gray-800;
+  @apply rounded-xl shadow-2xl border border-gray-200 dark:border-gray-800 p-4 overflow-x-auto my-6;
   background: var(--glass-bg) !important;
   backdrop-filter: blur(10px);
+  white-space: pre-line;
+}
+
+.prose pre code {
+  @apply bg-transparent p-0 rounded-none text-inherit;
+  color: inherit;
 }
 
 /* -------------------------------------------------------------------------- */

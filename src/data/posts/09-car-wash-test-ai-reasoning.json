@@ -1,0 +1,8 @@
+{
+  "id": "9",
+  "title": "🚗🤖 The Car Wash Test: When AI Misses Common Sense",
+  "description": "A simple test of causal reasoning reveals how AI can miss basic validations. What happens when you try to solve a problem... but forget the most important part?",
+  "tags": [ "AI", "LLM", "ChatGPT", "Reasoning", "Common Sense", "Testing" ],
+  "imageUrl": "/assets/open-graph/blog/car-wash-test-ai-reasoning-og-image.png",
+  "postedDate": "2026-02-15T11:11:11Z"
+}

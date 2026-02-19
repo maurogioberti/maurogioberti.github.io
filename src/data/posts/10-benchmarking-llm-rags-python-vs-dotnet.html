@@ -1,0 +1,112 @@
+<div class="max-w-4xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">
+    🧪 Benchmarking LLM RAGs: Python vs .NET (No Spoilers Yet)
+  </h1>
+
+  <p class="text-lg mb-4">
+    I’ve been working on a benchmark that compares <strong>LLM-powered RAG pipelines</strong> in <strong>Python</strong> and <strong>.NET</strong> for candidate matching.
+  </p>
+
+  <p class="text-lg mb-6">
+    Quick note before we start: this is intentionally a <strong>no-spoilers version</strong> because I’ll share the final conclusions in a meeting first.
+  </p>
+
+  <h2 class="text-2xl font-semibold mb-4">
+    Why this benchmark
+  </h2>
+
+  <p class="text-lg mb-6">
+    Most comparisons online focus on framework preference or subjective opinions.
+    I wanted a setup where both stacks run under comparable conditions so we can discuss tradeoffs with data, not vibes.
+  </p>
+
+  <h2 class="text-2xl font-semibold mb-4">
+    The repos behind the work
+  </h2>
+
+  <ul class="list-disc pl-6 text-lg mb-6">
+    <li>
+      Resume preprocessor: 
+      <a href="https://github.com/maurogioberti/llm-candidate-profiler" target="_blank" class="text-blue-600 underline hover:text-blue-800">
+        github.com/maurogioberti/llm-candidate-profiler
+      </a>
+    </li>
+    <li>
+      RAG benchmark (multi-language):
+      <a href="https://github.com/maurogioberti/llm-candidate-rag-benchmark-multilang" target="_blank" class="text-blue-600 underline hover:text-blue-800">
+        github.com/maurogioberti/llm-candidate-rag-benchmark-multilang
+      </a>
+    </li>
+  </ul>
+
+  <h2 class="text-2xl font-semibold mb-4">
+    How the preprocessor works
+  </h2>
+
+  <p class="text-lg mb-4">
+    Before benchmarking retrieval quality, resumes are normalized through a preprocessing pipeline so both stacks start from the same structured input.
+  </p>
+
+  <ul class="list-disc pl-6 text-lg mb-6">
+    <li>Scans PDF resumes and extracts text content</li>
+    <li>Builds LLM prompts to produce structured candidate profiles</li>
+    <li>Supports provider switching via configuration (local/cloud)</li>
+    <li>Generates JSON outputs that feed the benchmark dataset</li>
+  </ul>
+
+  <h2 class="text-2xl font-semibold mb-4">
+    What is being compared
+  </h2>
+
+  <p class="text-lg mb-4">
+    The benchmark compares two implementations of the same product intent:
+  </p>
+
+  <ul class="list-disc pl-6 text-lg mb-6">
+    <li><strong>Python</strong> pipeline (LangChain-based orchestration)</li>
+    <li><strong>.NET</strong> pipeline (Microsoft.Extensions.AI-based orchestration)</li>
+    <li>Shared embeddings strategy for consistency</li>
+    <li>Equivalent datasets and prompt intent across both stacks</li>
+  </ul>
+
+  <h2 class="text-2xl font-semibold mb-4">
+    How the evaluation is designed
+  </h2>
+
+  <p class="text-lg mb-4">
+    This is not a single-run screenshot benchmark.
+    It uses repeatable execution and score aggregation to reduce random variance.
+  </p>
+
+  <ul class="list-disc pl-6 text-lg mb-6">
+    <li>Multiple evaluation runs per prompt</li>
+    <li>Consistent temperature settings for deterministic behavior</li>
+    <li>Quality evaluation plus performance/load testing</li>
+    <li>Parity checks so differences reflect orchestration, not data drift</li>
+  </ul>
+
+  <blockquote class="border-l-4 pl-4 italic text-gray-600 mb-8">
+    If we want fair conclusions, we need parity in inputs, embeddings, prompts, and scoring rules.
+  </blockquote>
+
+  <h2 class="text-2xl font-semibold mb-4">
+    Why this matters
+  </h2>
+
+  <p class="text-lg mb-6">
+    Teams choosing between Python and .NET for AI features usually ask the same thing:
+    <strong>Which stack gives better quality, reliability, and operational confidence for real business use?</strong>
+  </p>
+
+  <p class="text-lg mb-6">
+    This work is my attempt to answer that with a practical, reproducible benchmark instead of guesswork.
+  </p>
+
+  <p class="text-lg font-bold mb-4">
+    Results soon — after the meeting. 😉
+  </p>
+
+  <p class="text-center text-sm mt-8">
+    #RAG #LLM #Python #DotNet #Benchmarking #AIEngineering
+  </p>
+</div>

@@ -1,0 +1,8 @@
+{
+  "id": "10",
+  "title": "🧪⚖️ Benchmarking LLM RAGs: Python vs .NET",
+  "description": "I built a multi-language benchmark to compare LLM-powered RAG pipelines in Python and .NET for candidate matching. Here is the setup, methodology, and why parity matters — without revealing the final results yet.",
+  "tags": [ "RAG", "LLM", "Python", ".NET", "Benchmarking", "AI" ],
+  "imageUrl": "/assets/open-graph/default-og-image.png",
+  "postedDate": "2026-02-19T11:11:11Z"
+}

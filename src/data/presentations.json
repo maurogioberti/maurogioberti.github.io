@@ -85,14 +85,14 @@
     "imageUrl": "/assets/open-graph/presentation/benchmarking-llm-rags-python-vs-dotnet.png",
     "eventName": "Power Platform Bootcamp Buenos Aires 2026",
     "location": "Buenos Aires, Argentina",
-    "postUrl": "",
-    "repositoryUrl": "",
-    "slidesUrl": "",
+    "postUrl": "https://www.maurogioberti.com/pages/blog/benchmarking-llm-rags-python-vs-net",
+    "repositoryUrl": "https://github.com/maurogioberti/llm-candidate-rag-benchmark-multilang",
+    "slidesUrl": "https://drive.google.com/file/d/1pI-zPWXOQi_tqsW2G9R1hCoZx5pt5n6Y",
     "demoVideoUrl": "",
-    "videoUrl": "",
+    "videoUrl": "https://youtu.be/Vk_-VCWyZcE?t=7670",
     "registrationUrl": "https://www.powerplatformbootcamp.com/2026/location-detail/?id=3ec2e91b-b94c-ef11-b8e8-6045bd0c9548&event=buenos-aires",
-    "resourcesUrl": "",
-    "feedbackUrl": "",
+    "resourcesUrl": "https://github.com/maurogioberti/llm-candidate-profiler",
+    "feedbackUrl": "https://forms.gle/renQnLnSihBFAEG29",
     "tags": ["ai", "llm", "rag", "retrieval-augmented-generation", "rrhh", "power-platform", "intermediate"]
   }
 ]

@@ -20,6 +20,13 @@ const DATE_FORMAT_MONTH = 'long';
 const DATE_FORMAT_DAY = 'numeric';
 const DATE_LOCALE = 'en-US';
 
+const EVENT_TYPE_CONFIG: Record<string, { label: string; icon: string; cssClass: string }> = {
+  online:  { label: 'Online',  icon: 'fa-desktop',        cssClass: 'event-type-online'  },
+  onsite:  { label: 'On-site', icon: 'fa-users',          cssClass: 'event-type-onsite'  },
+  hybrid:  { label: 'Hybrid',  icon: 'fa-layer-group',    cssClass: 'event-type-hybrid'  },
+};
+const EVENT_TYPE_DEFAULT = { label: 'Event', icon: 'fa-calendar-alt', cssClass: 'event-type-default' };
+
 const getYouTubeThumbnail = (videoUrl: string): string => {
   const patterns = [YOUTUBE_STANDARD_URL_VIDEO_ID_REGEX, YOUTUBE_WATCH_PAGE_VIDEO_ID_REGEX ];
 
@@ -78,6 +85,7 @@ export const recordingsViewModel = async () => {
     const safeTitle = escapeHtml(presentation.title);
     const safeEventName = escapeHtml(presentation.eventName || presentation.sponsor);
     const safeLocation = presentation.location ? escapeHtml(presentation.location) : '';
+    const typeConfig = EVENT_TYPE_CONFIG[presentation.type] ?? EVENT_TYPE_DEFAULT;
     
     return `
       <a href="${presentation.videoUrl}" target="_blank" rel="noopener noreferrer" class="video-link" aria-label="Watch ${safeTitle}">
@@ -94,6 +102,10 @@ export const recordingsViewModel = async () => {
           </div>
           <div class="video-content">
             <h3 class="video-title">${safeTitle}</h3>
+            <span class="event-type-badge ${typeConfig.cssClass}">
+              <i class="fas ${typeConfig.icon}"></i>
+              ${typeConfig.label}
+            </span>
             <div class="video-meta">
               <p class="video-event">
                 <i class="fas fa-calendar-alt"></i>

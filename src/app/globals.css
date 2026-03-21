@@ -13,7 +13,9 @@
 /*        Keep naming semantic (foreground, heading, accent, etc.).           */
 /* -------------------------------------------------------------------------- */
 
-:root {
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
   /* Modern Color Palette - Dark Mode */
   --vs-background: #0a0a0f;
   --vs-background-secondary: #12121a;
@@ -72,7 +74,8 @@
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
+  :root:not([data-theme]) {
+    color-scheme: light;
     /* Modern Color Palette - Light Mode */
     --vs-background: #ffffff;
     --vs-background-secondary: #f8fafc;
@@ -123,6 +126,57 @@
   }
 }
 
+:root[data-theme='light'] {
+  color-scheme: light;
+  /* Modern Color Palette - Light Mode */
+  --vs-background: #ffffff;
+  --vs-background-secondary: #f8fafc;
+  --vs-background-tertiary: #f1f5f9;
+  --vs-foreground: #0f172a;
+  --vs-foreground-secondary: #252627;
+  --vs-foreground-muted: #94a3b8;
+  --vs-heading: #000000;
+  
+  /* Brand Colors (adjusted for light mode) */
+  --vs-primary: #2563eb;
+  --vs-primary-light: #3b82f6;
+  --vs-primary-dark: #1e40af;
+  --vs-accent: #7c3aed;
+  --vs-accent-light: #8b5cf6;
+  
+  /* UI Elements */
+  --vs-border: rgba(0, 0, 0, 0.1);
+  --vs-border-light: rgba(0, 0, 0, 0.05);
+  --vs-shadow: rgba(0, 0, 0, 0.1);
+  
+  /* Glass Effect */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.1);
+  
+  /* Tags */
+  --vs-tag-bg: rgba(37, 99, 235, 0.06);
+  --vs-tag-border: rgba(37, 99, 235, 0.2);
+  --vs-tag-text: var(--vs-primary);
+
+  /* Card Hover */
+  --vs-card-hover-shadow: rgba(37, 99, 235, 0.06);
+  --vs-card-hover-border: rgba(0, 0, 0, 0.15);
+
+  /* Code Blocks */
+  --vs-code-bg: rgba(0, 0, 0, 0.04);
+  --vs-code-border: rgba(0, 0, 0, 0.08);
+
+  /* Secondary Button */
+  --vs-btn-secondary-border: rgba(37, 99, 235, 0.3);
+  --vs-btn-secondary-hover-bg: rgba(37, 99, 235, 0.06);
+  --vs-btn-secondary-text: var(--vs-primary);
+
+  /* Gradients */
+  --gradient-mesh: radial-gradient(at 40% 20%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
+                   radial-gradient(at 80% 0%, rgba(139, 92, 246, 0.1) 0px, transparent 50%),
+                   radial-gradient(at 0% 50%, rgba(236, 72, 153, 0.08) 0px, transparent 50%);
+}
+
   /* -------------------------------------------------------------------------- */
   /*  Base Styles                                                               */
   /*  Includes: html/body defaults, global rendering + background mesh.         */
@@ -131,6 +185,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
+  background-color: var(--vs-background);
 }
 
 body {
@@ -293,6 +348,30 @@ a:hover {
 
 .prose pre[data-shiki] {
   white-space: pre;
+}
+
+:root[data-theme='light'] .prose pre[data-shiki],
+:root[data-theme='light'] .prose pre[data-shiki] span {
+  color: var(--shiki-light);
+}
+
+:root[data-theme='dark'] .prose pre[data-shiki],
+:root[data-theme='dark'] .prose pre[data-shiki] span {
+  color: var(--shiki-dark);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .prose pre[data-shiki],
+  :root:not([data-theme]) .prose pre[data-shiki] span {
+    color: var(--shiki-light);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .prose pre[data-shiki],
+  :root:not([data-theme]) .prose pre[data-shiki] span {
+    color: var(--shiki-dark);
+  }
 }
 
 .prose pre code {

@@ -8,7 +8,7 @@ const SUPPORTED_LANGUAGE_SET = new Set<SupportedLanguage>(SUPPORTED_LANGUAGES);
 
 const PRE_BLOCK_REGEX = /<pre([^>]*)>([\s\S]*?)<\/pre>/gi;
 const CODE_BLOCK_REGEX = /^<code[^>]*>([\s\S]*?)<\/code>$/i;
-const HIGHLIGHTED_PRE_REGEX = /^<pre[^>]*>([\s\S]*?)<\/pre>$/i;
+const HIGHLIGHTED_PRE_REGEX = /^<pre([^>]*)>([\s\S]*?)<\/pre>$/i;
 
 const LANGUAGE_ALIASES: Record<string, SupportedLanguage> = {
   bash: 'bash',
@@ -26,7 +26,11 @@ const LANGUAGE_ALIASES: Record<string, SupportedLanguage> = {
 export async function highlightCode(code: string, language: SupportedLanguage): Promise<string> {
   return await codeToHtml(code, {
     lang: language,
-    theme: 'github-dark',
+    themes: {
+      light: 'github-light',
+      dark: 'github-dark',
+    },
+    defaultColor: false,
   });
 }
 
@@ -56,15 +60,17 @@ export async function highlightBlogCodeBlocks(html: string): Promise<string> {
     }
 
     const highlightedHtml = await highlightCode(rawCode, language);
-    const highlightedCode = extractHighlightedCode(highlightedHtml);
+    const highlightedPre = extractHighlightedPre(highlightedHtml);
 
-    if (!highlightedCode) {
+    if (!highlightedPre) {
       segments.push(fullMatch);
       lastIndex = matchIndex + fullMatch.length;
       continue;
     }
 
-    segments.push(`<pre${withShikiAttribute(attributes)}>${highlightedCode}</pre>`);
+    segments.push(
+      `<pre${mergePreAttributes(attributes, highlightedPre.attributes)}>${highlightedPre.codeHtml}</pre>`
+    );
     lastIndex = matchIndex + fullMatch.length;
   }
 
@@ -82,16 +88,84 @@ function extractRawCode(blockHtml: string): string {
     .replace(/\r?\n\s*$/, '');
 }
 
-function extractHighlightedCode(highlightedHtml: string): string | undefined {
-  return highlightedHtml.match(HIGHLIGHTED_PRE_REGEX)?.[1];
-}
+function extractHighlightedPre(highlightedHtml: string): { attributes: string; codeHtml: string } | undefined {
+  const match = highlightedHtml.match(HIGHLIGHTED_PRE_REGEX);
 
-function withShikiAttribute(attributes: string): string {
-  if (/data-shiki=/i.test(attributes)) {
-    return attributes;
+  if (!match) {
+    return undefined;
   }
 
-  return `${attributes} data-shiki="true"`;
+  return {
+    attributes: match[1] ?? '',
+    codeHtml: match[2] ?? '',
+  };
+}
+
+function mergePreAttributes(originalAttributes: string, highlightedAttributes: string): string {
+  const mergedClasses = mergeClassNames(
+    readAttributeValue(originalAttributes, 'class'),
+    readAttributeValue(highlightedAttributes, 'class')
+  );
+  const mergedStyles = mergeStyles(
+    readAttributeValue(originalAttributes, 'style'),
+    readAttributeValue(highlightedAttributes, 'style')
+  );
+  const remainingAttributes = [
+    removeAttribute(originalAttributes, 'class'),
+    removeAttribute(highlightedAttributes, 'class'),
+  ]
+    .map((attributes) => removeAttribute(attributes, 'style'))
+    .map((attributes) => removeAttribute(attributes, 'data-shiki'))
+    .map((attributes) => attributes.trim())
+    .filter(Boolean);
+
+  const attributes = [...remainingAttributes];
+
+  if (mergedClasses) {
+    attributes.push(`class="${escapeAttributeValue(mergedClasses)}"`);
+  }
+
+  if (mergedStyles) {
+    attributes.push(`style="${escapeAttributeValue(mergedStyles)}"`);
+  }
+
+  attributes.push('data-shiki="true"');
+
+  return attributes.length > 0 ? ` ${attributes.join(' ')}` : '';
+}
+
+function readAttributeValue(attributes: string, attributeName: string): string | undefined {
+  return attributes.match(new RegExp(`(?:^|\\s)${attributeName}=["']([^"']*)["']`, 'i'))?.[1];
+}
+
+function removeAttribute(attributes: string, attributeName: string): string {
+  return attributes.replace(new RegExp(`(?:^|\\s)${attributeName}=["'][^"']*["']`, 'ig'), '');
+}
+
+function mergeClassNames(...values: Array<string | undefined>): string | undefined {
+  const classNames = Array.from(
+    new Set(
+      values
+        .flatMap((value) => value?.split(/\s+/) ?? [])
+        .map((value) => value.trim())
+        .filter(Boolean)
+    )
+  );
+
+  return classNames.length > 0 ? classNames.join(' ') : undefined;
+}
+
+function mergeStyles(...values: Array<string | undefined>): string | undefined {
+  const declarations = values
+    .flatMap((value) => value?.split(';') ?? [])
+    .map((value) => value.trim())
+    .filter(Boolean);
+
+  return declarations.length > 0 ? `${declarations.join('; ')};` : undefined;
+}
+
+function escapeAttributeValue(value: string): string {
+  return value.replace(/"/g, '&quot;');
 }
 
 function resolveLanguage(attributes: string, code: string): SupportedLanguage | undefined {

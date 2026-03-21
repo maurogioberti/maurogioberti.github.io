@@ -217,6 +217,80 @@ body::before {
   pointer-events: none;
 }
 
+.page-load-feedback {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.page-load-feedback[data-state='loading'],
+.page-load-feedback[data-state='done'] {
+  opacity: 1;
+}
+
+.page-load-feedback[data-state='done'] {
+  opacity: 0;
+}
+
+.page-load-feedback-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--vs-primary) 0%, var(--vs-primary-light) 55%, var(--vs-accent) 100%);
+  transition: transform 180ms ease-out;
+  will-change: transform;
+}
+
+.page-load-feedback-overlay {
+  position: absolute;
+  top: 4rem;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.page-load-feedback-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    rgba(59, 130, 246, 0.015) 35%,
+    rgba(139, 92, 246, 0.04) 50%,
+    transparent 65%
+  );
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.page-load-feedback[data-state='loading'] .page-load-feedback-overlay::before {
+  opacity: 1;
+  animation: page-load-feedback-overlay 1.25s ease-in-out infinite;
+}
+
+@keyframes page-load-feedback-overlay {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
 /* -------------------------------------------------------------------------- */
 /*  Scrollbars                                                                */
 /* -------------------------------------------------------------------------- */

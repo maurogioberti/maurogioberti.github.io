@@ -1,16 +1,14 @@
 import { formatDate } from '@/core/crosscutting/utils/date';
 import { faker } from '@faker-js/faker';
-import { describe, expect, jest, test } from '@jest/globals';
+import { describe, expect, test } from '@jest/globals';
 
 import { Recommendation } from './Recommendation';
-
-jest.mock("@/core/crosscutting/utils/date");
 
 describe("Recommendation", () => {
   const name = faker.person.firstName();
   const position = faker.person.jobTitle();
   const relation = faker.lorem.word();
-  const date = faker.date.past();
+  const date = new Date('2020-01-01T00:00:00.000Z');
   const profilePictureUrl = faker.internet.url();
   const linkedInProfileUrl = faker.internet.url();
   const linkedInRecommendationUrl = faker.internet.url();
@@ -42,9 +40,6 @@ describe("Recommendation", () => {
   });
 
   test("should return formatted date", () => {
-    const formattedDate = "January 1, 2020";
-    (formatDate as jest.Mock).mockReturnValue(formattedDate);
-
     const recommendation = new Recommendation(
       name,
       position,
@@ -57,7 +52,6 @@ describe("Recommendation", () => {
       text
     );
 
-    expect(recommendation.formattedDate).toBe(formattedDate);
-    expect(formatDate).toHaveBeenCalledWith(date);
+    expect(recommendation.formattedDate).toBe(formatDate(date));
   });
 });

@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 
 export default async function BlogPage() {
   const { posts } = await postsViewModel();
-  const IMAGE_WIDTH = 400;
-  const IMAGE_HEIGHT = 200;
+    const IMAGE_WIDTH = 1024;
+    const IMAGE_HEIGHT = 1024;
 
   return (
     <div className="min-h-screen px-6 py-16 sm:py-20 bg-vs-background text-vs-foreground font-sans">
@@ -33,12 +33,12 @@ export default async function BlogPage() {
                 alt={`Open Graph image for ${post.title}`}
                 width={IMAGE_WIDTH}
                 height={IMAGE_HEIGHT}
-                className="h-85 w-full object-fill rounded-t-lg"
+                className="w-full h-auto rounded-t-lg object-contain"
               />
               <div className="p-6">
-                <h2 className="text-2xl font-semibold text-vs-foreground group-hover:text-vs-primary transition-colors duration-300">{post.title}</h2>
+                <h2 className="text-xl font-semibold leading-tight text-vs-foreground group-hover:text-vs-primary transition-colors duration-300">{post.title}</h2>
                 <p className="text-sm mt-1">{post.formattedDate}</p>
-                <p className="text-md mt-2">{post.description}</p>
+                <p className="text-sm mt-2 text-vs-foreground/80">{post.description}</p>
 
                 {post.tags && post.tags.length > 0 && (
                   <div className="flex flex-wrap gap-2 mt-4">

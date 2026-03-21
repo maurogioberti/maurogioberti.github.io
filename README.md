@@ -7,10 +7,11 @@
 <h1 align="center">
   My Personal Portfolio 🚀
 </h1>
+
 <p align="center">
   Welcome to my personal website! 🌟
   <br />
-  A hub for my portfolio, blog, and professional services.
+  A hub for my portfolio, blog, talks, resume, and professional services.
   <br />
   <br />
   <a href="https://github.com/maurogioberti/maurogioberti.github.io/stargazers">⭐ Stars are welcome 😊</a>
@@ -20,7 +21,7 @@
 
 <p>
   <a href="https://github.com/maurogioberti/next-clean-architecture" title="CodeScouts Academy" target="_blank">
-    <img src="https://img.shields.io/badge/built_with-Next.js | Clean Architecture-blue?style=for-the-badge" alt="Built with Next.js, Clean Architecture, used Codescouts React Clean Architecture as Reference" />
+    <img src="https://img.shields.io/badge/built_with-Next.js | Clean Architecture-blue?style=for-the-badge" alt="Built with Next.js, Clean Architecture, inspired by Codescouts React Clean Architecture" />
   </a>
 </p>
 
@@ -34,27 +35,35 @@
 
 ## 🚀 About This Project
 
-This website is my personal platform to showcase my work, share blog posts, and present my professional services. It’s built with **Next.js 14 (App Router)**, **TypeScript**, and **Tailwind CSS**, following **Clean Architecture** principles.
+This website is my personal platform to showcase my work, share blog posts, and present my professional services.
 
-The codebase is organized to keep **business logic** independent from the **UI layer**, with clear separation between domain models, use cases, infrastructure, and presentation. Dependency Injection is used to wire services, repositories, and use cases together in a predictable way.
+Built with **Next.js 15**, **React 19**, **TypeScript**, and **Tailwind CSS 4**, following **Clean Architecture** principles.
 
-### Key Features
-- **Portfolio**: Highlighting my skills, work history, and key achievements.
-- **Blog**: Sharing insights and lessons learned from my experience in technology and consulting.
-- **Talks**: Showcasing presentations and speaking engagements.
-- **Resume**: Comprehensive timeline and professional recommendations.
-- **Services**: A dedicated section for showcasing the professional services I offer.
+The codebase is designed to keep **business logic** independent from the **UI layer**, with clear separation between domain models, use cases, infrastructure, and presentation. Dependency Injection is used to wire services, repositories, and use cases in a predictable and maintainable way.
+
+The goal is simple:
+👉 Keep business logic independent from the UI  
+👉 Make everything scalable, testable, and easy to evolve  
+
+### ✨ Key Features
+
+- **Portfolio** → Skills, experience, and key achievements  
+- **Blog** → Real insights from software engineering and consulting  
+- **Talks** → Conferences, meetups, and presentations  
+- **Resume** → Timeline + recommendations  
+- **Services** → What I can help you with  
 
 ## 🛠 Tech Stack
 
-- **Framework**: Next.js 14 (App Router under `src/app`)
-- **Language**: TypeScript
-- **UI**: React 18 + Tailwind CSS (with CSS variables and light/dark theme support)
+- **Runtime**: Node.js 25.8.1 (via `.nvmrc`)
+- **Framework**: Next.js 15 (App Router under `src/app`)
+- **Language**: TypeScript 5
+- **UI**: React 19 + Tailwind CSS 4 (with custom design tokens and theme support)
 - **Architecture**: Clean Architecture (domain, application, infrastructure, crosscutting)
-- **Styling**: Custom design tokens via CSS variables in `src/app/globals.css`
+- **Styling**: Design tokens via CSS variables in `src/app/globals.css`
 - **Data Source**: Local JSON files under `src/data` for posts, profile, timeline, services, and recommendations
-- **Dependency Injection**: Custom DI container (`src/core/crosscutting/injection/DependencyInjectionContainer.ts`) configured in `src/di.ts`
-- **Testing**: Jest + ts-jest + Testing Library (React + jest-dom)
+- **Dependency Injection**: Custom DI container (`src/di.ts`) wiring services, repositories, and use cases
+- **Testing**: Jest + next/jest + Testing Library (React + jest-dom)
 
 ---
 
@@ -66,32 +75,38 @@ git clone https://github.com/maurogioberti/maurogioberti.github.io.git
 cd maurogioberti.github.io
 ```
 
-🏂 **Install dependencies**
+🟢 **Set Node version (recommended)**
+```bash
+nvm install 25.8.1
+nvm use 25.8.1
+```
+
+📦 **Install dependencies**
 ```bash
 npm install
 ```
 
-🏁 **Run the app in development**
+🏁 **Run in development**
 ```bash
 npm run dev
 ```
 
-🧪 **Run the test suite**
+🧪 **Run tests**
 ```bash
 npm test
 ```
 
-📦 **Create a production build**
+📦 **Build**
 ```bash
 npm run build
 ```
 
-🌐 **Start the production server**
+🌐 **Preview production (static export)**
 ```bash
-npm start
+npx serve@latest out
 ```
 
-No environment variables are required to run the project locally; all content is loaded from JSON files in `src/data`.
+No environment variables required. Everything runs from JSON files in `src/data`.
 
 ---
 
@@ -125,9 +140,9 @@ project-root/
 ```
 
 This structure ensures:
-- Clear separation between **business logic** and **presentation**.
-- Testable, composable use cases and repositories.
-- A predictable layout for Next.js routes and static content.
+- Clear separation between **business logic** and **presentation**
+- Testable and composable use cases and repositories
+- A predictable and scalable layout for Next.js routes and static content
 
 ---
 
@@ -135,9 +150,9 @@ This structure ensures:
 
 Testing is focused on business logic, repositories, and view models:
 
-- **Unit Tests**: Implemented with **Jest** and **ts-jest** for TypeScript support.
-- **React Components**: Tested with **@testing-library/react** and **@testing-library/jest-dom** where applicable.
-- **Architecture-Friendly**: Use cases and repositories depend on interfaces and can be easily mocked.
+- **Unit Tests** → Jest + next/jest for TypeScript and Next.js-aware transforms  
+- **UI Tests** → Testing Library (React + jest-dom)  
+- **Architecture-Friendly** → Use cases and repositories depend on interfaces and can be easily mocked  
 
 Run the full test suite with:
 ```bash

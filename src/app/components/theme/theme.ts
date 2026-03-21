@@ -111,3 +111,88 @@ export const themeInitScript = `
     : mode;
 })();
 `.trim();
+
+export const extensionHydrationCleanupScript = `
+(() => {
+  const attributeNames = new Set([
+    'bis_skin_checked',
+    'bis_register',
+    'bis_use',
+    'data-bis-config',
+    'data-dynamic-id',
+    'data-gr-ext-installed',
+    'data-new-gr-c-s-check-loaded',
+  ]);
+  const processedPattern = /^__processed_[\\\\w-]+__$/;
+  const extensionProtocols = ['chrome-extension:', 'moz-extension:', 'safari-web-extension:'];
+
+  const shouldRemove = (name) => attributeNames.has(name) || processedPattern.test(name);
+  const hasExtensionSource = (element) => {
+    if (!(element instanceof HTMLScriptElement)) {
+      return false;
+    }
+
+    const source = element.getAttribute('src');
+    return typeof source === 'string' && extensionProtocols.some((protocol) => source.startsWith(protocol));
+  };
+
+  const cleanElement = (element) => {
+    if (!(element instanceof Element)) {
+      return;
+    }
+
+    for (const attribute of Array.from(element.attributes)) {
+      if (shouldRemove(attribute.name)) {
+        element.removeAttribute(attribute.name);
+      }
+    }
+
+    if (hasExtensionSource(element)) {
+      element.removeAttribute('src');
+      element.removeAttribute('type');
+      element.removeAttribute('charset');
+    }
+  };
+
+  const cleanSubtree = (root) => {
+    cleanElement(root);
+
+    if (!(root instanceof Element)) {
+      return;
+    }
+
+    for (const element of root.querySelectorAll('*')) {
+      cleanElement(element);
+    }
+  };
+
+  const root = document.documentElement;
+
+  if (!root) {
+    return;
+  }
+
+  cleanSubtree(root);
+
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type === 'attributes') {
+        cleanElement(mutation.target);
+        continue;
+      }
+
+      for (const node of mutation.addedNodes) {
+        cleanSubtree(node);
+      }
+    }
+  });
+
+  observer.observe(root, {
+    attributes: true,
+    childList: true,
+    subtree: true,
+  });
+
+  window.setTimeout(() => observer.disconnect(), 5000);
+})();
+`.trim();

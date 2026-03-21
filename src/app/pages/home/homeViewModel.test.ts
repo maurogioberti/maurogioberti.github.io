@@ -1,18 +1,17 @@
 import { container } from '@/core/crosscutting/injection/DependencyInjectionContainer';
 import { faker } from '@faker-js/faker';
-import { describe, expect, jest, test } from '@jest/globals';
+import { beforeEach, describe, expect, jest, test } from '@jest/globals';
 
 import { homeViewModel } from './homeViewModel';
 
-const EXPECTED_CALL_COUNT = 1;
-
-jest.mock("@/core/crosscutting/injection/DependencyInjectionContainer", () => ({
-  container: {
-    resolve: jest.fn(),
-  },
-}));
+const EXPECTED_CALL_COUNT_ONCE = 1;
+const EXPECTED_CALL_COUNT_TWICE = 2;
 
 describe("homeViewModel", () => {
+  beforeEach(() => {
+    jest.restoreAllMocks();
+  });
+
   test("should fetch and return a message and profile", async () => {
     const fakeMessageContent = faker.lorem.sentence();
     const fakeProfile = {
@@ -35,7 +34,7 @@ describe("homeViewModel", () => {
       execute: jest.fn<() => Promise<typeof mockProfile>>().mockResolvedValue(mockProfile),
     };
 
-    (container.resolve as jest.Mock).mockImplementation((useCase) => {
+    const resolveSpy = jest.spyOn(container, 'resolve').mockImplementation((useCase) => {
       if (useCase === "GetMessageUseCase") return getMessageUseCase;
       if (useCase === 'GetProfileUseCase') return getProfileUseCase;
       return undefined;
@@ -45,7 +44,8 @@ describe("homeViewModel", () => {
 
     expect(result.message).toBe(fakeMessageContent);
     expect(result.profile).toEqual(fakeProfile);
-    expect(getMessageUseCase.execute).toHaveBeenCalledTimes(EXPECTED_CALL_COUNT);
-    expect(getProfileUseCase.execute).toHaveBeenCalledTimes(EXPECTED_CALL_COUNT);
+    expect(getMessageUseCase.execute).toHaveBeenCalledTimes(EXPECTED_CALL_COUNT_ONCE);
+    expect(getProfileUseCase.execute).toHaveBeenCalledTimes(EXPECTED_CALL_COUNT_ONCE);
+    expect(resolveSpy).toHaveBeenCalledTimes(EXPECTED_CALL_COUNT_TWICE);
   });
 });

@@ -110,20 +110,20 @@ export default async function ResumePage() {
                     href={recommendation.linkedInProfileUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-semibold text-vs-primary hover:underline">
+                    className="block font-semibold leading-tight text-vs-primary hover:underline">
                     {recommendation.name}
                   </a>
-                  <p className="italic text-vs-primary">{recommendation.position}</p>
-
-                  <p className="text-sm text-vs-foreground/60 mb-1">Recommended on: {recommendation.formattedDate}</p>
-
-                  <p className="text-sm text-vs-primary mb-2 italic">{recommendation.relation}</p>
-                  {recommendation.translation && <p className="text-sm text-vs-primary-light italic mt-1">{recommendation.translation}</p>}
+                  <div className="space-y-0.5">
+                    <p className="text-sm font-medium italic leading-tight" style={{ color: 'var(--vs-primary-dark)' }}>{recommendation.position}</p>
+                    <p className="text-xs leading-tight text-vs-foreground/50" style={{ color: 'var(--vs-primary-dark)' }}>Recommended on: {recommendation.formattedDate}</p>
+                    <p className="text-xs font-medium italic leading-tight" style={{ color: 'var(--vs-primary-light)' }}>{recommendation.relation}</p>
+                    {recommendation.translation && <p className="text-xs font-medium italic leading-tight" style={{ color: 'var(--vs-primary-light)' }}>{recommendation.translation}</p>}
+                  </div>
                   <a
                     href={recommendation.linkedInRecommendationUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-vs-foreground hover:underline">
+                    className="mt-3 block text-sm text-vs-foreground hover:underline">
                     {recommendation.text}
                   </a>
                 </div>

@@ -18,9 +18,9 @@ export default async function ServicesPage() {
       </header>
       <section className="mx-auto grid max-w-6xl gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {services.map((service, index) => (
-          <div key={index} className="card p-6">
-            <h2 className="text-2xl font-semibold mb-4">{service.title}</h2>
-            <div dangerouslySetInnerHTML={{ __html: service.content }} />
+          <div key={index} className="card flex flex-col p-6">
+            <h2 className="text-xl font-semibold leading-tight mb-3">{service.title}</h2>
+            <div className="text-sm" dangerouslySetInnerHTML={{ __html: service.content }} />
             {!service.available && (
               <>
                 <div className="flex justify-center">
@@ -45,12 +45,12 @@ export default async function ServicesPage() {
           I work with companies on architecture reviews, technical interviews, and team development initiatives. If you&apos;re reaching out regarding a consulting engagement, speaking opportunity, or technical collaboration, you can use the direct contact options below. Please include your organization and a brief description of your needs so I can respond appropriately.
         </p>
 
-        <div className="mt-8 grid gap-8 md:grid-cols-2">
+        <div className="mt-8 grid gap-8 md:grid-cols-2 md:items-start">
           <div className="card p-6">
-            <h4 className="text-lg font-semibold text-vs-foreground">
+            <h4 className="mt-0 mb-0 text-lg font-semibold text-vs-foreground">
               U.S. Business Phone
             </h4>
-            <p className="mt-2 text-sm text-vs-foreground/80">
+            <p className="mt-2 mb-0 text-sm leading-7 text-vs-foreground/80">
               Available for consulting and project-related discussions. Calls or text messages (SMS) are welcome. Conversations are typically scheduled in advance between <strong>1:00 PM – 6:00 PM Eastern Time (ET) / 12:00 PM – 5:00 PM Central Time (CT)</strong>. A short introduction and the purpose of your inquiry are appreciated.
             </p>
 
@@ -64,10 +64,10 @@ export default async function ServicesPage() {
             )}
           </div>
           <div className="card p-6">
-            <h4 className="text-lg font-semibold text-vs-foreground">
+            <h4 className="mt-0 mb-0 text-lg font-semibold text-vs-foreground">
               WhatsApp
             </h4>
-            <p className="mt-2 text-sm text-vs-foreground/80">
+            <p className="mt-2 mb-0 text-sm leading-7 text-vs-foreground/80">
               The same number is available on WhatsApp for those who prefer it. For faster responses, please include context about your project or organization.
             </p>
 

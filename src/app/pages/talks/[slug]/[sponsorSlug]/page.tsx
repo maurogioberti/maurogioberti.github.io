@@ -11,16 +11,18 @@ import { talkParamsViewModel } from './talkParamsViewModel';
 import { talkViewModel } from './talkViewModel';
 
 type TalksPageProps = {
-  params: { slug: string; sponsorSlug: string };
+  params: Promise<{ slug: string; sponsorSlug: string }>;
 };
 
 export async function generateMetadata({ params }: TalksPageProps): Promise<Metadata> {
-  const { talk } = await talkViewModel(params.slug, params.sponsorSlug);
+  const { slug, sponsorSlug } = await params;
+  const { talk } = await talkViewModel(slug, sponsorSlug);
   return TalkMetadata.generate(talk);
 }
 
 export default async function TalkPage({ params }: TalksPageProps) {
-  const { talk, profile } = await talkViewModel(params.slug, params.sponsorSlug);
+  const { slug, sponsorSlug } = await params;
+  const { talk, profile } = await talkViewModel(slug, sponsorSlug);
 
   if (!talk) {
     notFound();

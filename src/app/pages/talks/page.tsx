@@ -61,9 +61,9 @@ export default async function TalkPage() {
                     </div>
                   </div>
                 </div>
-                <div className="p-5">
-                  <h2 className="text-xl font-semibold text-vs-foreground group-hover:text-vs-primary transition-colors duration-300">{talk.title}</h2>
-                  <p className="text-sm text-vs-foreground/70 mt-2">
+                <div className="px-5 pt-3 pb-5">
+                  <h2 className="text-base font-semibold leading-tight text-vs-foreground group-hover:text-vs-primary transition-colors duration-300">{talk.title}</h2>
+                  <p className="text-sm text-vs-foreground/70 mt-1">
                     <span className="font-medium">Where:</span> {talk.place}
                     {talk.location ? ` - ${talk.location}` : ""}
                   </p>

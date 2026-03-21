@@ -41,7 +41,7 @@ describe("DependencyInjectionContainer", () => {
     const unregisteredKey = faker.lorem.word();
     const EXPECTED_ERROR_MESSAGE = `No factory found for key: ${unregisteredKey}`;
 
-    expect(() => container.resolve(unregisteredKey)).toThrowError(EXPECTED_ERROR_MESSAGE);
+    expect(() => container.resolve(unregisteredKey)).toThrow(EXPECTED_ERROR_MESSAGE);
   });
 
   test("should support multiple different keys", () => {

@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname, useSearchParams } from 'next/navigation';
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 const INITIAL_PROGRESS = 0.12;
 const MAX_PROGRESS = 0.9;
@@ -22,6 +22,91 @@ export function PageLoadProgress() {
   const progressRef = useRef(0);
   const isLoadingRef = useRef(false);
   const hasMountedRef = useRef(false);
+  const setProgress = useCallback((value: number) => {
+    progressRef.current = value;
+
+    if (barRef.current) {
+      barRef.current.style.transform = `scaleX(${value})`;
+    }
+  }, []);
+
+  const clearTimers = useCallback(() => {
+    if (hideTimeoutRef.current !== null) {
+      window.clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = null;
+    }
+
+    if (finishTimeoutRef.current !== null) {
+      window.clearTimeout(finishTimeoutRef.current);
+      finishTimeoutRef.current = null;
+    }
+
+    if (animationFrameRef.current !== null) {
+      window.cancelAnimationFrame(animationFrameRef.current);
+      animationFrameRef.current = null;
+    }
+  }, []);
+
+  const tick = useCallback((now: number) => {
+    const elapsed = now - startTimeRef.current;
+    const progress = Math.min(
+      MAX_PROGRESS,
+      INITIAL_PROGRESS + (1 - Math.exp(-elapsed / 700)) * (MAX_PROGRESS - INITIAL_PROGRESS)
+    );
+
+    setProgress(progress);
+
+    if (isLoadingRef.current) {
+      animationFrameRef.current = window.requestAnimationFrame(tick);
+    }
+  }, [setProgress]);
+
+  const startLoading = useCallback(() => {
+    if (!containerRef.current) {
+      return;
+    }
+
+    clearTimers();
+
+    isLoadingRef.current = true;
+    startTimeRef.current = performance.now();
+    containerRef.current.dataset.state = 'loading';
+    setProgress(INITIAL_PROGRESS);
+    animationFrameRef.current = window.requestAnimationFrame(tick);
+  }, [clearTimers, setProgress, tick]);
+
+  const finishLoading = useCallback(() => {
+    if (!containerRef.current) {
+      return;
+    }
+
+    const elapsed = performance.now() - startTimeRef.current;
+
+    if (isLoadingRef.current && elapsed < MIN_VISIBLE_MS) {
+      finishTimeoutRef.current = window.setTimeout(finishLoading, MIN_VISIBLE_MS - elapsed);
+      return;
+    }
+
+    isLoadingRef.current = false;
+    clearTimers();
+
+    if (progressRef.current <= 0) {
+      containerRef.current.dataset.state = 'idle';
+      return;
+    }
+
+    setProgress(1);
+    containerRef.current.dataset.state = 'done';
+
+    hideTimeoutRef.current = window.setTimeout(() => {
+      if (!containerRef.current) {
+        return;
+      }
+
+      containerRef.current.dataset.state = 'idle';
+      setProgress(0);
+    }, HIDE_DELAY_MS);
+  }, [clearTimers, setProgress]);
 
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
@@ -78,7 +163,7 @@ export function PageLoadProgress() {
       window.removeEventListener('popstate', handlePopState);
       clearTimers();
     };
-  }, []);
+  }, [clearTimers, startLoading]);
 
   useEffect(() => {
     if (!hasMountedRef.current) {
@@ -87,93 +172,7 @@ export function PageLoadProgress() {
     }
 
     finishLoading();
-  }, [routeKey]);
-
-  function setProgress(value: number) {
-    progressRef.current = value;
-
-    if (barRef.current) {
-      barRef.current.style.transform = `scaleX(${value})`;
-    }
-  }
-
-  function clearTimers() {
-    if (hideTimeoutRef.current !== null) {
-      window.clearTimeout(hideTimeoutRef.current);
-      hideTimeoutRef.current = null;
-    }
-
-    if (finishTimeoutRef.current !== null) {
-      window.clearTimeout(finishTimeoutRef.current);
-      finishTimeoutRef.current = null;
-    }
-
-    if (animationFrameRef.current !== null) {
-      window.cancelAnimationFrame(animationFrameRef.current);
-      animationFrameRef.current = null;
-    }
-  }
-
-  function tick(now: number) {
-    const elapsed = now - startTimeRef.current;
-    const progress = Math.min(
-      MAX_PROGRESS,
-      INITIAL_PROGRESS + (1 - Math.exp(-elapsed / 700)) * (MAX_PROGRESS - INITIAL_PROGRESS)
-    );
-
-    setProgress(progress);
-
-    if (isLoadingRef.current) {
-      animationFrameRef.current = window.requestAnimationFrame(tick);
-    }
-  }
-
-  function startLoading() {
-    if (!containerRef.current) {
-      return;
-    }
-
-    clearTimers();
-
-    isLoadingRef.current = true;
-    startTimeRef.current = performance.now();
-    containerRef.current.dataset.state = 'loading';
-    setProgress(INITIAL_PROGRESS);
-    animationFrameRef.current = window.requestAnimationFrame(tick);
-  }
-
-  function finishLoading() {
-    if (!containerRef.current) {
-      return;
-    }
-
-    const elapsed = performance.now() - startTimeRef.current;
-
-    if (isLoadingRef.current && elapsed < MIN_VISIBLE_MS) {
-      finishTimeoutRef.current = window.setTimeout(finishLoading, MIN_VISIBLE_MS - elapsed);
-      return;
-    }
-
-    isLoadingRef.current = false;
-    clearTimers();
-
-    if (progressRef.current <= 0) {
-      containerRef.current.dataset.state = 'idle';
-      return;
-    }
-
-    setProgress(1);
-    containerRef.current.dataset.state = 'done';
-
-    hideTimeoutRef.current = window.setTimeout(() => {
-      if (!containerRef.current) {
-        return;
-      }
-
-      containerRef.current.dataset.state = 'idle';
-      setProgress(0);
-    }, HIDE_DELAY_MS);
-  }
+  }, [finishLoading, routeKey]);
 
   return (
     <div ref={containerRef} className="page-load-feedback" data-state="idle" aria-hidden="true">

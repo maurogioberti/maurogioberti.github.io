@@ -1,11 +1,26 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* -------------------------------------------------------------------------- */
-/*  Fonts                                                                     */
-/* -------------------------------------------------------------------------- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-vs-background: var(--vs-background);
+  --color-vs-background-secondary: var(--vs-background-secondary);
+  --color-vs-background-tertiary: var(--vs-background-tertiary);
+  --color-vs-foreground: var(--vs-foreground);
+  --color-vs-foreground-secondary: var(--vs-foreground-secondary);
+  --color-vs-foreground-muted: var(--vs-foreground-muted);
+  --color-vs-heading: var(--vs-heading);
+  --color-vs-primary: var(--vs-primary);
+  --color-vs-primary-light: var(--vs-primary-light);
+  --color-vs-primary-dark: var(--vs-primary-dark);
+  --color-vs-accent: var(--vs-accent);
+  --color-vs-accent-light: var(--vs-accent-light);
+  --color-vs-success: var(--vs-success);
+  --color-vs-warning: var(--vs-warning);
+  --color-vs-error: var(--vs-error);
+  --color-vs-border: var(--vs-border);
+  --color-vs-border-light: var(--vs-border-light);
+}
 
 /* -------------------------------------------------------------------------- */
 /*  Design Tokens (Colors, Effects)                                           */
@@ -191,7 +206,7 @@ html {
 body {
   background-color: var(--vs-background);
   color: var(--vs-foreground);
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", 
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", 
                "Helvetica Neue", Arial, sans-serif;
   font-feature-settings: "cv11", "ss01";
   font-variation-settings: "opsz" auto;
@@ -329,7 +344,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.15;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--vs-heading);
 }
 
@@ -341,11 +356,11 @@ h1 {
 }
 
 h2 {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  margin-top: 2.5rem;
-  margin-bottom: 1.5rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.5rem;
 }
 
 h3 {
@@ -359,7 +374,6 @@ p {
   font-size: 1.0625rem;
   line-height: 1.75;
   letter-spacing: -0.011em;
-  margin-bottom: 1.5rem;
   color: var(--vs-foreground-secondary);
 }
 
@@ -381,6 +395,10 @@ a:hover {
 
 .prose {
   @apply max-w-none;
+}
+
+.prose p {
+  margin-bottom: 1.5rem;
 }
 
 .prose img {

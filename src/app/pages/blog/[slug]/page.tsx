@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { PostMetadata } from '@/core/crosscutting/seo/post';
+import { highlightBlogCodeBlocks } from '@/core/crosscutting/content/shiki';
 
 import { postParamsViewModel } from './postParamsViewModel';
 import { postViewModel } from './postViewModel';
@@ -25,6 +26,8 @@ export default async function PostPage({ params }: BlogDetailPageProps) {
     notFound();
   }
 
+  const highlightedContent = await highlightBlogCodeBlocks(post.content);
+
   return (
     <div className="blog-post-container">
       <article className="blog-post">
@@ -38,7 +41,7 @@ export default async function PostPage({ params }: BlogDetailPageProps) {
           <p className="text-sm">{post.formattedDate}</p>
         </header>
         <section className="prose prose-invert prose-lg max-w-none">
-          <div dangerouslySetInnerHTML={{ __html: post.content }} />
+          <div dangerouslySetInnerHTML={{ __html: highlightedContent }} />
         </section>
       </article>
     </div>

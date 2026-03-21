@@ -10,9 +10,9 @@ export const metadata: Metadata = { ...resumeMetadata };
 export default async function ResumePage() {
   const { profile, timeline, recommendations } = await resumeViewModel();
   return (
-    <div className="min-h-screen bg-vs-background text-vs-foreground p-6">
-      <header className="mb-12 text-center">
-        <h1 className="text-5xl font-extrabold mb-4">📜 Resume</h1>
+    <div className="min-h-screen bg-vs-background text-vs-foreground px-4 py-16 sm:px-6 sm:py-20">
+      <header className="mx-auto mb-12 max-w-3xl text-center">
+        <h1 className="text-5xl font-extrabold mb-4">Resume</h1>
         <p className="text-lg mt-4">
           {profile.conciseDescription}
         </p>
@@ -20,9 +20,9 @@ export default async function ResumePage() {
       <div className="flex flex-col items-center mb-8">
         <Image src="/assets/profile/maurogioberti.png" alt="Mauro Gioberti" width={200} height={200} className="w-50 h-50 rounded-full object-cover shadow-lg" />
       </div>
-      <section className="flex flex-col sm:flex-row gap-8">
+      <section className="mx-auto flex w-full max-w-7xl flex-col items-start gap-10 pb-4 sm:pb-8 lg:flex-row">
         <div className="flex-1">
-          <h2 className="text-4xl font-bold mb-6">📈 Professional Timeline</h2>
+          <h2 className="text-4xl font-bold mb-6">Professional Timeline</h2>
 
           <div className="-my-6">
             {timeline.map((item, index) => (
@@ -46,7 +46,7 @@ export default async function ResumePage() {
                         {item.consultingCompanyLogoUrl && (
                           <Image src={item.consultingCompanyLogoUrl} alt={`${item.consultingCompany} logo`} width={56} height={56} className="w-14 h-14 rounded-md object-cover" />
                         )}
-                        <p className="text-base italic text-blue-500">
+                        <p className="text-base italic text-vs-primary">
                           Services for{" "}
                           {item.consultingCompanyUrl ? (
                             <a href={item.consultingCompanyUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">
@@ -68,7 +68,7 @@ export default async function ResumePage() {
                     )}
                 <div
                   className="flex flex-col sm:flex-row items-start mb-1 group-last:before:hidden 
-                      before:absolute before:left-2 sm:before:left-0 before:h-full before:px-px before:bg-blue-600 
+                      before:absolute before:left-2 sm:before:left-0 before:h-full before:px-px before:bg-vs-primary 
                       sm:before:ml-[6.5rem] before:self-start before:-translate-x-1/2 before:translate-y-3 
                       after:absolute after:left-2 sm:after:left-0 after:w-2 after:h-2 after:bg-vs-primary 
                       after:border-4 after:box-content after:border-vs-background after:rounded-full 
@@ -76,7 +76,7 @@ export default async function ResumePage() {
                   <time
                     className="sm:absolute left-0 translate-y-0.5 inline-flex items-center 
                       justify-center text-xs font-semibold uppercase w-20 h-6 mb-3 
-                      sm:mb-0 text-white bg-blue-500 rounded-full">
+                      sm:mb-0 text-white bg-vs-primary rounded-full">
                     {item.year}
                   </time>
 
@@ -88,7 +88,7 @@ export default async function ResumePage() {
                 {item.tags && (
                   <div className="flex flex-wrap gap-2 mt-2">
                     {item.tags.map((tag, idx) => (
-                      <span key={idx} className="px-2 py-1 bg-blue-600 text-white text-xs rounded-full">
+                      <span key={idx} className="tag">
                         {tag}
                       </span>
                     ))}
@@ -99,11 +99,11 @@ export default async function ResumePage() {
           </div>
         </div>
 
-        <aside className="sm:w-1/3 bg-vs-background-light p-4 rounded-lg shadow-md">
-          <h2 className="text-3xl font-semibold mb-4">🏅 Recommendations</h2>
-          <div className="space-y-6">
+        <aside className="card w-full max-w-3xl px-6 pt-2 pb-6 lg:w-[30rem] lg:max-w-none lg:flex-none">
+          <h2 className="text-3xl font-semibold mb-2">Recommendations</h2>
+          <div className="space-y-8">
             {recommendations.map((recommendation, index) => (
-              <div key={index} className="flex items-start gap-4 pb-6 border-b border-vs-primary">
+              <div key={index} className="mx-auto flex max-w-3xl items-start gap-4 border-b border-vs-primary/40 pb-8 last:border-b-0 last:pb-0">
                 <Image src={recommendation.profilePictureUrl} alt={`${recommendation.name}'s profile`} width={48} height={48} className="w-12 h-12 rounded-full object-cover" />
                 <div className="flex-1">
                   <a
@@ -113,12 +113,12 @@ export default async function ResumePage() {
                     className="font-semibold text-vs-primary hover:underline">
                     {recommendation.name}
                   </a>
-                  <p className="italic text-blue-500">{recommendation.position}</p>
+                  <p className="italic text-vs-primary">{recommendation.position}</p>
 
-                  <p className="text-xs text-vs-foreground/60 mb-1">Recommended on: {recommendation.formattedDate}</p>
+                  <p className="text-sm text-vs-foreground/60 mb-1">Recommended on: {recommendation.formattedDate}</p>
 
-                  <p className="text-xs text-blue-500 mb-2 italic">{recommendation.relation}</p>
-                  {recommendation.translation && <p className="text-xs text-blue-400 italic mt-1">{recommendation.translation}</p>}
+                  <p className="text-sm text-vs-primary mb-2 italic">{recommendation.relation}</p>
+                  {recommendation.translation && <p className="text-sm text-vs-primary-light italic mt-1">{recommendation.translation}</p>}
                   <a
                     href={recommendation.linkedInRecommendationUrl}
                     target="_blank"

@@ -71,7 +71,7 @@ export default async function TalkPage({ params }: TalksPageProps) {
             </h1>
 
             <div className="flex flex-wrap gap-2 mb-6">
-              <span className="inline-block bg-blue-600 text-white text-xs font-semibold py-1 px-3 rounded-full">
+              <span className="inline-block bg-vs-primary text-white text-xs font-semibold py-1 px-3 rounded-full">
                 {talk.type}
               </span>
               {talk.tags.map((tag) => (
@@ -120,7 +120,7 @@ export default async function TalkPage({ params }: TalksPageProps) {
             Back to Talks
           </Link>
 
-          <div className="bg-vs-background-light rounded-lg shadow-lg p-6 mb-8">
+          <div className="card p-6 mb-8">
             <h2 className="text-2xl font-bold text-vs-primary mb-4">Event Details</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -176,7 +176,7 @@ export default async function TalkPage({ params }: TalksPageProps) {
                       {talk.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="bg-blue-500 text-white text-xs font-semibold py-1 px-3 rounded-full shadow hover:bg-blue-600 transition-colors"
+                          className="tag"
                         >
                           {tag}
                         </span>
@@ -190,7 +190,7 @@ export default async function TalkPage({ params }: TalksPageProps) {
 
           <div className="prose prose-lg max-w-none mb-12">
             <h2 className="text-3xl font-bold text-vs-primary mb-6">About this Talk</h2>
-            <div className="bg-vs-background-light rounded-lg p-6 shadow-inner">
+            <div className="card p-6">
               <div dangerouslySetInnerHTML={{ __html: talk.description }} />
             </div>
           </div>

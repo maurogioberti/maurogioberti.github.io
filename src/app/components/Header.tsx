@@ -6,7 +6,7 @@ export async function Header() {
   const { content, profile } = await headerViewModel();
 
   return (
-    <header className="bg-vs-background-secondary text-vs-foreground shadow-md w-full h-16">
+    <header className="sticky top-0 z-50 glass text-vs-foreground w-full h-16">
       <nav className="max-w-7xl mx-auto pl-1 pr-4 sm:px-6 lg:px-8 flex justify-between items-center h-full">
         <div className="text-base sm:text-lg font-semibold tracking-tighter leading-tight mr-2">
           <Link href="/" className="hover:opacity-80">

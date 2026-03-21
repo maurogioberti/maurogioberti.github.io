@@ -16,9 +16,9 @@ export default async function BlogPage() {
   const IMAGE_HEIGHT = 200;
 
   return (
-    <div className="min-h-screen p-6 bg-vs-background text-vs-foreground font-sans">
+    <div className="min-h-screen px-6 py-16 sm:py-20 bg-vs-background text-vs-foreground font-sans">
       <header className="mb-12 text-center">
-        <h1 className="text-5xl font-extrabold text-vs-primary mb-4">📝 Blog</h1>
+        <h1 className="text-5xl font-extrabold text-vs-primary mb-4">Blog</h1>
         <p className="text-lg">Discover posts on software engineering, best practices, and Clean Architecture.</p>
       </header>
 
@@ -26,7 +26,7 @@ export default async function BlogPage() {
         {posts.map((post) => (
           <div
             key={post.id}
-            className="group relative bg-vs-background-light rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            className="group relative card overflow-hidden">
             <Link href={`/pages/blog/${post.slug}`} className="block">
               <Image
                 src={post.imageUrl}
@@ -45,7 +45,7 @@ export default async function BlogPage() {
                     {post.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="bg-blue-500 text-white text-xs font-semibold py-1 px-3 rounded-full shadow hover:bg-blue-600 transition-colors">
+                        className="tag">
                         {tag}
                       </span>
                     ))}

@@ -46,6 +46,24 @@
   --glass-bg: rgba(18, 18, 26, 0.7);
   --glass-border: rgba(255, 255, 255, 0.1);
   
+  /* Tags */
+  --vs-tag-bg: rgba(59, 130, 246, 0.08);
+  --vs-tag-border: rgba(59, 130, 246, 0.2);
+  --vs-tag-text: var(--vs-primary-light);
+
+  /* Card Hover */
+  --vs-card-hover-shadow: rgba(59, 130, 246, 0.08);
+  --vs-card-hover-border: rgba(255, 255, 255, 0.15);
+
+  /* Code Blocks */
+  --vs-code-bg: rgba(255, 255, 255, 0.06);
+  --vs-code-border: rgba(255, 255, 255, 0.08);
+
+  /* Secondary Button */
+  --vs-btn-secondary-border: rgba(59, 130, 246, 0.3);
+  --vs-btn-secondary-hover-bg: rgba(59, 130, 246, 0.08);
+  --vs-btn-secondary-text: var(--vs-primary-light);
+
   /* Gradients */
   --gradient-secondary: linear-gradient(135deg, #ec4899 0%, #f59e0b 100%);
   --gradient-mesh: radial-gradient(at 40% 20%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
@@ -80,6 +98,24 @@
     --glass-bg: rgba(255, 255, 255, 0.7);
     --glass-border: rgba(0, 0, 0, 0.1);
     
+    /* Tags */
+    --vs-tag-bg: rgba(37, 99, 235, 0.06);
+    --vs-tag-border: rgba(37, 99, 235, 0.2);
+    --vs-tag-text: var(--vs-primary);
+
+    /* Card Hover */
+    --vs-card-hover-shadow: rgba(37, 99, 235, 0.06);
+    --vs-card-hover-border: rgba(0, 0, 0, 0.15);
+
+    /* Code Blocks */
+    --vs-code-bg: rgba(0, 0, 0, 0.04);
+    --vs-code-border: rgba(0, 0, 0, 0.08);
+
+    /* Secondary Button */
+    --vs-btn-secondary-border: rgba(37, 99, 235, 0.3);
+    --vs-btn-secondary-hover-bg: rgba(37, 99, 235, 0.06);
+    --vs-btn-secondary-text: var(--vs-primary);
+
     /* Gradients */
     --gradient-mesh: radial-gradient(at 40% 20%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
                      radial-gradient(at 80% 0%, rgba(139, 92, 246, 0.1) 0px, transparent 50%),
@@ -162,7 +198,7 @@ body::before {
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
-  letter-spacing: -0.011em;
+  letter-spacing: -0.02em;
   line-height: 1.15;
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--vs-heading);
@@ -171,12 +207,14 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: 3.5rem;
   font-weight: 800;
+  letter-spacing: -0.03em;
   line-height: 1.1;
 }
 
 h2 {
   font-size: 2.5rem;
   font-weight: 700;
+  letter-spacing: -0.02em;
   margin-top: 2.5rem;
   margin-bottom: 1.5rem;
 }
@@ -238,20 +276,50 @@ a:hover {
 }
 
 .prose code {
-  @apply bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-sm;
+  @apply px-2 py-1 rounded text-sm;
+  background: var(--vs-code-bg);
+  border: 1px solid var(--vs-code-border);
   color: var(--vs-accent);
 }
 
 .prose pre {
-  @apply rounded-xl shadow-2xl border border-gray-200 dark:border-gray-800 p-4 overflow-x-auto my-6;
+  @apply rounded-xl p-3 overflow-x-auto my-6;
   background: var(--glass-bg) !important;
+  border: 1px solid var(--vs-code-border);
   backdrop-filter: blur(10px);
   white-space: pre-line;
+  line-height: 1.5;
+}
+
+.prose pre[data-shiki] {
+  white-space: pre;
 }
 
 .prose pre code {
   @apply bg-transparent p-0 rounded-none text-inherit;
+  border: 0;
   color: inherit;
+  display: block;
+  white-space: inherit;
+  line-height: 1.5;
+}
+
+.prose pre[data-shiki] code {
+  white-space: normal;
+}
+
+.prose pre[data-shiki] .line {
+  display: block;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  line-height: 1.5;
+}
+
+.prose pre[data-shiki] .line span {
+  display: inline;
+  border: 0;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -284,9 +352,31 @@ a:hover {
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px -12px var(--vs-shadow);
-  border-color: var(--vs-border-light);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px -8px var(--vs-card-hover-shadow);
+  border-color: var(--vs-card-hover-border);
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Tag Component                                                             */
+/* -------------------------------------------------------------------------- */
+
+.tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  border: 1px solid var(--vs-tag-border);
+  background: var(--vs-tag-bg);
+  color: var(--vs-tag-text);
+  transition: all 0.2s ease;
+}
+
+.tag:hover {
+  border-color: var(--vs-primary);
+  background: var(--vs-btn-secondary-hover-bg);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -324,6 +414,28 @@ a:hover {
 }
 
 .btn-primary:active {
+  transform: translateY(0);
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Button Secondary                                                          */
+/* -------------------------------------------------------------------------- */
+
+.btn-secondary {
+  @apply px-6 py-3 rounded-xl font-semibold;
+  color: var(--vs-btn-secondary-text);
+  border: 1px solid var(--vs-btn-secondary-border);
+  background: transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-secondary:hover {
+  background: var(--vs-btn-secondary-hover-bg);
+  border-color: var(--vs-primary);
+  transform: translateY(-2px);
+}
+
+.btn-secondary:active {
   transform: translateY(0);
 }
 

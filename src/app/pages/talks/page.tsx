@@ -18,9 +18,9 @@ export default async function TalkPage() {
   const IMAGE_HEIGHT = 200;
   
   return (
-    <div className="min-h-screen p-6 bg-vs-background text-vs-foreground font-sans">
+    <div className="min-h-screen px-6 py-16 sm:py-20 bg-vs-background text-vs-foreground font-sans">
       <header className="mb-12 text-center">
-        <h1 className="text-5xl font-extrabold text-vs-primary mb-4">📝 Talks & Presentations</h1>
+        <h1 className="text-5xl font-extrabold text-vs-primary mb-4">Talks & Presentations</h1>
         <p className="text-lg">Discover talks on software engineering, best practices, and Clean Architecture.</p>
       </header>
 
@@ -33,10 +33,10 @@ export default async function TalkPage() {
                 ${talk.status === PRESENTATION_STATUS.UPCOMING || talk.status === PRESENTATION_STATUS.ONGOING ? "shadow-lg hover:shadow-xl border-2 border-vs-primary" : "shadow-md hover:shadow-lg border border-vs-foreground/10"}`}>
               <div className="absolute top-4 right-4 z-10">
                 {talk.status === PRESENTATION_STATUS.ONGOING && (
-                  <span className="bg-red-600 text-white text-xs font-bold py-1 px-3 rounded-full shadow-md animate-pulse">Today! 🔴</span>
+                  <span className="bg-red-600 text-white text-xs font-bold py-1 px-3 rounded-full shadow-md animate-pulse">Live Now</span>
                 )}
                 {talk.status === PRESENTATION_STATUS.UPCOMING && (
-                  <span className="bg-green-600 text-white text-xs font-bold py-1 px-3 rounded-full shadow-md animate-pulse">Upcoming 🗓️</span>
+                  <span className="bg-green-600 text-white text-xs font-bold py-1 px-3 rounded-full shadow-md animate-pulse">Upcoming</span>
                 )}
                 {talk.status === PRESENTATION_STATUS.PAST && (
                   <span className="bg-gray-600 text-white text-xs font-medium py-1 px-3 rounded-full">Past Event</span>
@@ -53,7 +53,7 @@ export default async function TalkPage() {
                     className={`w-full object-cover ${talk.status === PRESENTATION_STATUS.PAST ? "aspect-video opacity-90" : "aspect-video"}`}
                     priority={talk.status !== PRESENTATION_STATUS.PAST}
                   />
-                  <span className="absolute top-4 left-4 bg-blue-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow">{talk.sponsor}</span>
+                  <span className="absolute top-4 left-4 bg-vs-primary text-white text-xs font-semibold px-3 py-1 rounded-full shadow">{talk.sponsor}</span>
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
                     <div className="flex items-center space-x-2">
                       <span className="bg-gray-200 text-gray-800 dark:bg-gray-100/70 dark:text-vs-background-dark text-xs font-medium py-1 px-2 rounded">{formatDate(talk.date)}</span>
@@ -105,15 +105,12 @@ export default async function TalkPage() {
                       {talk.tags.slice(0, 3).map((tag) => (
                         <span
                           key={tag}
-                          className={`text-xs py-0.5 px-2 rounded ${
-                            talk.status === PRESENTATION_STATUS.PAST ? "bg-gray-200 text-gray-700" : "bg-blue-600/80 text-white font-semibold shadow"
-                          }`}>
+                          className={`tag ${talk.status !== PRESENTATION_STATUS.PAST ? "font-semibold" : ""}`}>
                           {tag}
                         </span>
                       ))}
                       {talk.tags.length > 3 && (
-                        <span className={`text-xs py-0.5 px-2 rounded ${
-                            talk.status === PRESENTATION_STATUS.PAST ? "bg-gray-200 text-gray-700" : "bg-blue-600/80 text-white font-semibold shadow"}`}>
+                        <span className={`tag ${talk.status !== PRESENTATION_STATUS.PAST ? "font-semibold" : ""}`}>
                           +{talk.tags.length - 3}
                         </span>
                       )}

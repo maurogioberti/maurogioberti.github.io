@@ -33,13 +33,12 @@ export default async function PostPage({ params }: BlogDetailPageProps) {
   return (
     <div className="blog-post-container">
       <article className="blog-post">
-        <div>
+        <div className="post-header-card">
           <Link href="/pages/blog" className="back-button">← Back to posts</Link>
+          <p className="post-tag">AI • RAG • Benchmarking</p>
+          <h1 className="post-title">{post.title}</h1>
+          <p className="post-date">{post.formattedDate}</p>
         </div>
-        <header className="mb-8 text-center">
-          <h1 className="text-5xl font-bold text-vs-primary mb-4">{post.title}</h1>
-          <p className="text-sm">{post.formattedDate}</p>
-        </header>
         <section className="prose prose-invert prose-lg max-w-none">
           <div dangerouslySetInnerHTML={{ __html: highlightedContent }} />
         </section>

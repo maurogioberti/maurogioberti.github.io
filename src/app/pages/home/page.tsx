@@ -27,10 +27,33 @@ export default async function HomePage() {
         </section>
         <h1 className="text-4xl font-bold text-vs-primary text-center mb-4">{message}</h1>
         <div className="mt-6 text-lg text-center">
-          <p><Link href="/pages/resume" className="text-vs-primary hover:text-vs-primary-light underline">Resume:</Link> {" "} Dive into my professional journey.</p>
-          <p><Link href="/pages/services" className="text-vs-primary hover:text-vs-primary-light underline"> Services:</Link> {" "} Explore the ways I can help your business grow.</p>
-          <p><Link href="/pages/talks" className="text-vs-primary hover:text-vs-primary-light underline">Talks:</Link> {" "} Discover my thoughts, lessons, and code from real-world experiences.</p>
-          <p><Link href="/pages/blog" className="text-vs-primary hover:text-vs-primary-light underline">Blog:</Link> {" "} Check out my latest thoughts on software engineering and beyond.</p>
+<p>
+  <Link href="/pages/resume" className="text-vs-primary hover:text-vs-primary-light">
+    Resume:
+  </Link>{" "}
+  Dive into my professional journey.
+</p>
+
+<p>
+  <Link href="/pages/services" className="text-vs-primary hover:text-vs-primary-light">
+    Services:
+  </Link>{" "}
+  Explore the ways I can help your business grow.
+</p>
+
+<p>
+  <Link href="/pages/talks" className="text-vs-primary hover:text-vs-primary-light">
+    Talks:
+  </Link>{" "}
+  Discover my thoughts, lessons, and code from real-world experiences.
+</p>
+
+<p>
+  <Link href="/pages/blog" className="text-vs-primary hover:text-vs-primary-light">
+    Blog:
+  </Link>{" "}
+  Check out my latest thoughts on software engineering and beyond.
+</p>
           <div className="mt-4 flex flex-col sm:flex-row items-center sm:justify-center space-y-2 sm:space-y-0 sm:space-x-4">
             <Link href="/pages/services" className="btn-primary text-center">
               Contact Me

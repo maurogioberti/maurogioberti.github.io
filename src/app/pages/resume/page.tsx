@@ -99,36 +99,50 @@ export default async function ResumePage() {
           </div>
         </div>
 
-        <aside className="card w-full max-w-3xl px-6 pt-2 pb-6 lg:w-[30rem] lg:max-w-none lg:flex-none">
-          <h2 className="text-3xl font-semibold mb-2">Recommendations</h2>
-          <div className="space-y-8">
-            {recommendations.map((recommendation, index) => (
-              <div key={index} className="mx-auto flex max-w-3xl items-start gap-4 border-b border-vs-primary/40 pb-8 last:border-b-0 last:pb-0">
-                <Image src={recommendation.profilePictureUrl} alt={`${recommendation.name}'s profile`} width={48} height={48} className="w-12 h-12 rounded-full object-cover" />
-                <div className="flex-1">
-                  <a
-                    href={recommendation.linkedInProfileUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block font-semibold leading-tight text-vs-primary hover:underline">
-                    {recommendation.name}
-                  </a>
-                  <div className="space-y-0.5">
-                    <p className="text-sm font-medium italic leading-tight" style={{ color: 'var(--vs-primary-dark)' }}>{recommendation.position}</p>
-                    <p className="text-xs leading-tight text-vs-foreground/50" style={{ color: 'var(--vs-primary-dark)' }}>Recommended on: {recommendation.formattedDate}</p>
-                    <p className="text-xs font-medium italic leading-tight" style={{ color: 'var(--vs-primary-light)' }}>{recommendation.relation}</p>
-                    {recommendation.translation && <p className="text-xs font-medium italic leading-tight" style={{ color: 'var(--vs-primary-light)' }}>{recommendation.translation}</p>}
+        <aside className="card w-full max-w-3xl px-4 py-3 lg:w-[30rem] lg:max-w-none lg:flex-none lg:self-start">
+          <h2 className="mb-2 text-2xl font-semibold tracking-tight text-vs-primary sm:text-3xl dark:text-sky-200">
+            Recommendations
+          </h2>
+          <div className="space-y-3">
+            {recommendations.map((recommendation, index) => {
+              return (
+                <div key={index} className="flex w-full items-start gap-2.5 border-b border-vs-primary/20 pb-2 last:border-b-0 last:pb-0">
+                  <Image src={recommendation.profilePictureUrl} alt={`${recommendation.name}'s profile`} width={48} height={48} className="h-12 w-12 shrink-0 rounded-full object-cover" />
+                  <div className="relative min-w-0 flex-1 pb-3 pr-12">
+                    <div className="flex flex-col gap-2">
+                      <div className="flex flex-col gap-[2px]">
+                        <a
+                          href={recommendation.linkedInProfileUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block font-bold leading-tight text-vs-heading hover:text-vs-primary-light hover:underline">
+                          {recommendation.name}
+                        </a>
+                        <p className="text-md font-medium leading-snug text-vs-primary">
+                          {recommendation.position}
+                        </p>
+                        <p className="-mt-1 -mb-2 text-[12px] leading-tight text-blue-700 dark:text-sky-400">
+                          {recommendation.relation}
+                        </p>
+                      </div>
+                      <a
+                        href={recommendation.linkedInRecommendationUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block text-sm leading-snug text-vs-foreground/90 hover:underline">
+                        {recommendation.text}
+                      </a>
+                    </div>
+                    <time
+                      className="pointer-events-none absolute bottom-0 right-0 text-right text-[10px] leading-tight text-gray-500/45 dark:text-gray-500/40"
+                      dateTime={recommendation.date.toISOString().slice(0, 10)}>
+                      {recommendation.formattedDate}
+                    </time>
+                    {recommendation.translation ? <span className="sr-only">{recommendation.translation}</span> : null}
                   </div>
-                  <a
-                    href={recommendation.linkedInRecommendationUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-3 block text-sm text-vs-foreground hover:underline">
-                    {recommendation.text}
-                  </a>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </aside>
       </section>

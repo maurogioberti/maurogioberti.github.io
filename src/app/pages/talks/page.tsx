@@ -116,11 +116,7 @@ export default async function TalkPage() {
                       )}
                     </div>
                   )}
-
                   <div className="mt-5 flex justify-between items-center">
-                    <strong className="text-vs-primary text-sm font-semibold hover:underline flex items-center">
-                      View Details <span className="ml-1">→</span>
-                    </strong>
                     {talk.status === PRESENTATION_STATUS.ONGOING && <span className="bg-red-500 text-white text-xs px-2 py-1 rounded">Live now!</span>}
                   </div>
                 </div>

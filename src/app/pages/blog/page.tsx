@@ -51,7 +51,6 @@ export default async function BlogPage() {
                     ))}
                   </div>
                 )}
-                <strong className="inline-block mt-4 text-vs-primary font-semibold hover:underline">Read More →</strong>
               </div>
             </Link>
           </div>

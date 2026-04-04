@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme='dark'] *));
+
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -349,14 +351,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.1;
 }
 
 h2 {
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   margin-top: 0.2rem;
@@ -371,15 +373,12 @@ h3 {
 }
 
 p {
-  font-size: 1.0625rem;
-  line-height: 1.75;
+  line-height: 1.5;
   letter-spacing: -0.011em;
-  color: var(--vs-foreground-secondary);
 }
 
 a {
   transition: color 0.25s ease, opacity 0.25s ease;
-  color: inherit;
   text-decoration: none;
 }
 

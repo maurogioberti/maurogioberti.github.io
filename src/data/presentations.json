@@ -94,5 +94,29 @@
     "resourcesUrl": "https://github.com/maurogioberti/llm-candidate-profiler",
     "feedbackUrl": "https://forms.gle/renQnLnSihBFAEG29",
     "tags": ["ai", "llm", "rag", "retrieval-augmented-generation", "rrhh", "power-platform", "intermediate"]
+  },
+  {
+    "id": "5",
+    "title": "Benchmarking LLM RAG Systems: a Real-World Hiring Use Case",
+    "slug": "benchmarking-llm-rag-systems-real-world-hiring-use-case",
+    "sponsor": "DevBcn",
+    "sponsorSlug": "devbcn2026",
+    "type": "onsite",
+    "description": "Accepted talk for DevBcn 2026 about benchmarking RAG systems through a real-world hiring use case, comparing a Python LangChain implementation with a .NET Semantic Kernel implementation.<br><br>The session covers the end-to-end pipeline: dataset preprocessing, vector indexing, skill normalization, explainable responses, testing strategy, performance and latency comparison, and benchmark results from practical engineering trade-offs.",
+    "place": "World Trade Center, Room 3",
+    "language": "English",
+    "date": "2026-06-16T15:35:00Z",
+    "imageUrl": "/assets/open-graph/presentation/benchmarking-llm-rags-python-vs-dotnet.png",
+    "eventName": "DevBcn 2026",
+    "location": "Barcelona, Spain",
+    "postUrl": "",
+    "repositoryUrl": "https://github.com/maurogioberti/llm-candidate-rag-benchmark-multilang",
+    "slidesUrl": "https://drive.google.com/file/d/1nUprKWeBIUdjWOqnVCU8dCRR_kwG0ur4",
+    "demoVideoUrl": "",
+    "videoUrl": "",
+    "registrationUrl": "https://www.devbcn.com/2026/talks/1131988",
+    "resourcesUrl": "https://github.com/maurogioberti/llm-candidate-profiler",
+    "feedbackUrl": "https://openfeedback.io/1131988",
+    "tags": ["RAG", "LLM", "AI", "Benchmarking", "Python", ".NET", "Semantic Kernel", "LangChain", "Data Engineering"]
   }
 ]

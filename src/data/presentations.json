@@ -116,7 +116,7 @@
     "videoUrl": "",
     "registrationUrl": "https://www.devbcn.com/2026/talks/1131988",
     "resourcesUrl": "https://github.com/maurogioberti/llm-candidate-profiler",
-    "feedbackUrl": "https://openfeedback.io/1131988",
+    "feedbackUrl": "https://forms.gle/5cDoaXnj8BkpMaM2A",
     "tags": ["RAG", "LLM", "AI", "Benchmarking", "Python", ".NET", "Semantic Kernel", "LangChain", "Data Engineering"]
   }
 ]

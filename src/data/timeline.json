@@ -1,7 +1,7 @@
 [
   {
     "year": "2024",
-    "title": "Software Engineer",
+    "title": "Technical Lead",
     "company": "PayRetailers",
     "companyUrl": "https://www.payretailers.com/",
     "companyLogoUrl": "/assets/resume/payretailers-logo.png",
@@ -10,8 +10,8 @@
     "consultingCompany": null,
     "consultingCompanyUrl": null,
     "consultingCompanyLogoUrl": null,
-    "description": "Focused on .NET Core, Entity Framework, and React while advancing in software development with DDD principles and CQRS. Maintained legacy systems and integrations while developing new solutions using Azure services like Functions, Logic Apps, and Web Apps. Enhanced backend solutions with domain logic principles, continuous deployment, and security improvements via OAuth. Applied MediatR for command-query separation, adhering to clean code and architectural best practices.",
-    "tags": [".NET Core", "CQRS", "DDD Principles", "OAuth", "React", "Clean Code", "Azure", "Azure Functions", "Logic Apps", "Web Apps"]
+    "description": "Technical Lead as a mix of engineering, architecture, team leadership, and platform modernization. Focused on architecture and technical decisions across business-critical applications, coordinating with Product, QA, DevOps, and Architecture, mentoring engineers, and leading refactors, migrations, and critical production improvements. Applying AI-first and specification-driven development (SDD) practices to improve delivery speed, code quality, and engineering productivity.",
+    "tags": [".NET", "React", "Next.js", "Azure AKS", "Azure Functions", "Azure Service Bus", "SQL", "Databricks"]
   },
   {
     "year": "2023",

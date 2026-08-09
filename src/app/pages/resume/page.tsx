@@ -29,7 +29,7 @@ export default async function ResumePage() {
               <div key={index} className="relative pl-8 sm:pl-32 py-6 group">
                 <div className="flex items-center gap-4 mb-2">
                   {item.companyLogoUrl && (
-                    <Image src={item.companyLogoUrl} alt={`${item.company} logo`} width={56} height={56} className="w-14 h-14 rounded-md object-cover" />
+                    <Image src={item.companyLogoUrl} alt={`${item.company} logo`} width={56} height={56} className="w-14 h-14 rounded-md object-contain"/>
                   )}
                   <div>
                     <div className="font-caveat font-medium text-2xl text-vs-primary">
@@ -44,7 +44,7 @@ export default async function ResumePage() {
                     {item.consultingCompany && (
                       <div className="flex items-center gap-4">
                         {item.consultingCompanyLogoUrl && (
-                          <Image src={item.consultingCompanyLogoUrl} alt={`${item.consultingCompany} logo`} width={56} height={56} className="w-14 h-14 rounded-md object-cover" />
+                          <Image src={item.consultingCompanyLogoUrl} alt={`${item.consultingCompany} logo`} width={56} height={56} className="w-14 h-14 rounded-md object-contain" />
                         )}
                         <p className="text-base italic text-vs-primary">
                           Services for{" "}

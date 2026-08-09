@@ -158,6 +158,7 @@ describe("Profile", () => {
       tiktok: faker.internet.url(),
       linkedin: faker.internet.url(),
       website: faker.internet.url(),
+      sessionize: faker.internet.url(),
     };
     const profile = new Profile(faker.person.firstName(), faker.person.lastName(), faker.date.birthdate(), faker.person.jobTitle(), [], EMPTY_STRING, EMPTY_STRING, EMPTY_STRING, socials);
     expect(profile.githubUrl).toBe(socials.github);
@@ -167,6 +168,7 @@ describe("Profile", () => {
     expect(profile.tiktokUrl).toBe(socials.tiktok);
     expect(profile.linkedinUrl).toBe(socials.linkedin);
     expect(profile.websiteUrl).toBe(socials.website);
+    expect(profile.sessionizeUrl).toBe(socials.sessionize);
   });
   
   test("should return undefined for missing social media URLs", () => {
@@ -179,6 +181,7 @@ describe("Profile", () => {
     expect(profile.tiktokUrl).toBeUndefined();
     expect(profile.linkedinUrl).toBeUndefined();
     expect(profile.websiteUrl).toBeUndefined();
+    expect(profile.sessionizeUrl).toBeUndefined();
   });
 
   describe("Phone formatting", () => {

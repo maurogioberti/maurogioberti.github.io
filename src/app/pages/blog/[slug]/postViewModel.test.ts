@@ -20,7 +20,7 @@ describe("postViewModel", () => {
     };
 
     const mockGetPostBySlugExecute = jest
-      .fn<() => Promise<typeof mockPostData>>()
+      .fn<(slug: string) => Promise<typeof mockPostData>>()
       .mockResolvedValue(mockPostData);
 
     const mockGetPostBySlugUseCase = { execute: mockGetPostBySlugExecute };
@@ -40,7 +40,7 @@ describe("postViewModel", () => {
     const mockError = new Error(errorMessage);
 
     const mockGetPostBySlugExecute = jest
-      .fn<() => Promise<never>>()
+      .fn<(slug: string) => Promise<never>>()
       .mockRejectedValue(mockError);
 
     const mockGetPostBySlugUseCase = { execute: mockGetPostBySlugExecute };

@@ -30,7 +30,7 @@ describe("linktreeViewModel", () => {
       .mockResolvedValue(mockProfileData);
 
     const mockGetStandaloneSiteExecute = jest
-      .fn<() => Promise<string>>()
+      .fn<(pageName: string, placeholders: Record<string, string>) => Promise<string>>()
       .mockResolvedValue(mockHtmlContent);
 
     const mockGetProfileUseCase = { execute: mockGetProfileExecute };
@@ -100,7 +100,7 @@ describe("linktreeViewModel", () => {
       .mockResolvedValue(mockProfileData);
 
     const mockGetStandaloneSiteExecute = jest
-      .fn<() => Promise<never>>()
+      .fn<(pageName: string, placeholders: Record<string, string>) => Promise<never>>()
       .mockRejectedValue(mockError);
 
     const mockGetProfileUseCase = { execute: mockGetProfileExecute };

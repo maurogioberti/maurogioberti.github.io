@@ -35,9 +35,9 @@ describe("talktreeViewModel", () => {
   };
   
   function _setupContainerMocks(mocks: {
-    profileUseCase?: { execute: jest.Mock };
-    presentationContentUseCase?: { execute: jest.Mock };
-    standaloneSiteUseCase?: { execute: jest.Mock };
+    profileUseCase?: { execute: () => unknown };
+    presentationContentUseCase?: { execute: (slug: string, sponsorSlug: string) => unknown };
+    standaloneSiteUseCase?: { execute: (pageName: string, placeholders: Record<string, string>) => unknown };
   }): void {
     const mockResolve = (identifier: unknown) => {
       if (identifier === DependencyIdentifiers.USE_CASES.GET_STANDALONE_SITE) {
@@ -66,11 +66,11 @@ describe("talktreeViewModel", () => {
       .mockResolvedValue(mockProfileData);
 
     const mockGetPresentationContentExecute = jest
-      .fn<() => Promise<typeof mockPresentationData>>()
+      .fn<(slug: string, sponsorSlug: string) => Promise<typeof mockPresentationData>>()
       .mockResolvedValue(mockPresentationData);
 
     const mockGetStandaloneSiteExecute = jest
-      .fn<() => Promise<string>>()
+      .fn<(pageName: string, placeholders: Record<string, string>) => Promise<string>>()
       .mockResolvedValue(mockHtmlContent);
       
     _setupContainerMocks({
@@ -121,8 +121,8 @@ describe("talktreeViewModel", () => {
     };
 
     const mockGetProfileExecute = jest.fn<() => Promise<typeof mockProfileData>>().mockResolvedValue(mockProfileData);
-    const mockGetPresentationContentExecute = jest.fn<() => Promise<typeof presentationWithMissingUrls>>().mockResolvedValue(presentationWithMissingUrls);
-    const mockGetStandaloneSiteExecute = jest.fn<() => Promise<typeof mockHtmlContent>>().mockResolvedValue(mockHtmlContent);
+    const mockGetPresentationContentExecute = jest.fn<(slug: string, sponsorSlug: string) => Promise<typeof presentationWithMissingUrls>>().mockResolvedValue(presentationWithMissingUrls);
+    const mockGetStandaloneSiteExecute = jest.fn<(pageName: string, placeholders: Record<string, string>) => Promise<typeof mockHtmlContent>>().mockResolvedValue(mockHtmlContent);
 
     _setupContainerMocks({
       profileUseCase: { execute: mockGetProfileExecute },
@@ -193,7 +193,7 @@ describe("talktreeViewModel", () => {
     const mockError = new Error(errorMessage);
 
     const mockGetProfileExecute = jest.fn<() => Promise<typeof mockProfileData>>().mockResolvedValue(mockProfileData);
-    const mockGetPresentationContentExecute = jest.fn<() => Promise<never>>().mockRejectedValue(mockError);
+    const mockGetPresentationContentExecute = jest.fn<(slug: string, sponsorSlug: string) => Promise<never>>().mockRejectedValue(mockError);
     const mockGetStandaloneSiteExecute = jest.fn();
 
     _setupContainerMocks({
@@ -218,7 +218,7 @@ describe("talktreeViewModel", () => {
     const mockError = new Error(errorMessage);
 
     const mockGetProfileExecute = jest.fn<() => Promise<typeof mockProfileData>>().mockResolvedValue(mockProfileData);
-    const mockGetPresentationContentExecute = jest.fn<() => Promise<typeof mockPresentationData>>().mockResolvedValue(mockPresentationData);
+    const mockGetPresentationContentExecute = jest.fn<(slug: string, sponsorSlug: string) => Promise<typeof mockPresentationData>>().mockResolvedValue(mockPresentationData);
     const mockGetStandaloneSiteExecute = jest.fn<() => Promise<never>>().mockRejectedValue(mockError);
 
     _setupContainerMocks({
@@ -246,8 +246,8 @@ describe("talktreeViewModel", () => {
     };
 
     const mockGetProfileExecute = jest.fn<() => Promise<typeof mockProfileData>>().mockResolvedValue(mockProfileData);
-    const mockGetPresentationContentExecute = jest.fn<() => Promise<typeof presentationWithoutRepository>>().mockResolvedValue(presentationWithoutRepository);
-    const mockGetStandaloneSiteExecute = jest.fn<() => Promise<typeof mockHtmlContent>>().mockResolvedValue(mockHtmlContent);
+    const mockGetPresentationContentExecute = jest.fn<(slug: string, sponsorSlug: string) => Promise<typeof presentationWithoutRepository>>().mockResolvedValue(presentationWithoutRepository);
+    const mockGetStandaloneSiteExecute = jest.fn<(pageName: string, placeholders: Record<string, string>) => Promise<typeof mockHtmlContent>>().mockResolvedValue(mockHtmlContent);
 
     const mockGetProfileUseCase = { execute: mockGetProfileExecute };
     const mockGetPresentationContentUseCase = { execute: mockGetPresentationContentExecute };

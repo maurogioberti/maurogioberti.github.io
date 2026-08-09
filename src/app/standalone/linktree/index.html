@@ -507,8 +507,18 @@
         }
 
         .website-card,
-        .recordings-card {
+        .speaker-card,
+        .recordings-card,
+        .directory-card {
             --card-rgb: 0, 142, 230;
+        }
+
+        .speaker-card {
+            --card-rgb: 77, 184, 255;
+        }
+
+        .directory-card {
+            --card-rgb: 159, 140, 255;
         }
 
         .linkedin-card {
@@ -772,7 +782,7 @@
                     <div class="profile-copy">
                         <p class="profile-kicker">
                             <span class="kicker-dot" aria-hidden="true"></span>
-                            Leadership &middot; AI &middot; Mentorship
+                            Leadership / AI / Mentorship
                         </p>
                         <h1>Mauro Gioberti</h1>
                         <p class="professional-headline">
@@ -809,6 +819,19 @@
                                 </span>
                             </a>
 
+                            <a href="/standalone/speaker" class="link-card featured-card speaker-card">
+                                <span class="link-icon" aria-hidden="true">
+                                    <i class="fas fa-microphone-lines"></i>
+                                </span>
+                                <span class="link-copy">
+                                    <strong>Speaker profile</strong>
+                                    <small>Topics, sessions &amp; speaking contact</small>
+                                </span>
+                                <span class="link-arrow" aria-hidden="true">
+                                    <i class="fas fa-arrow-right"></i>
+                                </span>
+                            </a>
+
                             <a href="/standalone/recordings" class="link-card featured-card recordings-card">
                                 <span class="link-icon" aria-hidden="true">
                                     <i class="fas fa-circle-play"></i>
@@ -816,6 +839,19 @@
                                 <span class="link-copy">
                                     <strong>Talk recordings</strong>
                                     <small>Watch conference &amp; meetup sessions</small>
+                                </span>
+                                <span class="link-arrow" aria-hidden="true">
+                                    <i class="fas fa-arrow-right"></i>
+                                </span>
+                            </a>
+
+                            <a href="/standalone" class="link-card featured-card directory-card">
+                                <span class="link-icon" aria-hidden="true">
+                                    <i class="fas fa-layer-group"></i>
+                                </span>
+                                <span class="link-copy">
+                                    <strong>Standalone directory</strong>
+                                    <small>Every focused view in one place</small>
                                 </span>
                                 <span class="link-arrow" aria-hidden="true">
                                     <i class="fas fa-arrow-right"></i>
@@ -890,7 +926,7 @@
 
                 <footer class="page-footer">
                     <p>Build thoughtfully. Share openly.</p>
-                    <span aria-hidden="true">&middot;</span>
+                    <span aria-hidden="true">/</span>
                     <a href="{WEBSITE_URL}" target="_blank" rel="noopener noreferrer">Mauro Gioberti</a>
                 </footer>
             </div>

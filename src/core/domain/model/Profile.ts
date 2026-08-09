@@ -4,6 +4,7 @@ const SOCIAL_KEYS = {
   TWITTER: "twitter",
   INSTAGRAM: "instagram",
   TIKTOK: "tiktok",
+  SESSIONIZE: "sessionize",
   LINKEDIN: "linkedin",
   WEBSITE: "website",
 };
@@ -75,6 +76,10 @@ export class Profile {
 
   get linkedinUrl(): string {
     return this.socials[SOCIAL_KEYS.LINKEDIN];
+  }
+
+  get sessionizeUrl(): string {
+    return this.socials[SOCIAL_KEYS.SESSIONIZE];
   }
 
   get websiteUrl(): string {

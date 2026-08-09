@@ -52,7 +52,7 @@ describe("talkViewModel", () => {
 
   test("should return a talk and profile object", async () => {
     const mockGetPresentationBySlugExecute = jest
-      .fn<() => Promise<typeof mockTalk>>()
+      .fn<(slug: string, sponsorSlug: string) => Promise<typeof mockTalk>>()
       .mockResolvedValue(mockTalk);
 
     const mockGetProfileExecute = jest

@@ -52,6 +52,7 @@ The goal is simple:
 - **Talks** → Conferences, meetups, and presentations  
 - **Resume** → Timeline + recommendations  
 - **Services** → What I can help you with  
+- **Ask Mauro** → Floating AI assistant that answers questions from this portfolio  
 
 ## 🛠 Tech Stack
 
@@ -143,6 +144,31 @@ This structure ensures:
 - Clear separation between **business logic** and **presentation**
 - Testable and composable use cases and repositories
 - A predictable and scalable layout for Next.js routes and static content
+
+---
+
+## 🤖 Ask Mauro Assistant
+
+The main pages show a floating **Ask Mauro** launcher that opens a native chat panel backed by the
+[Ask Mauro RAG backend](https://ai.maurogioberti.com). The full standalone experience lives at
+**https://ai.maurogioberti.com**; the widget under `src/app/components/ask-mauro/` is a compact,
+portfolio-native implementation of the same contract.
+
+How it fits this codebase:
+
+- **Static export, cross-origin API** → this site deploys to GitHub Pages (`output: "export"`), so there is
+  no server runtime to proxy through. The browser calls `POST https://ai.maurogioberti.com/api/ask`
+  directly, and the backend allows only exact portfolio origins via its CORS allowlist.
+- **No streaming** → the backend returns one complete JSON answer (`content` paragraphs plus optional
+  portfolio cards); the panel's typewriter reveal is purely presentational and honors reduced motion.
+- **Errors by contract** → failures map from the backend's `error.code` envelope (`busy`, `rate_limited`,
+  `timeout`, …) to compact, retryable copy. There is no client-side timeout and no automatic retry:
+  one question, one generation request.
+- **Lazy by design** → the launcher is the only Ask Mauro code in the initial bundle; the panel, its state
+  machine, API client, and CSS load in a separate chunk on first open.
+- **Local development** → `npm run dev` targets a local backend at `http://127.0.0.1:8000`; production
+  builds target the public API. Both URLs are plain constants in `askMauroClient.ts` — still no
+  environment variables.
 
 ---
 

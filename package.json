@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@faker-js/faker": "^9.2.0",
-    "next": "^15",
+    "next": "^15.5.23",
     "react": "^19",
     "react-dom": "^19",
     "shiki": "^4.0.2"
@@ -50,13 +50,15 @@
     "eslint-config-next": "^15",
     "jest": "^30.3.0",
     "jest-environment-jsdom": "^30.3.0",
-    "postcss": "^8",
+    "postcss": "^8.5.26",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
   "overrides": {
     "test-exclude": "^8.0.0",
     "glob": "^13.0.6",
-    "jsdom": "^29.0.1"
+    "jsdom": "^29.0.1",
+    "postcss": "^8.5.26",
+    "sharp": "^0.35.3"
   }
 }

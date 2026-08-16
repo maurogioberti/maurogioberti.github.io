@@ -10,7 +10,7 @@ const AskMauroPanel = dynamic(() => import('./AskMauroPanel').then((module) => m
   ssr: false,
 });
 
-const AVATAR_SRC = '/assets/profile/maurogioberti-avatar.png';
+const AVATAR_SRC = '/assets/profile/maurogioberti-ai-avatar.png';
 const AVATAR_SIZE = 32;
 const LAUNCHER_LABEL = 'Ask Mauro — AI assistant';
 

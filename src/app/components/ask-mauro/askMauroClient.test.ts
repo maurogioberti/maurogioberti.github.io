@@ -210,3 +210,40 @@ describe('askMauro', () => {
     expect(result).toEqual({ ok: false, kind: 'server' });
   });
 });
+
+describe('askMauro cancellation', () => {
+  test('passes the abort signal to fetch', async () => {
+    const controller = new AbortController();
+    let seen: AbortSignal | undefined;
+    const fetchFn = jest.fn(async (_url: string, init?: RequestInit) => {
+      seen = init?.signal ?? undefined;
+      return new Response(JSON.stringify({ content: ['ok'] }), { status: 200 });
+    }) as unknown as typeof fetch;
+
+    await askMauro('question', fetchFn, controller.signal);
+
+    expect(seen).toBe(controller.signal);
+  });
+
+  test('reports an aborted request as cancelled rather than a network failure', async () => {
+    const controller = new AbortController();
+    controller.abort();
+    const fetchFn = (async () => {
+      throw new DOMException('aborted', 'AbortError');
+    }) as unknown as typeof fetch;
+
+    const result = await askMauro('question', fetchFn, controller.signal);
+
+    expect(result).toEqual({ ok: false, kind: 'cancelled' });
+  });
+
+  test('still reports a genuine network failure as network', async () => {
+    const fetchFn = (async () => {
+      throw new TypeError('failed to fetch');
+    }) as unknown as typeof fetch;
+
+    const result = await askMauro('question', fetchFn);
+
+    expect(result).toEqual({ ok: false, kind: 'network' });
+  });
+});

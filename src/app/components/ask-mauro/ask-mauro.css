@@ -66,6 +66,27 @@
   }
 }
 
+/*
+ * Waiting copy swapping to the next message: a 3px lift and a fade, once, no
+ * loop. The text already changes every 2.5s; anything more assertive would
+ * read as a slot machine. The reduced-motion block below collapses it to an
+ * instant swap, because it matches `.ask-mauro-panel *`.
+ */
+.ask-mauro-thinking {
+  animation: ask-mauro-thinking-swap 260ms ease-out;
+}
+
+@keyframes ask-mauro-thinking-swap {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .ask-mauro-panel,
   .ask-mauro-panel *,

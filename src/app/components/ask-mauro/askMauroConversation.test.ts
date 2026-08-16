@@ -144,3 +144,50 @@ describe('sliceParagraphs', () => {
     expect(countParagraphChars([])).toBe(0);
   });
 });
+
+describe('cancel', () => {
+  test('returns to idle from asking so the composer is usable again', () => {
+    const asked = conversationReducer(INITIAL_CONVERSATION_STATE, {
+      type: 'ask',
+      question: 'What did Mauro present at DevBcn 2026?',
+    });
+
+    const cancelled = conversationReducer(asked, { type: 'cancel' });
+
+    expect(cancelled.status).toBe(CONVERSATION_STATUS_IDLE);
+    expect(cancelled.error).toBeNull();
+  });
+
+  test('keeps the already-rendered messages instead of erasing them', () => {
+    const asked = conversationReducer(INITIAL_CONVERSATION_STATE, {
+      type: 'ask',
+      question: 'Tell me about RAG',
+    });
+
+    const cancelled = conversationReducer(asked, { type: 'cancel' });
+
+    expect(cancelled.messages).toEqual(asked.messages);
+  });
+
+  test('can stop a partially revealed answer without completing it', () => {
+    const asked = conversationReducer(INITIAL_CONVERSATION_STATE, {
+      type: 'ask',
+      question: 'Tell me about RAG',
+    });
+    const revealing = conversationReducer(asked, {
+      type: 'succeed',
+      answer: { content: ['One.', 'Two.'], cards: [] },
+    });
+
+    const cancelled = conversationReducer(revealing, { type: 'cancel' });
+
+    expect(cancelled.status).toBe(CONVERSATION_STATUS_IDLE);
+    expect(cancelled.messages).toHaveLength(2);
+  });
+
+  test('is a no-op when nothing is running', () => {
+    expect(conversationReducer(INITIAL_CONVERSATION_STATE, { type: 'cancel' })).toBe(
+      INITIAL_CONVERSATION_STATE
+    );
+  });
+});

@@ -25,7 +25,6 @@ import {
   REVEAL_CHARS_PER_TICK,
   REVEAL_TICK_MS,
   SUGGESTED_QUESTIONS,
-  THINKING_STAGES,
   conversationReducer,
   countParagraphChars,
   sliceParagraphs,
@@ -33,16 +32,32 @@ import {
   type ConversationMessage,
   type UserMessage,
 } from './askMauroConversation';
+import { linkify } from './linkify';
+import { THINKING_ARIA_LABEL } from './thinkingMessages';
+import { useThinkingMessage } from './useThinkingMessage';
 
-const AVATAR_SRC = '/assets/profile/maurogioberti-avatar.png';
+const AVATAR_SRC = '/assets/profile/maurogioberti-ai-avatar.png';
 const AVATAR_SIZE = 28;
 const HEADER_AVATAR_SIZE = 36;
 const ICON_SIZE = 18;
 const LINK_ICON_SIZE = 12;
 const RETRY_ICON_SIZE = 14;
 const MAX_COMPOSER_HEIGHT_PX = 160;
+/**
+ * The send button's own height (`h-9` = 2.25rem = 36px), reused as the floor
+ * for the editable area so the two controls in the composer row share one
+ * definition of "control height" rather than drifting apart.
+ */
+const MIN_COMPOSER_HEIGHT_PX = 36;
 const COUNTER_THRESHOLD = QUESTION_MAX_LENGTH - 60;
 const TYPING_DOT_DELAY_S = 0.16;
+/**
+ * The portfolio ships as `<html lang="en">` with no language switcher, so the
+ * widget's waiting copy is English. The catalog is bilingual and the hook takes
+ * the language as a parameter, so adding a switcher later is a one-line change
+ * here rather than a rewrite.
+ */
+const WIDGET_LANGUAGE = 'en' as const;
 const PANEL_TITLE_ID = 'ask-mauro-panel-title';
 
 /** Matches Tailwind's `sm` breakpoint: below it the panel opens as a modal sheet. */
@@ -70,8 +85,15 @@ export function AskMauroPanel({ open, onClose }: AskMauroPanelProps) {
   const messageListRef = useRef<HTMLDivElement>(null);
   const [state, dispatch] = useReducer(conversationReducer, INITIAL_CONVERSATION_STATE);
   const [reveal, setReveal] = useState<RevealProgress | null>(null);
-  const [thinkingStage, setThinkingStage] = useState(0);
   const [announcement, setAnnouncement] = useState('');
+  /** Aborts the in-flight ask; set while a generation is running. */
+  const abortRef = useRef<AbortController | null>(null);
+  /**
+   * Monotonic run id. A cancelled request can still resolve a moment later, so
+   * every dispatch is gated on still being the current run — that is what
+   * keeps a stopped answer from appearing after the fact.
+   */
+  const runRef = useRef(0);
 
   const revealingMessage =
     state.status === CONVERSATION_STATUS_REVEALING ? lastAssistantMessage(state.messages) : null;
@@ -101,23 +123,6 @@ export function AskMauroPanel({ open, onClose }: AskMauroPanelProps) {
       composerRef.current?.focus({ preventScroll: true });
     }
   }, [open, state.status]);
-
-  // Escalates the waiting copy: answers are generation-bound and can take
-  // tens of seconds, so the label acknowledges longer waits.
-  useEffect(() => {
-    if (state.status !== CONVERSATION_STATUS_ASKING) {
-      setThinkingStage(0);
-      return;
-    }
-
-    const timers = THINKING_STAGES.slice(1).map((stage, index) =>
-      window.setTimeout(() => setThinkingStage(index + 1), stage.afterMs)
-    );
-
-    return () => {
-      timers.forEach((timer) => window.clearTimeout(timer));
-    };
-  }, [state.status]);
 
   // Local typewriter reveal for the newest answer. The response is already
   // complete; reduced-motion users see the full text immediately.
@@ -169,14 +174,64 @@ export function AskMauroPanel({ open, onClose }: AskMauroPanelProps) {
   }, [state.messages, state.status, state.error, reveal]);
 
   const runQuestion = useCallback(async (question: string) => {
-    const result = await askMauro(question);
+    const token = ++runRef.current;
+    const controller = new AbortController();
+    abortRef.current = controller;
+
+    const result = await askMauro(question, fetch, controller.signal);
+
+    // Superseded by a Stop (or by the panel closing): drop the result silently.
+    if (token !== runRef.current) {
+      return;
+    }
+    abortRef.current = null;
 
     if (result.ok) {
       dispatch({ type: 'succeed', answer: result.answer });
-    } else {
+    } else if (result.kind !== 'cancelled') {
       dispatch({ type: 'fail', kind: result.kind });
     }
   }, []);
+
+  /**
+   * Stop the current generation for real.
+   *
+   * Aborting the request makes the backend see the disconnect and drop its
+   * llama-server connection, which ends the generation (measured: the model's
+   * slot frees in ~0.4 s). Whatever was already revealed stays on screen; the
+   * rest of the answer is never fabricated.
+   */
+  const stop = useCallback(() => {
+    if (state.status === CONVERSATION_STATUS_IDLE) {
+      return;
+    }
+
+    runRef.current += 1;
+    abortRef.current?.abort();
+    abortRef.current = null;
+    dispatch({ type: 'cancel' });
+    composerRef.current?.focus({ preventScroll: true });
+  }, [state.status]);
+
+  // Closing the panel, navigating away, or unmounting must not leave a
+  // generation running on the server.
+  useEffect(() => {
+    if (!open && abortRef.current) {
+      runRef.current += 1;
+      abortRef.current.abort();
+      abortRef.current = null;
+      dispatch({ type: 'cancel' });
+    }
+  }, [open]);
+
+  useEffect(
+    () => () => {
+      runRef.current += 1;
+      abortRef.current?.abort();
+      abortRef.current = null;
+    },
+    []
+  );
 
   const send = useCallback(
     (question: string) => {
@@ -264,16 +319,16 @@ export function AskMauroPanel({ open, onClose }: AskMauroPanelProps) {
             reveal={revealingMessage !== null && revealingMessage.id === message.id ? reveal : null}
           />
         ))}
-        {state.status === CONVERSATION_STATUS_ASKING && <ThinkingRow label={THINKING_STAGES[thinkingStage].label} />}
+        {state.status === CONVERSATION_STATUS_ASKING && <ThinkingRow />}
         {state.error !== null && <ErrorRow message={ERROR_COPY[state.error]} onRetry={retry} />}
         {/* The reveal text is deliberately not live; this region announces the
             waiting stages and one completion notice instead of every tick. */}
         <p aria-live="polite" className="sr-only">
-          {state.status === CONVERSATION_STATUS_ASKING ? THINKING_STAGES[thinkingStage].label : announcement}
+          {state.status === CONVERSATION_STATUS_ASKING ? THINKING_ARIA_LABEL[WIDGET_LANGUAGE] : announcement}
         </p>
       </div>
 
-      <Composer disabled={busy} onSend={send} textareaRef={composerRef} />
+      <Composer disabled={busy} onSend={send} onStop={stop} textareaRef={composerRef} />
 
       <footer className="flex items-center justify-between gap-3 border-t border-vs-border px-4 pt-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))]">
         <p className="text-[11px] text-vs-foreground-muted">Answers can take a minute</p>
@@ -360,7 +415,7 @@ function AssistantRow({ message, reveal }: { message: AssistantMessage; reveal: 
       <div className="min-w-0 flex-1 space-y-3">
         {paragraphs.map((paragraph, index) => (
           <p key={index} className="max-w-[66ch] text-sm leading-relaxed break-words text-vs-foreground/90">
-            {paragraph}
+            <LinkedText text={paragraph} />
             {index === caretIndex && <span className="ask-mauro-caret" aria-hidden="true" />}
           </p>
         ))}
@@ -376,6 +431,37 @@ function AssistantRow({ message, reveal }: { message: AssistantMessage; reveal: 
         )}
       </div>
     </div>
+  );
+}
+
+/**
+ * Assistant prose with any URLs rendered as real links.
+ *
+ * Segments are React nodes, never HTML strings, so clickability is added
+ * without a raw-HTML rendering path. The backend only lets through URLs that
+ * appear verbatim in the retrieved evidence, so these are real portfolio
+ * links; they still open with `noopener noreferrer`. Cards are unaffected —
+ * an answer may legitimately show a link and a card for the same resource.
+ */
+function LinkedText({ text }: { text: string }) {
+  return (
+    <>
+      {linkify(text).map((segment, index) =>
+        segment.kind === 'link' ? (
+          <a
+            key={index}
+            href={segment.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="break-words text-vs-primary underline underline-offset-2 transition-opacity hover:opacity-80"
+          >
+            {segment.value}
+          </a>
+        ) : (
+          <span key={index}>{segment.value}</span>
+        ),
+      )}
+    </>
   );
 }
 
@@ -399,11 +485,15 @@ function AnswerCardView({ card }: { card: AskCard }) {
   );
 }
 
-function ThinkingRow({ label }: { label: string }) {
+function ThinkingRow() {
+  const message = useThinkingMessage(WIDGET_LANGUAGE);
+
   return (
     <div className="flex items-center gap-2.5">
       <Image src={AVATAR_SRC} alt="" width={AVATAR_SIZE} height={AVATAR_SIZE} className="h-7 w-7 flex-shrink-0 rounded-full" />
-      <p className="flex items-center gap-1.5 rounded-full border border-vs-border bg-vs-background/60 px-3 py-2">
+      {/* min-h keeps the bubble a fixed height so a longer message cannot
+          nudge the transcript as the copy rotates. */}
+      <p className="flex min-h-9 items-center gap-1.5 rounded-full border border-vs-border bg-vs-background/60 px-3 py-2">
         {[0, 1, 2].map((dot) => (
           <span
             key={dot}
@@ -411,7 +501,15 @@ function ThinkingRow({ label }: { label: string }) {
             style={{ animationDelay: `${dot * TYPING_DOT_DELAY_S}s` }}
           />
         ))}
-        <span className="ml-1 text-xs text-vs-foreground-muted">{label}</span>
+        {/* Hidden from assistive tech: the panel's live region announces one
+            stable word instead of every rotation. */}
+        <span
+          key={message.text}
+          aria-hidden="true"
+          className="ask-mauro-thinking ml-1 min-w-[13rem] whitespace-nowrap text-xs text-vs-foreground-muted"
+        >
+          {message.glyph} {message.text}
+        </span>
       </p>
     </div>
   );
@@ -439,10 +537,13 @@ function ErrorRow({ message, onRetry }: { message: string; onRetry: () => void }
 function Composer({
   disabled,
   onSend,
+  onStop,
   textareaRef,
 }: {
   disabled: boolean;
   onSend: (question: string) => void;
+  /** Cancels the running generation for real; shown in place of Send. */
+  onStop: () => void;
   textareaRef: RefObject<HTMLTextAreaElement | null>;
 }) {
   const [value, setValue] = useState('');
@@ -455,7 +556,14 @@ function Composer({
     }
 
     textarea.style.height = 'auto';
-    textarea.style.height = `${Math.min(textarea.scrollHeight, MAX_COMPOSER_HEIGHT_PX)}px`;
+    // Clamped at BOTH ends. scrollHeight is purely font/line-height driven, so
+    // an empty composer measured 35px against a 36px send button and sat 3px
+    // short of the row it lives in — the editable area looked compressed and
+    // its top strip was not clickable. MIN_COMPOSER_HEIGHT_PX is the send
+    // control's own height, so the two stay locked together instead of being
+    // two independent numbers that happen to be close.
+    const measured = Math.min(textarea.scrollHeight, MAX_COMPOSER_HEIGHT_PX);
+    textarea.style.height = `${Math.max(measured, MIN_COMPOSER_HEIGHT_PX)}px`;
   }, [textareaRef, value]);
 
   function submit(event?: FormEvent) {
@@ -491,7 +599,7 @@ function Composer({
           onKeyDown={handleKeyDown}
           placeholder="Ask Mauro something..."
           aria-label="Ask Mauro something"
-          className={`flex-1 resize-none bg-transparent px-2 py-1.5 text-base leading-relaxed placeholder:text-vs-foreground-muted focus:outline-none sm:text-sm ${
+          className={`min-h-9 flex-1 resize-none bg-transparent px-2 py-2 text-base leading-relaxed placeholder:text-vs-foreground-muted focus:outline-none sm:text-sm ${
             disabled ? 'opacity-60' : ''
           }`}
         />
@@ -505,16 +613,35 @@ function Composer({
             {value.length}/{QUESTION_MAX_LENGTH}
           </span>
         )}
-        <button
-          type="submit"
-          disabled={disabled || value.trim() === ''}
-          aria-label="Send question"
-          className="inline-flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg text-white transition-all duration-200 [background:var(--vs-button)] hover:brightness-110 disabled:opacity-35"
-        >
-          <SendIcon />
-        </button>
+        {disabled ? (
+          <button
+            type="button"
+            onClick={onStop}
+            aria-label="Stop generating"
+            className="inline-flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg text-white transition-all duration-200 [background:var(--vs-error,#b3261e)] hover:brightness-110"
+          >
+            <StopIcon />
+          </button>
+        ) : (
+          <button
+            type="submit"
+            disabled={value.trim() === ''}
+            aria-label="Send question"
+            className="inline-flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg text-white transition-all duration-200 [background:var(--vs-button)] hover:brightness-110 disabled:opacity-35"
+          >
+            <SendIcon />
+          </button>
+        )}
       </div>
     </form>
+  );
+}
+
+function StopIcon() {
+  return (
+    <svg aria-hidden="true" width={ICON_SIZE} height={ICON_SIZE} viewBox="0 0 24 24" fill="currentColor">
+      <rect x="6" y="6" width="12" height="12" rx="2" />
+    </svg>
   );
 }
 

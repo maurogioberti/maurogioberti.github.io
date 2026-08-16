@@ -46,6 +46,7 @@ export type ConversationAction =
   | { type: 'retry' }
   | { type: 'succeed'; answer: AskAnswer }
   | { type: 'fail'; kind: AskErrorKind }
+  | { type: 'cancel' }
   | { type: 'reveal-complete' };
 
 export const INITIAL_CONVERSATION_STATE: ConversationState = {
@@ -109,6 +110,17 @@ export function conversationReducer(state: ConversationState, action: Conversati
 
       return { ...state, status: CONVERSATION_STATUS_IDLE, error: action.kind };
     }
+    case 'cancel': {
+      // Stop is valid while asking AND while revealing: both states are "the
+      // user is still waiting". Returning to idle re-enables the composer at
+      // once. Messages are left exactly as they are — a partially revealed
+      // answer stays partially revealed rather than being completed or erased.
+      if (state.status === CONVERSATION_STATUS_IDLE) {
+        return state;
+      }
+
+      return { ...state, status: CONVERSATION_STATUS_IDLE, error: null };
+    }
     case 'reveal-complete': {
       if (state.status !== CONVERSATION_STATUS_REVEALING) {
         return state;
@@ -150,6 +162,8 @@ export function sliceParagraphs(paragraphs: readonly string[], visibleChars: num
 /* -------------------------------------------------------------------------- */
 
 export const ERROR_COPY: Record<AskErrorKind, string> = {
+  // Never rendered: cancelling is a user action, not a failure.
+  cancelled: 'That question was stopped.',
   invalid: "That question couldn't be processed. Try rephrasing it a bit.",
   busy: 'Ask Mauro is answering someone else right now. Try again in a moment.',
   rate_limited: "You've asked several questions in a short time. Give it a moment and try again.",
@@ -160,12 +174,6 @@ export const ERROR_COPY: Record<AskErrorKind, string> = {
 };
 
 /** Answers are generation-bound and can take tens of seconds; the label escalates while waiting. */
-export const THINKING_STAGES = [
-  { afterMs: 0, label: 'searching the profile' },
-  { afterMs: 15000, label: 'still thinking — good answers take a moment' },
-  { afterMs: 45000, label: 'almost there — thanks for the patience' },
-] as const;
-
 export const ANSWER_READY_ANNOUNCEMENT = 'Answer ready.';
 
 export const SUGGESTED_QUESTIONS = [

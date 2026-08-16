@@ -55,6 +55,7 @@ export interface AskAnswer {
 }
 
 export type AskErrorKind =
+  | 'cancelled'
   | 'invalid'
   | 'busy'
   | 'rate_limited'
@@ -210,7 +211,11 @@ async function readErrorCode(response: Response): Promise<string | undefined> {
  * answers can take tens of seconds, the backend owns timeout semantics (504),
  * and one user action must produce at most one generation request.
  */
-export async function askMauro(question: string, fetchFn: typeof fetch = fetch): Promise<AskResult> {
+export async function askMauro(
+  question: string,
+  fetchFn: typeof fetch = fetch,
+  signal?: AbortSignal
+): Promise<AskResult> {
   let response: Response;
 
   try {
@@ -218,9 +223,14 @@ export async function askMauro(question: string, fetchFn: typeof fetch = fetch):
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({ question: question.trim() }),
+      // Aborting this request is the first link of the cancellation chain: the
+      // backend sees the disconnect and drops its llama-server connection,
+      // which stops the generation instead of leaving it burning CPU.
+      ...(signal ? { signal } : {}),
     });
   } catch {
-    return { ok: false, kind: 'network' };
+    // A deliberate Stop is not a network failure, and the UI must not show one.
+    return { ok: false, kind: signal?.aborted ? 'cancelled' : 'network' };
   }
 
   if (!response.ok) {

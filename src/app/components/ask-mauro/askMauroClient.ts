@@ -9,7 +9,19 @@
 
 const DEVELOPMENT_API_ORIGIN = 'http://127.0.0.1:8000';
 const PRODUCTION_API_ORIGIN = 'https://ai.maurogioberti.com';
-const API_ORIGIN = process.env.NODE_ENV === 'development' ? DEVELOPMENT_API_ORIGIN : PRODUCTION_API_ORIGIN;
+const DEFAULT_API_ORIGIN =
+  process.env.NODE_ENV === 'development' ? DEVELOPMENT_API_ORIGIN : PRODUCTION_API_ORIGIN;
+
+/**
+ * Optional origin override for local work. Set it in `.env.development.local`,
+ * which is gitignored and read by `next dev` only — `next build` never loads
+ * it, so the static export always keeps PRODUCTION_API_ORIGIN.
+ *
+ * Point it at the live backend (https://ai.maurogioberti.com) to develop the
+ * widget without running the API locally; leave it unset to keep the
+ * NODE_ENV default above.
+ */
+const API_ORIGIN = process.env.NEXT_PUBLIC_ASK_API_ORIGIN || DEFAULT_API_ORIGIN;
 
 export const ASK_MAURO_APP_URL = 'https://ai.maurogioberti.com';
 export const ASK_MAURO_API_URL = `${API_ORIGIN}/api/ask`;

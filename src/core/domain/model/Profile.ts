@@ -7,6 +7,7 @@ const SOCIAL_KEYS = {
   SESSIONIZE: "sessionize",
   LINKEDIN: "linkedin",
   WEBSITE: "website",
+  AI: "ai",
 };
 
 const INITIAL_EXPERIENCE_DATE = new Date("2014-01-01");
@@ -84,6 +85,10 @@ export class Profile {
 
   get websiteUrl(): string {
     return this.socials[SOCIAL_KEYS.WEBSITE];
+  }
+
+  get aiUrl(): string {
+    return this.socials[SOCIAL_KEYS.AI];
   }
 
   get phoneInternational(): string | undefined {

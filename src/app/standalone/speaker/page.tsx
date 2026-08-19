@@ -156,6 +156,9 @@ export default async function SpeakerPage() {
             <Link className="speaker-button speaker-button-secondary" href="/standalone/recordings">
               Watch recordings <PlayIcon />
             </Link>
+            <a className="speaker-button speaker-button-secondary" href={profile.aiUrl} target="_blank" rel="noopener noreferrer">
+              Ask Mauro AI <ArrowUpRightIcon />
+            </a>
           </div>
         </div>
 

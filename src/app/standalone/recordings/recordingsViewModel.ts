@@ -125,6 +125,7 @@ export const recordingsViewModel = async () => {
   }).join('\n');
 
   const htmlContent = await getStandaloneSiteUseCase.execute(RECORDINGS_PAGE, {
+    AI_URL: profile.aiUrl,
     GITHUB_URL: profile.githubUrl,
     YOUTUBE_URL: profile.youtubeUrl,
     TWITTER_URL: profile.twitterUrl,

@@ -36,6 +36,9 @@
           <a href="{POST_URL}" target="_blank" class="link-item"> <i class="fas fa-blog"></i> Related Blog Post </a>
           <a href="{RESOURCES_URL}" target="_blank" class="link-item"> <i class="fas fa-book"></i> Additional Resources </a>
         </div>
+        <h3 class="section-title">🤖 Ask My AI</h3>
+        <a href="{AI_URL}" target="_blank" rel="noopener noreferrer" class="ask-ai-button"> <i class="fas fa-wand-magic-sparkles"></i> Ask about this talk </a>
+
         <h3 class="section-title">📩 Feedback</h3>
         <a href="{FEEDBACK_URL}" target="_blank" class="feedback-button"> <i class="fas fa-comment-alt"></i> Leave Your Feedback </a>
 
@@ -118,7 +121,8 @@
   }
 
   .link-item,
-  .feedback-button {
+  .feedback-button,
+  .ask-ai-button {
     display: block;
     background: #007acc;
     color: white;
@@ -131,13 +135,24 @@
   }
 
   .link-item i,
-  .feedback-button i {
+  .feedback-button i,
+  .ask-ai-button i {
     margin-right: 8px;
   }
 
   .link-item:hover,
   .feedback-button:hover {
     background: #0d2476;
+  }
+
+  .ask-ai-button {
+    background: #ffb02e;
+    color: #12141d;
+    font-weight: 600;
+  }
+
+  .ask-ai-button:hover {
+    background: #ffc45c;
   }
 
   /* Social Links */

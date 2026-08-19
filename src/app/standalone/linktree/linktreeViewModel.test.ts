@@ -14,6 +14,7 @@ describe("linktreeViewModel", () => {
 
   test("should return HTML content with profile data", async () => {
     const mockProfileData = {
+      aiUrl: faker.internet.url(),
       githubUrl: faker.internet.url(),
       youtubeUrl: faker.internet.url(),
       twitterUrl: faker.internet.url(),
@@ -47,6 +48,7 @@ describe("linktreeViewModel", () => {
 
     expect(mockGetProfileExecute).toHaveBeenCalled();
     expect(mockGetStandaloneSiteExecute).toHaveBeenCalledWith(LINKTREE_PAGE, {
+      AI_URL: mockProfileData.aiUrl,
       GITHUB_URL: mockProfileData.githubUrl,
       YOUTUBE_URL: mockProfileData.youtubeUrl,
       TWITTER_URL: mockProfileData.twitterUrl,
@@ -83,6 +85,7 @@ describe("linktreeViewModel", () => {
 
   test("should handle errors from GetStandaloneSiteUseCase", async () => {
     const mockProfileData = {
+      aiUrl: faker.internet.url(),
       githubUrl: faker.internet.url(),
       youtubeUrl: faker.internet.url(),
       twitterUrl: faker.internet.url(),
@@ -117,6 +120,7 @@ describe("linktreeViewModel", () => {
 
     expect(mockGetProfileExecute).toHaveBeenCalled();
     expect(mockGetStandaloneSiteExecute).toHaveBeenCalledWith(LINKTREE_PAGE, {
+      AI_URL: mockProfileData.aiUrl,
       GITHUB_URL: mockProfileData.githubUrl,
       YOUTUBE_URL: mockProfileData.youtubeUrl,
       TWITTER_URL: mockProfileData.twitterUrl,

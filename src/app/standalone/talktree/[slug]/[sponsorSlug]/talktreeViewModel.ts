@@ -17,6 +17,7 @@ export const talktreeViewModel = async (slug: string, sponsorSlug: string) => {
   const presentation = await getPresentationContentUseCase.execute(slug, sponsorSlug);
   
   const htmlContent = await getStandaloneSiteUseCase.execute(TALKTREE_PAGE, {
+    AI_URL: profile.aiUrl,
     GITHUB_URL: profile.githubUrl,
     YOUTUBE_URL: profile.youtubeUrl,
     TWITTER_URL: profile.twitterUrl,

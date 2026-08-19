@@ -506,6 +506,16 @@
             font-size: 1.02rem;
         }
 
+        .ai-card {
+            --card-rgb: 255, 176, 46;
+            min-height: 104px;
+            grid-column: 1 / -1;
+            border-color: rgba(var(--card-rgb), 0.2);
+            background:
+                linear-gradient(120deg, rgba(var(--card-rgb), 0.07), transparent 46%),
+                linear-gradient(145deg, rgba(41, 39, 34, 0.99), rgba(31, 30, 28, 0.99));
+        }
+
         .website-card,
         .speaker-card,
         .recordings-card,
@@ -806,6 +816,19 @@
                         </div>
 
                         <div class="featured-grid">
+                            <a href="{AI_URL}" target="_blank" rel="noopener noreferrer" class="link-card featured-card ai-card">
+                                <span class="link-icon" aria-hidden="true">
+                                    <i class="fas fa-wand-magic-sparkles"></i>
+                                </span>
+                                <span class="link-copy">
+                                    <strong>Ask Mauro AI</strong>
+                                    <small>Ask anything about my career, talks &amp; projects</small>
+                                </span>
+                                <span class="link-arrow" aria-hidden="true">
+                                    <i class="fas fa-arrow-right"></i>
+                                </span>
+                            </a>
+
                             <a href="{WEBSITE_URL}" target="_blank" rel="noopener noreferrer" class="link-card featured-card website-card">
                                 <span class="link-icon" aria-hidden="true">
                                     <i class="fas fa-globe"></i>

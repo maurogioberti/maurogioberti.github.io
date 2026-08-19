@@ -27,9 +27,30 @@ export const metadata: Metadata = {
   },
 };
 
-const DIRECTORY_ITEMS = [
+type DirectoryItem = {
+  index: string;
+  label: string;
+  title: string;
+  description: string;
+  href: string;
+  accent: string;
+  external?: boolean;
+  action?: string;
+};
+
+const buildDirectoryItems = (aiUrl: string): DirectoryItem[] => [
   {
     index: '01',
+    label: 'AI assistant',
+    title: 'Ask Mauro AI',
+    description: 'Ask anything about my experience, talks, projects, and writing, and get an answer grounded in my actual professional work.',
+    href: aiUrl,
+    accent: 'ai',
+    external: true,
+    action: 'Ask a question',
+  },
+  {
+    index: '02',
     label: 'Speaker landing',
     title: 'Technical speaker profile',
     description: 'Positioning, topics, sessions, recordings, and contact paths in one conference-ready page.',
@@ -37,7 +58,7 @@ const DIRECTORY_ITEMS = [
     accent: 'speaker',
   },
   {
-    index: '02',
+    index: '03',
     label: 'Link hub',
     title: 'Everything in one link',
     description: 'The compact social and portfolio directory designed for bios, profiles, and quick sharing.',
@@ -45,7 +66,7 @@ const DIRECTORY_ITEMS = [
     accent: 'links',
   },
   {
-    index: '03',
+    index: '04',
     label: 'Video library',
     title: 'Talk recordings',
     description: 'A distraction-free collection of available presentations and community sessions.',
@@ -56,6 +77,7 @@ const DIRECTORY_ITEMS = [
 
 export default async function StandalonePage() {
   const { profile, sessions } = await speakerViewModel();
+  const directoryItems = buildDirectoryItems(profile.aiUrl);
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -65,17 +87,17 @@ export default async function StandalonePage() {
     description: 'A directory of focused speaker, recording, link, and technical talk pages.',
     mainEntity: {
       '@type': 'ItemList',
-      numberOfItems: DIRECTORY_ITEMS.length + sessions.length,
+      numberOfItems: directoryItems.length + sessions.length,
       itemListElement: [
-        ...DIRECTORY_ITEMS.map((item, index) => ({
+        ...directoryItems.map((item, index) => ({
           '@type': 'ListItem',
           position: index + 1,
           name: item.title,
-          url: `https://maurogioberti.com${item.href}`,
+          url: item.external ? item.href : `https://maurogioberti.com${item.href}`,
         })),
         ...sessions.map((session, index) => ({
           '@type': 'ListItem',
-          position: DIRECTORY_ITEMS.length + index + 1,
+          position: directoryItems.length + index + 1,
           name: session.title,
           url: `https://maurogioberti.com${session.standaloneUrl}`,
         })),
@@ -116,7 +138,7 @@ export default async function StandalonePage() {
             </p>
           </div>
           <div className="standalone-directory-summary" aria-label="Directory summary">
-            <div><strong>{DIRECTORY_ITEMS.length}</strong><span>Core views</span></div>
+            <div><strong>{directoryItems.length}</strong><span>Core views</span></div>
             <div><strong>{sessions.length}</strong><span>Talk pages</span></div>
           </div>
         </section>
@@ -131,11 +153,12 @@ export default async function StandalonePage() {
           </div>
 
           <div className="standalone-directory-card-grid">
-            {DIRECTORY_ITEMS.map((item) => (
+            {directoryItems.map((item) => (
               <Link
                 href={item.href}
                 className={`standalone-directory-card standalone-directory-card-${item.accent}`}
                 key={item.href}
+                {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
               >
                 <span className="standalone-directory-card-topline">
                   <span>{item.index}</span>
@@ -144,7 +167,7 @@ export default async function StandalonePage() {
                 <span className="standalone-directory-card-label">{item.label}</span>
                 <strong>{item.title}</strong>
                 <span className="standalone-directory-card-description">{item.description}</span>
-                <span className="standalone-directory-card-action">Open view <ArrowRightIcon /></span>
+                <span className="standalone-directory-card-action">{item.action ?? 'Open view'} <ArrowRightIcon /></span>
               </Link>
             ))}
           </div>

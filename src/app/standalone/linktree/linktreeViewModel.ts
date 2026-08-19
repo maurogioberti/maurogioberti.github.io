@@ -17,6 +17,7 @@ export const linktreeViewModel = async () => {
   const profile = await getProfileUseCase.execute();
 
   const htmlContent = await getStandaloneSiteUseCase.execute(LINKTREE_PAGE, {
+    AI_URL: profile.aiUrl,
     GITHUB_URL: profile.githubUrl,
     YOUTUBE_URL: profile.youtubeUrl,
     TWITTER_URL: profile.twitterUrl,

@@ -35,7 +35,7 @@ export default async function PostPage({ params }: BlogDetailPageProps) {
       <article className="blog-post">
         <div className="post-header-card">
           <Link href="/pages/blog" className="back-button">← Back to posts</Link>
-          <p className="post-tag">AI • RAG • Benchmarking</p>
+          {post.tags.length > 0 && <p className="post-tag">{post.tags.join(' • ')}</p>}
           <h1 className="post-title">{post.title}</h1>
           <p className="post-date">{post.formattedDate}</p>
         </div>

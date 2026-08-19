@@ -45,8 +45,8 @@ describe("DependencyInjectionContainer", () => {
   });
 
   test("should support multiple different keys", () => {
-    const firstDependencyKey = faker.lorem.word();
-    const secondDependencyKey = faker.lorem.word();
+    const firstDependencyKey = faker.string.uuid();
+    const secondDependencyKey = faker.string.uuid();
     const firstDependencyValue = faker.word.sample();
     const secondDependencyValue = faker.word.sample();
 

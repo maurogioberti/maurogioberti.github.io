@@ -27,7 +27,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/optimize-images.mjs",
     "start": "next start",
     "lint": "eslint .",
     "test": "jest"

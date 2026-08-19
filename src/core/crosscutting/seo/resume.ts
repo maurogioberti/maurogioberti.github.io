@@ -4,11 +4,14 @@ const resumeMetadata: Metadata = {
   title: "Resume | Mauro Gioberti",
   description:
     "Explore Mauro Gioberti's professional timeline, achievements, and recommendations in software engineering, clean architecture, and modern development practices.",
+  alternates: {
+    canonical: "/pages/resume",
+  },
   openGraph: {
     title: "Resume | Mauro Gioberti",
     description:
       "Dive into Mauro Gioberti's professional career, showcasing his expertise in software engineering, clean architecture, and modern development methodologies.",
-    url: "https://maurogioberti.com/resume",
+    url: "https://maurogioberti.com/pages/resume",
     images: [
       {
         url: "https://maurogioberti.com/assets/open-graph/resume-og-image.png",

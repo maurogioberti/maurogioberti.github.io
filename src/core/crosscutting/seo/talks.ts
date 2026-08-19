@@ -3,10 +3,13 @@ import { Metadata } from 'next';
 const talkMetadata: Metadata = {
   title: "Talk | Mauro Gioberti",
   description: "Discover insights, tutorials, and discussions on software engineering, clean architecture, and modern development practices.",
+  alternates: {
+    canonical: "/pages/talks",
+  },
   openGraph: {
     title: "Talk | Mauro Gioberti",
     description: "Explore in-depth articles about clean architecture, software engineering best practices, and more.",
-    url: "https://maurogioberti.com/talk",
+    url: "https://maurogioberti.com/pages/talks",
     images: [
       {
         url: "https://maurogioberti.com/assets/open-graph/talk-og-image.png",

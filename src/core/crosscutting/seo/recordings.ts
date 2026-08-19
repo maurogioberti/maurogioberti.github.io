@@ -5,6 +5,9 @@ const recordingsMetadata: Metadata = {
   description:
     "Watch real-world tech talk recordings by Mauro Gioberti on automation, testing, clean architecture, and .NET-based systems, presented at international conferences and meetups.",
 
+  alternates: {
+    canonical: "/standalone/recordings",
+  },
   openGraph: {
     title: "Talk Recordings | Mauro Gioberti",
     description: "Real-world tech talks on developer automation, testing strategies, clean architecture, and scalable systems, presented at international events.",

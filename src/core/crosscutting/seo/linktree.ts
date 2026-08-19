@@ -3,6 +3,9 @@ import { Metadata } from 'next';
 const linktreeMetadata: Metadata = {
   title: "Linktree",
   description: "Connect with Mauro Gioberti through various platforms.",
+  alternates: {
+    canonical: "/standalone/linktree",
+  },
   openGraph: {
     title: "Linktree | Mauro Gioberti",
     description: "Find all the ways to connect with Mauro Gioberti.",

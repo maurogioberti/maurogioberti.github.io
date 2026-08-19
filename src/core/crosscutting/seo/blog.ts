@@ -3,10 +3,13 @@ import { Metadata } from 'next';
 const blogMetadata: Metadata = {
   title: "Blog | Mauro Gioberti",
   description: "Discover insights, tutorials, and discussions on software engineering, clean architecture, and modern development practices.",
+  alternates: {
+    canonical: "/pages/blog",
+  },
   openGraph: {
     title: "Blog | Mauro Gioberti",
     description: "Explore in-depth articles about clean architecture, software engineering best practices, and more.",
-    url: "https://maurogioberti.com/blog",
+    url: "https://maurogioberti.com/pages/blog",
     images: [
       {
         url: "https://maurogioberti.com/assets/open-graph/blog-og-image.png",

@@ -3,10 +3,13 @@ import { Metadata } from 'next';
 const servicesMetadata: Metadata = {
   title: "Services | Mauro Gioberti",
   description: "Explore the services offered by Mauro Gioberti, including technical interviews, microservices development, and mentoring.",
+  alternates: {
+    canonical: "/pages/services",
+  },
   openGraph: {
     title: "Services | Mauro Gioberti",
     description: "Learn about the services Mauro Gioberti offers, including tech interviewer, mentoring and development.",
-    url: "https://maurogioberti.com/services",
+    url: "https://maurogioberti.com/pages/services",
     images: [
       {
         url: "https://maurogioberti.com/assets/open-graph/services-og-image.png",

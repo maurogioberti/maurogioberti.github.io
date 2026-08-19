@@ -1,0 +1,278 @@
+<div class="max-w-4xl mx-auto px-4 py-8">
+
+  <h1 class="text-3xl font-bold mb-6">
+    🤖 Ask Mauro: Why I Went Smaller, Not Bigger
+  </h1>
+
+  <p class="text-lg mb-4">
+    I got tired of people browsing my resume. So I made myself <strong>queryable</strong>. 🤖
+  </p>
+
+  <p class="text-lg mb-6">
+    Meet <strong>Ask Mauro</strong>: 👉
+    <a href="https://ai.maurogioberti.com" target="_blank" class="text-blue-600 underline hover:text-blue-800">
+      ai.maurogioberti.com
+    </a><br/>
+    Ask it about my experience, projects, talks, AI work, architecture, leadership — pretty much anything I've made public about my professional life. The same AI also lives as a popup inside this site.
+  </p>
+
+  <p class="text-lg mb-6 font-medium">
+    That's the product. The part worth arguing about is the architecture behind it.
+  </p>
+
+  <h2 class="text-2xl font-semibold mb-4">
+    The rules I care about
+  </h2>
+
+  <ul class="list-disc pl-6 text-lg mb-6 space-y-2">
+    <li>🧠 <strong>Answers are grounded</strong> in my own public knowledge base — not in whatever the model absorbed about someone with a similar name.</li>
+    <li>🔎 <strong>Retrieval checks the actual evidence</strong> before answering.</li>
+    <li>🔗 <strong>If a link isn't supported by that evidence, it doesn't get to invent one.</strong></li>
+    <li>⚡ <strong>Response behavior and latency are measured</strong>, so "it feels faster now" is never the justification for a change.</li>
+  </ul>
+
+  <p class="text-lg mb-6">
+    None of those four is a model capability. They are all architecture.<br/>
+    A bigger model doesn't give you any of them for free, and a smaller one doesn't take them away.
+  </p>
+
+  <h2 class="text-2xl font-semibold mb-4">
+    The first version worked. It was also unusable 🐌
+  </h2>
+
+  <p class="text-lg mb-4">
+    That fourth rule is the one that rewrote the whole project.
+  </p>
+
+  <p class="text-lg mb-4">
+    The first working version did what I designed it to do. Grounded in my knowledge base, retrieval before answering, no invented links. On the rules I care about, it was the product I wanted.
+  </p>
+
+  <p class="text-lg mb-6">
+    It averaged around <strong>68 seconds</strong> per response.
+  </p>
+
+  <p class="text-lg mb-6">
+    68 seconds is not "a bit slow". It's a different product.<br/>
+    Nobody sits in front of a chat box for over a minute to find out whether I've spoken at a conference. They type, they watch a spinner, they decide the site is broken, and they leave.
+  </p>
+
+  <blockquote class="border-l-4 pl-4 italic text-gray-600 mb-8">
+    A correct answer nobody waits for is not an answer. It's a log entry.
+  </blockquote>
+
+  <p class="text-lg mb-6">
+    And here's the uncomfortable part: this was not the kind of slow you profile your way out of. The system was doing exactly what I designed it to do — with a model far too heavy for the machine it lived on.
+  </p>
+
+  <h2 class="text-2xl font-semibold mb-4">
+    The hardware 🖥️
+  </h2>
+
+  <p class="text-lg mb-4">
+    All of this runs on <strong>a single server: 8 vCPU, 24 GB RAM</strong>.<br/>
+    No cluster, no autoscaling group, no "we'll figure out the bill later" scaling plan.
+  </p>
+
+  <p class="text-lg mb-6">
+    That constraint is deliberate. A personal AI that costs me real money every time a stranger gets curious about me is a project I quietly turn off in three months. If I want it to stay online, it has to be cheap and boring to run.
+  </p>
+
+  <h2 class="text-2xl font-semibold mb-4">
+    Model size stops being capability and becomes a latency tax
+  </h2>
+
+  <p class="text-lg mb-4">
+    General engineering reasoning here, not something I measured axis by axis — but it explains the shape of the result:
+  </p>
+
+  <ul class="list-disc pl-6 text-lg mb-6 space-y-2">
+    <li><strong>Generation is sequential.</strong> Tokens come out one at a time, each one requiring a full pass over the weights. Bigger model, more work per token, and the user feels every single one.</li>
+    <li><strong>Context isn't free.</strong> Everything you stuff into the prompt gets processed before the first output token appears. Dumping every plausible chunk into the prompt "just in case" is a latency decision disguised as a retrieval decision.</li>
+    <li><strong>Concurrency multiplies it.</strong> On a modest box, two people asking at the same time do not get the experience one person alone gets.</li>
+  </ul>
+
+  <p class="text-lg mb-4">
+    So the honest question becomes: <strong>what am I actually buying with those extra parameters?</strong>
+  </p>
+
+  <p class="text-lg mb-6">
+    My problem is bounded and closed. Every legitimate question about me has its answer sitting somewhere in my own public knowledge base. Nothing outside that corpus is a valid answer — if the evidence isn't there, the correct output is "I don't have that", not a plausible guess.
+  </p>
+
+  <blockquote class="border-l-4 pl-4 italic text-gray-600 mb-8">
+    When the corpus is closed, the model doesn't need to know things.<br/>
+    It needs to read the evidence in front of it and not go beyond it.
+  </blockquote>
+
+  <p class="text-lg mb-6">
+    Retrieval already did the hard part. What's left is reading comprehension and faithful writing — closer to a formatting job than a frontier reasoning task. Those extra parameters are buying world knowledge I explicitly don't want the system to use, and charging me seconds per answer for it.
+  </p>
+
+  <p class="text-lg mb-6">
+    That's not capability. <strong>That's a tax.</strong>
+  </p>
+
+  <h2 class="text-2xl font-semibold mb-4">
+    So I went smaller 📦
+  </h2>
+
+  <p class="text-lg mb-4">
+    The reflex when an AI feature disappoints is to reach for a bigger model. I went the other way: <strong>Qwen3 0.6B</strong>, a small language model, tiny compared with the ones we usually talk about in AI.
+  </p>
+
+  <p class="text-lg mb-6">
+    The work didn't disappear, though. It <strong>moved</strong>. Every bit of slack I took out of the model, I had to put back into retrieval, grounding, and the answer paths around it.
+  </p>
+
+  <h2 class="text-2xl font-semibold mb-4">
+    What you have to fix when the model gets small 🔧
+  </h2>
+
+  <p class="text-lg mb-4">
+    Swapping the model is a config change. Making the swap survivable is the actual project.
+  </p>
+
+  <ul class="list-disc pl-6 text-lg mb-6 space-y-2">
+    <li><strong>Precision over recall.</strong> With a big model, extra context is mostly harmless noise. With a small one, irrelevant passages actively compete for attention. Deciding what <em>not</em> to send became a first-class design step.</li>
+    <li><strong>Self-contained chunks.</strong> A small model won't reconstruct missing context from background knowledge it doesn't have. If a chunk needs its neighbour to make sense, it fails.</li>
+    <li><strong>Short, unambiguous instructions.</strong> Elaborate multi-clause system prompts full of conditional rules are a big-model luxury — and every extra token in the prompt is paid for before the first word comes out.</li>
+    <li><strong>An explicit "I don't know" path.</strong> If the evidence doesn't cover the question, saying so is the correct output. Left unhandled, that gap is precisely where a model starts improvising, and improvisation about my career is the one failure mode I refuse to ship.</li>
+    <li><strong>Answer shape.</strong> Short, direct, evidence-first. Generated tokens are literally what the user is waiting on.</li>
+  </ul>
+
+  <h2 class="text-2xl font-semibold mb-4">
+    A small model is a forcing function
+  </h2>
+
+  <p class="text-lg mb-4">
+    This is the part I didn't expect. A large model is <strong>forgiving</strong>. Feed it mediocre chunks with irrelevant ones mixed in, and it will usually still find the thread. That forgiveness feels like quality. It's actually <strong>insulation</strong> — it hides how bad your retrieval is, and you pay for that insulation on every single request, forever.
+  </p>
+
+  <p class="text-lg mb-6">
+    A small model has no such generosity. Give it noisy context and the answer falls apart immediately and visibly. Every retrieval weakness stops being a slow quality tax and becomes a bug you can see and fix.
+  </p>
+
+  <blockquote class="border-l-4 pl-4 italic text-gray-600 mb-8">
+    A big model lets you ship bad retrieval. A small one refuses to.
+  </blockquote>
+
+  <h2 class="text-2xl font-semibold mb-4">
+    The link rule 🔗
+  </h2>
+
+  <p class="text-lg mb-4">
+    A hallucinated sentence is bad. A hallucinated <em>link</em> is worse.
+  </p>
+
+  <p class="text-lg mb-6">
+    A wrong sentence is an opinion you might question. A wrong link is a promise the reader can click — and when it 404s, nobody concludes the model was uncertain. They conclude <strong>I</strong> was careless. My name is on the domain.
+  </p>
+
+  <p class="text-lg mb-4">
+    Which is why this is a constraint, not a request. "Please only cite sources you actually retrieved" written into a prompt is a probability, and models comply with requests <em>most</em> of the time. The rare fabricated URL is exactly the one that costs you trust, and exactly the one you won't catch in casual testing.
+  </p>
+
+  <p class="text-lg mb-4">
+    So the rule I hold the pipeline to is blunt:
+  </p>
+
+  <pre class="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 text-sm mb-6 overflow-x-auto">
+    question
+      → retrieve   the evidence for it
+      → ground     the answer in that evidence
+      → answer     only what the evidence supports
+      → links      only what the evidence supports
+  </pre>
+
+  <p class="text-lg mb-6">
+    If the evidence doesn't carry the link, the answer doesn't get to.
+  </p>
+
+  <h2 class="text-2xl font-semibold mb-4">
+    The payoff: 68s → 17s ⚡
+  </h2>
+
+  <p class="text-lg mb-4">
+    Moving from the larger model I started with to the SLM took the average response time from roughly <strong>68 seconds</strong> down to roughly <strong>17 seconds</strong>. The rules around it didn't change. The model did.
+  </p>
+
+  <blockquote class="border-l-4 pl-4 italic text-gray-600 mb-8">
+    I didn't make the server bigger. I made the work smaller.
+  </blockquote>
+
+  <p class="text-lg mb-6">
+    What that number is and isn't: it's an average response time, on my corpus, with my retrieval setup. It is not a claim that 0.6B models are four times faster than large ones for everybody, and it says nothing about answer quality that I measured. What it <em>is</em>: the evidence that turned an architectural opinion into a decision I can defend.
+  </p>
+
+  <p class="text-lg mb-6">
+    Without that instrumentation I'd have had a hunch, a migration, and no way to know whether I'd made things better or just different.
+  </p>
+
+  <h2 class="text-2xl font-semibold mb-4">
+    Where a big model is still the right call
+  </h2>
+
+  <p class="text-lg mb-4">
+    To be fair, there are problems where reaching for the largest model available is correct engineering, not laziness:
+  </p>
+
+  <ul class="list-disc pl-6 text-lg mb-6 space-y-2">
+    <li><strong>Open-domain reasoning</strong> — when the answer isn't in any corpus you own, retrieval has nothing to retrieve. Capacity <em>is</em> the product.</li>
+    <li><strong>Long agentic chains</strong> — small per-step error rates compound into large end-to-end failure rates, and raw capability buys real reliability.</li>
+    <li><strong>Hard code generation</strong> — holding a big mental model of unfamiliar code and producing something that actually compiles is where large models still separate themselves.</li>
+    <li><strong>Synthesis across many documents</strong> — when the task is "read all of this and find the tension between them", no single chunk contains the answer.</li>
+    <li><strong>You haven't built retrieval yet</strong> — a big model is a legitimate way to validate that a feature is worth building at all. The mistake isn't starting there. It's <em>staying</em> there and calling it an architecture.</li>
+  </ul>
+
+  <p class="text-lg mb-6">
+    Ask Mauro is none of those. Bounded corpus, bounded intents, and a hard requirement not to invent things. That's a retrieval-shaped problem, and it deserved a retrieval-shaped solution.
+  </p>
+
+  <h2 class="text-2xl font-semibold mb-4">
+    Before your next model upgrade
+  </h2>
+
+  <ul class="list-disc pl-6 text-lg mb-6 space-y-2">
+    <li>When the system is wrong, <strong>was the correct evidence in the retrieved context?</strong> If it wasn't, this is not a model problem and the upgrade won't fix it.</li>
+    <li>If you paste the perfect context in by hand, does a small model answer correctly? If yes, you have a retrieval problem.</li>
+    <li><strong>Can your system refuse?</strong> A pipeline that can't say "I don't have that" will hallucinate at every model size.</li>
+    <li>Are you measuring latency the way you measure quality, or is it in a dashboard nobody opens?</li>
+  </ul>
+
+  <p class="text-lg mb-6">
+    If most of your failures are retrieval failures, a bigger model is buying <strong>silence, not correctness</strong>. It just makes the wrong answers sound better.
+  </p>
+
+  <h2 class="text-2xl font-semibold mb-4">
+    Now go break it 😄
+  </h2>
+
+  <ul class="list-disc pl-6 text-lg mb-6">
+    <li>🤨 Ask weird questions.</li>
+    <li>👻 Try to make it hallucinate.</li>
+    <li>🎯 Find something it gets wrong.</li>
+    <li>🔗 See if you can get it to hand you a link it shouldn't have.</li>
+  </ul>
+
+  <p class="text-lg mb-6">
+    👉 <a href="https://ai.maurogioberti.com" target="_blank" class="text-blue-600 underline hover:text-blue-800">
+      ai.maurogioberti.com
+    </a><br/>
+    Or just open the popup on this site. Same AI.
+  </p>
+
+  <p class="text-lg mb-6">
+    If you catch it inventing something, contradicting itself, or confidently answering a question it has no evidence for, I genuinely want to hear about it. 💬<br/>
+    A failure you can reproduce is worth more to me than a compliment — and it tells me whether the weakness is in retrieval, in grounding, or actually in the model.
+  </p>
+
+  <p class="text-lg font-bold mb-8">
+    I stopped asking people to read about me. Now they can just ask. 🚀
+  </p>
+
+  <p class="text-center text-sm mt-8">
+    #AI #SLM #RAG #LLM #Qwen3 #SoftwareArchitecture
+  </p>
+
+</div>

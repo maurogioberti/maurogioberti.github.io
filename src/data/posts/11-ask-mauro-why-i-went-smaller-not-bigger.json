@@ -1,0 +1,8 @@
+{
+  "id": "11",
+  "title": "🤖⚡ Ask Mauro: Why I Went Smaller, Not Bigger",
+  "description": "I got tired of people browsing my resume, so I made myself queryable. Ask Mauro runs on a Qwen3 0.6B small language model on a single 8 vCPU / 24 GB server — and going smaller instead of bigger took the average response time from roughly 68 seconds to roughly 17. Here is the architecture reasoning behind that call.",
+  "tags": [ "AI", "SLM", "RAG", "LLM", "Software Architecture", "Performance" ],
+  "imageUrl": "/assets/open-graph/blog/ask-mauro-why-i-went-smaller-not-bigger-og-image.png",
+  "postedDate": "2026-08-19T11:11:11Z"
+}

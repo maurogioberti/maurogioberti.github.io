@@ -12,7 +12,7 @@ export abstract class BaseService {
     return new Promise<T>((resolve, reject) => {
       setTimeout(async () => {
         try {
-          const data = await import(`@/data/${fileName}`);
+          const data = await import(`@/data/${fileName}.json`);
           resolve(data.default as T);
         } catch (error) {
           reject(error);

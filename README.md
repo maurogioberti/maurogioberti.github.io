@@ -56,7 +56,7 @@ The goal is simple:
 
 ## 🛠 Tech Stack
 
-- **Runtime**: Node.js 25.8.1 (via `.nvmrc`)
+- **Runtime**: Node.js 24.19.0 LTS (via `.nvmrc`)
 - **Framework**: Next.js 15 (App Router under `src/app`)
 - **Language**: TypeScript 5
 - **UI**: React 19 + Tailwind CSS 4 (with custom design tokens and theme support)
@@ -78,8 +78,8 @@ cd maurogioberti.github.io
 
 🟢 **Set Node version (recommended)**
 ```bash
-nvm install 25.8.1
-nvm use 25.8.1
+nvm install 24.19.0
+nvm use 24.19.0
 ```
 
 📦 **Install dependencies**
